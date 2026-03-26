@@ -1,0 +1,40 @@
+import { Typography } from 'antd';
+
+const { Title, Text } = Typography;
+
+interface MaintenanceProps {
+	planned?: boolean;
+}
+
+export default function Maintenance({ planned = false }: MaintenanceProps) {
+	return (
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				justifyContent: 'center',
+				minHeight: '100vh',
+				textAlign: 'center',
+				gap: 24,
+				background: '#141414'
+			}}
+		>
+			<img
+				src="/images/banner-light.svg"
+				alt="FiroBlocks"
+				style={{ width: 300, height: 'auto' }}
+			/>
+			<Title style={{ fontSize: '5rem', color: '#9b1c2e', lineHeight: 1, margin: 0 }}>
+				{planned ? '🔧' : '503'}
+			</Title>
+			<title>FiroBlocks — Maintenance</title>
+
+			<Text style={{ fontSize: 18, color: '#d1d5db' }}>
+				{planned
+					? "We're down for scheduled maintenance. We'll be back shortly."
+					: "We're currently looking into it. Please check back soon."}
+			</Text>
+		</div>
+	);
+}

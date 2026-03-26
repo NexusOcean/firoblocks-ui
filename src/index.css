@@ -1,0 +1,57 @@
+/* Saira Semi Condensed */
+@font-face {
+	font-display: swap;
+	font-family: 'Saira Semi Condensed';
+	font-style: normal;
+	font-weight: 300;
+	src: url('/fonts/Saira/saira-semi-condensed-v15-latin-300.woff2') format('woff2');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Saira Semi Condensed';
+	font-style: normal;
+	font-weight: 400;
+	src: url('/fonts/Saira/saira-semi-condensed-v15-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Saira Semi Condensed';
+	font-style: normal;
+	font-weight: 700;
+	src: url('/fonts/Saira/saira-semi-condensed-v15-latin-700.woff2') format('woff2');
+}
+
+/* Source Sans Pro */
+@font-face {
+	font-display: swap;
+	font-family: 'Source Sans Pro';
+	font-style: normal;
+	font-weight: 400;
+	src: url('/fonts/SourceCodePro/source-sans-pro-v31-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Source Sans Pro';
+	font-style: normal;
+	font-weight: 700;
+	src: url('/fonts/SourceCodePro/source-sans-pro-v31-latin-700.woff2') format('woff2');
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	min-height: 100vh;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	background-color: var(--ant-color-bg-base);
+}
