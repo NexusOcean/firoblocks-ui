@@ -26,7 +26,7 @@ pnpm dev
 ## Community
 
 - Chat: [#general:nexusocean.org](https://matrix.to/#/#general:nexusocean.org)
-- Matrix client: [elements.nexusocean.org](https://elements.nexusocean.org)
+- Matrix client: [element.nexusocean.org](https://element.nexusocean.org)
 
 ## License
 
