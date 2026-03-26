@@ -90,26 +90,35 @@ export default function Address() {
 				{isLoading ? (
 					<Skeleton active />
 				) : (
-					<table style={{ width: '100%', borderCollapse: 'collapse' }}>
-						<tbody>
-							{details.map(({ label, value }) => (
-								<tr key={label}>
-									<td
-										style={{
-											padding: '8px 16px 8px 0',
-											width: 180,
-											verticalAlign: 'top'
-										}}
-									>
-										<Text type="secondary">{label}</Text>
-									</td>
-									<td style={{ padding: '8px 0', fontFamily: 'monospace' }}>
-										<Text>{value}</Text>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
+					<div style={{ overflowX: 'auto' }}>
+						<table style={{ width: '100%', borderCollapse: 'collapse' }}>
+							<tbody>
+								{details.map(({ label, value }) => (
+									<tr key={label}>
+										<td
+											style={{
+												padding: '8px 16px 8px 0',
+												width: 180,
+												verticalAlign: 'top',
+												whiteSpace: 'nowrap'
+											}}
+										>
+											<Text type="secondary">{label}</Text>
+										</td>
+										<td
+											style={{
+												padding: '8px 0',
+												fontFamily: 'monospace',
+												wordBreak: 'break-all'
+											}}
+										>
+											<Text>{value}</Text>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 				)}
 			</Card>
 
@@ -121,6 +130,7 @@ export default function Address() {
 					loading={isLoading}
 					pagination={false}
 					size="small"
+					scroll={{ x: true }}
 					onRow={(row) => ({ onClick: () => navigate(`/tx/${row.txid}`) })}
 				/>
 				{data && data.totalPages > 1 && (

@@ -120,32 +120,41 @@ export default function Transaction() {
 				{isLoading ? (
 					<Skeleton active />
 				) : (
-					<table style={{ width: '100%', borderCollapse: 'collapse' }}>
-						<tbody>
-							{details.map(({ label, value, isHash, link }) => (
-								<tr key={label}>
-									<td
-										style={{
-											padding: '8px 16px 8px 0',
-											width: 180,
-											verticalAlign: 'top'
-										}}
-									>
-										<Text type="secondary">{label}</Text>
-									</td>
-									<td style={{ padding: '8px 0', fontFamily: 'monospace' }}>
-										{isHash && value && link ? (
-											<Link to={link}>
-												<HashDisplay value={value} />
-											</Link>
-										) : (
-											<Text>{value}</Text>
-										)}
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
+					<div style={{ overflowX: 'auto' }}>
+						<table style={{ width: '100%', borderCollapse: 'collapse' }}>
+							<tbody>
+								{details.map(({ label, value, isHash, link }) => (
+									<tr key={label}>
+										<td
+											style={{
+												padding: '8px 16px 8px 0',
+												width: 180,
+												verticalAlign: 'top',
+												whiteSpace: 'nowrap'
+											}}
+										>
+											<Text type="secondary">{label}</Text>
+										</td>
+										<td
+											style={{
+												padding: '8px 0',
+												fontFamily: 'monospace',
+												wordBreak: 'break-all'
+											}}
+										>
+											{isHash && value && link ? (
+												<Link to={link}>
+													<HashDisplay value={value} />
+												</Link>
+											) : (
+												<Text>{value}</Text>
+											)}
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 				)}
 			</Card>
 
@@ -159,6 +168,7 @@ export default function Transaction() {
 							loading={isLoading}
 							pagination={false}
 							size="small"
+							scroll={{ x: true }}
 							onRow={(row) => ({
 								onClick: () => row.address && navigate(`/address/${row.address}`)
 							})}
@@ -174,6 +184,7 @@ export default function Transaction() {
 							loading={isLoading}
 							pagination={false}
 							size="small"
+							scroll={{ x: true }}
 							onRow={(row) => ({
 								onClick: () =>
 									row.addresses?.[0] && navigate(`/address/${row.addresses[0]}`)

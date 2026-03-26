@@ -20,17 +20,29 @@ export default function Error404() {
 			<img
 				src="/images/banner-light.svg"
 				alt="FiroBlocks"
-				style={{ width: 220, height: 'auto' }}
+				style={{ width: 300, height: 'auto' }}
 			/>
-			<Title style={{ fontSize: '6rem', color: '#9b1c2e', lineHeight: 1, margin: 0 }}>
+			<Title
+				style={{
+					fontSize: '5rem',
+					color: '#9b1c2e',
+					lineHeight: 1,
+					margin: 0,
+					maxWidth: 300,
+					display: 'block'
+				}}
+			>
 				404
 			</Title>
 			<title>FiroBlocks — Not Found</title>
 
-			<Text type="secondary" style={{ fontSize: 18 }}>
+			<Text style={{ fontSize: 18, color: '#d1d5db', maxWidth: 300, display: 'block' }}>
 				The page you requested could not be found.
 			</Text>
-			<Link to="/" style={{ color: '#ba2a45', fontSize: 16 }}>
+			<Link
+				to="/"
+				style={{ color: '#ba2a45', fontSize: 16, maxWidth: 300, display: 'block' }}
+			>
 				<ArrowLeftOutlined /> Back to Home
 			</Link>
 		</div>

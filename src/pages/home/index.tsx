@@ -82,14 +82,14 @@ export default function Home() {
 	const { data: txs, isLoading: txsLoading } = useLatestTransactions();
 
 	return (
-		<div style={{ padding: '24px 32px' }}>
+		<div style={{ padding: '24px 16px' }}>
 			<Title level={2} style={{ marginBottom: 24 }}>
 				FiroBlocks
 			</Title>
 			<title>FiroBlocks — Firo Block Explorer</title>
 
-			<Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
-				<Col xs={24} sm={12} lg={4} offset={2}>
+			<Row gutter={[16, 16]} justify="center" style={{ marginBottom: 32 }}>
+				<Col xs={24} sm={12} lg={4}>
 					<StatCard
 						label="Block Height"
 						value={stats?.blockHeight}
@@ -141,6 +141,7 @@ export default function Home() {
 						loading={blocksLoading}
 						pagination={false}
 						size="small"
+						scroll={{ x: true }}
 					/>
 				</Col>
 				<Col xs={24} xl={12}>
@@ -152,6 +153,7 @@ export default function Home() {
 						loading={txsLoading}
 						pagination={false}
 						size="small"
+						scroll={{ x: true }}
 					/>
 				</Col>
 			</Row>

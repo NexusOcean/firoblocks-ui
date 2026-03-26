@@ -13,8 +13,7 @@ dist-ssr
 *.local
 *.yml
 .env
-.vercelignore
-vercel.json
+.wrangler
 
 # Editor directories and files
 .vscode/*

@@ -12,7 +12,7 @@ export const useNetworkStats = () =>
 			supply: `${Math.round(data.totalSupply).toLocaleString()} FIRO`,
 			txCount: data.transactions.toLocaleString()
 		}),
-		refetchInterval: 30_000
+		refetchInterval: 60_000
 	});
 
 export const useLatestBlocks = () =>
@@ -20,7 +20,7 @@ export const useLatestBlocks = () =>
 		queryKey: ['blocks', 'latest'],
 		queryFn: () => getBlocks(undefined, 10),
 		select: (data) => data.blocks,
-		refetchInterval: 30_000
+		refetchInterval: 120_000
 	});
 
 export const useLatestTransactions = () =>
@@ -34,5 +34,5 @@ export const useLatestTransactions = () =>
 				type: tx.type,
 				valueOut: tx.vout.reduce((sum, o) => sum + o.value, 0).toFixed(2)
 			})),
-		refetchInterval: 30_000
+		refetchInterval: 120_000
 	});
