@@ -1,5 +1,5 @@
 import { Layout, Typography } from 'antd';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, Navigate } from 'react-router-dom';
 import Search from './components/Search';
 import { GithubOutlined } from '@ant-design/icons';
 import './styles.less';
