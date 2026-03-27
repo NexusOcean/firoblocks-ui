@@ -7,6 +7,10 @@ import './styles.less';
 const { Header, Content, Footer } = Layout;
 const { Text } = Typography;
 
+const { VITE_MAINTENANCE_PLANNED } = import.meta.env;
+
+const maintenance = VITE_MAINTENANCE_PLANNED === 'true';
+
 export default function AppLayout() {
 	return (
 		<Layout className="app-layout">
@@ -24,7 +28,7 @@ export default function AppLayout() {
 			</Header>
 
 			<Content className="app-content">
-				<Outlet />
+				{!maintenance ? <Outlet /> : <Navigate to="/maintenance" />}
 			</Content>
 
 			<Footer className="app-footer">
