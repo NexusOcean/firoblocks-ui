@@ -16,10 +16,9 @@ export default function Maintenance({ planned = false }: MaintenanceProps) {
 				flexDirection: 'column',
 				alignItems: 'center',
 				justifyContent: 'center',
-				minHeight: '100vh',
+				minHeight: '60vh',
 				textAlign: 'center',
-				gap: 24,
-				background: '#141414'
+				gap: 24
 			}}
 		>
 			<img
@@ -46,7 +45,6 @@ export default function Maintenance({ planned = false }: MaintenanceProps) {
 					? "We're down for scheduled maintenance. We'll be back shortly."
 					: "We're currently looking into it. Please check back soon."}
 			</Text>
-
 			<Link
 				to="/"
 				className="block-nav"
