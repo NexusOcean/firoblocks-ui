@@ -11,6 +11,7 @@ import {
 	SwapOutlined,
 	ThunderboltOutlined
 } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 const { Title } = Typography;
 
@@ -80,6 +81,7 @@ export default function Home() {
 	const { data: stats, isLoading: statsLoading } = useNetworkStats();
 	const { data: blocks, isLoading: blocksLoading } = useLatestBlocks();
 	const { data: txs, isLoading: txsLoading } = useLatestTransactions();
+	const navigate = useNavigate();
 
 	return (
 		<div style={{ padding: '24px 16px' }}>
@@ -142,6 +144,8 @@ export default function Home() {
 						pagination={false}
 						size="small"
 						scroll={{ x: true }}
+						className="pointer"
+						onRow={(row) => ({ onClick: () => navigate(`/block/${row.height}`) })}
 					/>
 				</Col>
 				<Col xs={24} xl={12}>
@@ -154,6 +158,8 @@ export default function Home() {
 						pagination={false}
 						size="small"
 						scroll={{ x: true }}
+						className="pointer"
+						onRow={(row) => ({ onClick: () => navigate(`/tx/${row.txid}`) })}
 					/>
 				</Col>
 			</Row>

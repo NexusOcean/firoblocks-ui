@@ -77,6 +77,37 @@
 	}
 
 	&:hover {
-		color: #fff;
+		transition: color 0.2s ease;
+		color: var(--ant-typography);
 	}
+}
+
+.block-nav {
+	color: #ba2a45;
+
+	.arrow-left {
+		margin-right: 2px;
+	}
+
+	.arrow-right {
+		margin-left: 2px;
+	}
+
+	&:hover {
+		color: var(--ant-typography);
+		opacity: 0.8;
+		transition: all 0.2s ease;
+
+		.arrow-left {
+			transform: translateX(-2px);
+		}
+
+		.arrow-right {
+			transform: translateX(2px);
+		}
+	}
+}
+
+.pointer td {
+	cursor: pointer;
 }

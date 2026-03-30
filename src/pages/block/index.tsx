@@ -126,6 +126,7 @@ export default function Block() {
 					pagination={false}
 					size="small"
 					scroll={{ x: true }}
+					className="pointer"
 					onRow={(row) => ({ onClick: () => navigate(`/tx/${row.txid}`) })}
 				/>
 			</Card>
@@ -133,14 +134,16 @@ export default function Block() {
 			{!isLoading && block && (
 				<Row justify="space-between">
 					<Col>
-						<Link to={`/block/${block.previousBlockHash}`} style={{ color: '#ba2a45' }}>
-							<ArrowLeftOutlined /> Previous Block
+						<Link to={`/block/${block.previousBlockHash}`} className="block-nav">
+							<ArrowLeftOutlined className="arrow-left" />
+							Previous
 						</Link>
 					</Col>
 					{block.nextBlockHash && (
 						<Col>
-							<Link to={`/block/${block.nextBlockHash}`} style={{ color: '#ba2a45' }}>
-								Next Block <ArrowRightOutlined />
+							<Link to={`/block/${block.nextBlockHash}`} className="block-nav">
+								Next
+								<ArrowRightOutlined className="arrow-right" />
 							</Link>
 						</Col>
 					)}

@@ -131,6 +131,7 @@ export default function Address() {
 					pagination={false}
 					size="small"
 					scroll={{ x: true }}
+					className="pointer"
 					onRow={(row) => ({ onClick: () => navigate(`/tx/${row.txid}`) })}
 				/>
 				{data && data.totalPages > 1 && (

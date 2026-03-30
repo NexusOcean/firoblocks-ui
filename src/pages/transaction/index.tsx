@@ -1,4 +1,4 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Typography, Card, Table, Tag, Row, Col, Skeleton } from 'antd';
 import { useTransactionDetail } from '@/hooks/useTransaction';
 import HashDisplay from '@/components/HashDisplay';
@@ -143,9 +143,7 @@ export default function Transaction() {
 											}}
 										>
 											{isHash && value && link ? (
-												<Link to={link}>
-													<HashDisplay value={value} />
-												</Link>
+												<HashDisplay value={value} />
 											) : (
 												<Text>{value}</Text>
 											)}
@@ -169,6 +167,7 @@ export default function Transaction() {
 							pagination={false}
 							size="small"
 							scroll={{ x: true }}
+							className="pointer"
 							onRow={(row) => ({
 								onClick: () => row.address && navigate(`/address/${row.address}`)
 							})}
@@ -185,6 +184,7 @@ export default function Transaction() {
 							pagination={false}
 							size="small"
 							scroll={{ x: true }}
+							className="pointer"
 							onRow={(row) => ({
 								onClick: () =>
 									row.addresses?.[0] && navigate(`/address/${row.addresses[0]}`)

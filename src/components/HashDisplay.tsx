@@ -35,12 +35,12 @@ export default function HashDisplay({ value, truncate = true }: HashDisplayProps
 			<Tooltip title={copied ? 'Copied!' : 'Copy'}>
 				<span
 					onClick={handleCopy}
-					style={{ cursor: 'pointer', color: copied ? '#52c41a' : '#7c1624' }}
+					style={{ cursor: 'pointer', color: copied ? '#52c41a' : '' }}
 				>
 					{copied ? (
-						<CheckOutlined style={{ fontSize: 13 }} />
+						<CheckOutlined style={{ fontSize: 16, padding: 2 }} />
 					) : (
-						<CopyOutlined style={{ fontSize: 13 }} />
+						<CopyOutlined style={{ fontSize: 16, padding: 2 }} />
 					)}
 				</span>
 			</Tooltip>
