@@ -69,9 +69,9 @@ export default function Transaction() {
 	const { data: tx, isLoading, isError } = useTransactionDetail(txid ?? '');
 	const navigate = useNavigate();
 
-	if (isError || !txid) {
-		return <Navigate to="/404" />;
-	}
+	if (!txid || !/^[a-fA-F0-9]{64}$/.test(txid)) return <Navigate to="/404" />;
+
+	if (isError) return <Navigate to="/maintenance" />;
 
 	const valueOut = tx?.vout.reduce((sum, o) => sum + o.value, 0);
 

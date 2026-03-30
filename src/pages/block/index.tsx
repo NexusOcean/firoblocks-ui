@@ -22,9 +22,9 @@ export default function Block() {
 	const { data: block, isLoading, isError } = useBlockDetail(height ?? '');
 	const navigate = useNavigate();
 
-	if (isError || !height) {
-		return <Navigate to="/404" />;
-	}
+	if (!height || !/^\d+$/.test(height)) return <Navigate to="/404" />;
+
+	if (isError) return <Navigate to="/maintenance" />;
 
 	const details = block
 		? [

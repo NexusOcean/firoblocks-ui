@@ -24,9 +24,10 @@ export default function Address() {
 	const [page, setPage] = useState(1);
 	const { data, isLoading, isError } = useAddressDetail(address ?? '', page);
 
-	if (isError || !address) {
+	if (!address || !/^a[1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address)) {
 		return <Navigate to="/404" />;
 	}
+	if (isError) return <Navigate to="/maintenance" />;
 
 	const details = data
 		? [
