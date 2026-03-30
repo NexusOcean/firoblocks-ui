@@ -12,6 +12,7 @@ import {
 	ThunderboltOutlined
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { truncateHash } from '@/components/HashDisplay';
 
 const { Title } = Typography;
 
@@ -33,7 +34,7 @@ const blockColumns = [
 		title: 'Hash',
 		dataIndex: 'hash',
 		key: 'hash',
-		render: (h: string) => <HashLink value={h} to={`/block/${h}`} truncate />
+		render: (h: string) => <span style={{ color: '#ba2a45' }}>{truncateHash(h)}</span>
 	},
 	{ title: 'Txs', dataIndex: 'nTx', key: 'nTx' },
 	{

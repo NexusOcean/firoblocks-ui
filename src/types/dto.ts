@@ -29,8 +29,8 @@ export interface BlockDto {
 	difficulty: number;
 	chainlock: boolean;
 	nTx: number;
-	previousBlockHash?: string;
-	nextBlockHash?: string;
+	previousBlockHeight?: string;
+	nextBlockHeight?: string;
 	txids: string[];
 }
 

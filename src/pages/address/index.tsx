@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { Typography, Card, Table, Tag, Skeleton, Pagination } from 'antd';
 import { useState } from 'react';
 import { useAddressDetail } from '@/hooks/useAddress';
@@ -24,12 +24,14 @@ export default function Address() {
 	const [page, setPage] = useState(1);
 	const { data, isLoading, isError } = useAddressDetail(address ?? '', page);
 
-	if (isError) return <Text type="danger">Address not found.</Text>;
+	if (isError || !address) {
+		return <Navigate to="/404" />;
+	}
 
 	const details = data
 		? [
-				{ label: 'Balance', value: `${data.balance.toFixed(4)} FIRO` },
-				{ label: 'Total Received', value: `${data.received.toFixed(4)} FIRO` },
+				{ label: 'Balance', value: `${data.balance.toFixed(2)} FIRO` },
+				{ label: 'Total Received', value: `${data.received.toFixed(2)} FIRO` },
 				{ label: 'Transactions', value: data.totalTxCount.toLocaleString() }
 			]
 		: [];

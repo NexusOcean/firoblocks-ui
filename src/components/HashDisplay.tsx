@@ -7,15 +7,20 @@ const { Text } = Typography;
 interface HashDisplayProps {
 	value: string;
 	truncate?: boolean;
+	copy?: boolean;
 }
 
-const truncateHash = (hash: string) => `${hash.slice(0, 8)}…${hash.slice(-8)}`;
+export const truncateHash = (hash: string) => {
+	if (!hash) return '';
+	return `${hash.slice(0, 8)}…${hash.slice(-8)}`;
+};
 
-export default function HashDisplay({ value, truncate = true }: HashDisplayProps) {
+export default function HashDisplay({ value, truncate = true, copy = true }: HashDisplayProps) {
 	const [copied, setCopied] = useState(false);
 
 	const handleCopy = async () => {
-		await navigator.clipboard.writeText(value);
+		const text = value.replaceAll(',', '');
+		await navigator.clipboard.writeText(text);
 		setCopied(true);
 		setTimeout(() => setCopied(false), 2000);
 	};
@@ -32,18 +37,20 @@ export default function HashDisplay({ value, truncate = true }: HashDisplayProps
 			<Text style={{ color: '#ba2a45', letterSpacing: '0.01em' }}>
 				{truncate ? truncateHash(value) : value}
 			</Text>
-			<Tooltip title={copied ? 'Copied!' : 'Copy'}>
-				<span
-					onClick={handleCopy}
-					style={{ cursor: 'pointer', color: copied ? '#52c41a' : '' }}
-				>
-					{copied ? (
-						<CheckOutlined style={{ fontSize: 16, padding: 2 }} />
-					) : (
-						<CopyOutlined style={{ fontSize: 16, padding: 2 }} />
-					)}
-				</span>
-			</Tooltip>
+			{copy && (
+				<Tooltip title={copied ? 'Copied!' : 'Copy'}>
+					<span
+						onClick={handleCopy}
+						style={{ cursor: 'pointer', color: copied ? '#52c41a' : '' }}
+					>
+						{copied ? (
+							<CheckOutlined style={{ fontSize: 16, padding: 2 }} />
+						) : (
+							<CopyOutlined style={{ fontSize: 16, padding: 2 }} />
+						)}
+					</span>
+				</Tooltip>
+			)}
 		</span>
 	);
 }

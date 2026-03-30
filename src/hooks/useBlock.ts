@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getBlock } from '@/services/api';
 
-export const useBlockDetail = (hash: string) =>
+export const useBlockDetail = (height: string) =>
 	useQuery({
-		queryKey: ['block', hash],
-		queryFn: () => getBlock(hash),
-		enabled: !!hash
+		queryKey: ['block', height],
+		queryFn: () => getBlock(height),
+		enabled: !!height && /^\d+$/.test(height)
 	});

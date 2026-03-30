@@ -5,6 +5,6 @@ export function useAddressDetail(address: string, page?: number) {
 	return useQuery({
 		queryKey: ['address', address, page],
 		queryFn: () => getAddress(address, page),
-		enabled: !!address
+		enabled: !!address && /^a[1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address)
 	});
 }

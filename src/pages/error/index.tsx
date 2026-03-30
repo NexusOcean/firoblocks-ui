@@ -41,9 +41,11 @@ export default function Error404() {
 			</Text>
 			<Link
 				to="/"
+				className="block-nav"
 				style={{ color: '#ba2a45', fontSize: 16, maxWidth: 300, display: 'block' }}
 			>
-				<ArrowLeftOutlined /> Back to Home
+				<ArrowLeftOutlined className="arrow-left" />
+				Back to Home
 			</Link>
 		</div>
 	);

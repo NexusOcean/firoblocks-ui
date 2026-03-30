@@ -1,8 +1,9 @@
 import { Layout, Typography } from 'antd';
-import { Outlet, Link, Navigate } from 'react-router-dom';
+import { Outlet, Link, Navigate, useLocation } from 'react-router-dom';
 import Search from './components/Search';
 import { GithubOutlined } from '@ant-design/icons';
 import './styles.less';
+import { useEffect } from 'react';
 
 const { Header, Content, Footer } = Layout;
 const { Text } = Typography;
@@ -12,6 +13,9 @@ const { VITE_MAINTENANCE_PLANNED } = import.meta.env;
 const maintenance = VITE_MAINTENANCE_PLANNED === 'true';
 
 export default function AppLayout() {
+	const { pathname } = useLocation();
+	useEffect(() => window.scrollTo(0, 0), [pathname]);
+
 	return (
 		<Layout className="app-layout">
 			<Header className="app-header">

@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Input } from 'antd';
 import type { InputRef } from 'antd';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
-import { search } from '@/services/api';
 import './search.less';
 
 function detectLocal(value: string): string | null {
 	const trimmed = value.trim();
 	if (!trimmed) return null;
-	if (/^a[1-9A-HJ-NP-Za-km-z]{25,40}$/.test(trimmed)) return `/address/${trimmed}`;
 	if (/^\d+$/.test(trimmed)) return `/block/${trimmed}`;
+	if (/^[a-fA-F0-9]{64}$/.test(trimmed)) return `/tx/${trimmed}`;
+	if (/^a[1-9A-HJ-NP-Za-km-z]{25,40}$/.test(trimmed)) return `/address/${trimmed}`;
 	return null;
 }
 
@@ -51,21 +51,6 @@ export default function Search() {
 			return;
 		}
 
-		if (/^[a-fA-F0-9]{64}$/.test(trimmed)) {
-			setLoading(true);
-			try {
-				const result = await search(trimmed);
-				close();
-				if (result.type === 'transaction') navigate(`/tx/${trimmed}`);
-				else navigate(`/block/${trimmed}`);
-			} catch {
-				setError(true);
-			} finally {
-				setLoading(false);
-			}
-			return;
-		}
-
 		setError(true);
 	}
 
@@ -97,7 +82,7 @@ export default function Search() {
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') handleSubmit();
 				}}
-				placeholder="Search by block height, hash or address..."
+				placeholder="Search by block, transaction, or address..."
 				status={error ? 'error' : ''}
 				prefix={loading ? <SearchOutlined spin /> : <SearchOutlined />}
 				suffix={<CloseOutlined onClick={close} className="search-close" />}

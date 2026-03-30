@@ -1,7 +1,7 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { Typography, Card, Table, Tag, Row, Col, Skeleton } from 'antd';
 import { useTransactionDetail } from '@/hooks/useTransaction';
-import HashDisplay from '@/components/HashDisplay';
+import HashDisplay, { truncateHash } from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import type { TransactionType, TxVinDto, TxVoutDto } from '@/types/dto';
 
@@ -69,18 +69,23 @@ export default function Transaction() {
 	const { data: tx, isLoading, isError } = useTransactionDetail(txid ?? '');
 	const navigate = useNavigate();
 
-	if (isError) return <Text type="danger">Transaction not found.</Text>;
+	if (isError || !txid) {
+		return <Navigate to="/404" />;
+	}
 
 	const valueOut = tx?.vout.reduce((sum, o) => sum + o.value, 0);
 
 	const details = tx
 		? [
-				{ label: 'Block Height', value: tx.blockHeight.toLocaleString() },
+				{
+					label: 'Block Height',
+					value: tx.blockHeight.toLocaleString(),
+					isHeight: true,
+					link: `/block/${tx.blockHeight}`
+				},
 				{
 					label: 'Block Hash',
-					value: tx.blockHash,
-					isHash: true,
-					link: `/block/${tx.blockHash}`
+					value: truncateHash(tx.blockHash)
 				},
 				{ label: 'Confirmations', value: tx.confirmations.toLocaleString() },
 				{ label: 'Timestamp', value: new Date(tx.time * 1000).toLocaleString() },
@@ -123,8 +128,8 @@ export default function Transaction() {
 					<div style={{ overflowX: 'auto' }}>
 						<table style={{ width: '100%', borderCollapse: 'collapse' }}>
 							<tbody>
-								{details.map(({ label, value, isHash, link }) => (
-									<tr key={label}>
+								{details.map(({ label, value, isHeight, link }) => (
+									<tr key={label} style={{ width: 360 }}>
 										<td
 											style={{
 												padding: '8px 16px 8px 0',
@@ -139,11 +144,11 @@ export default function Transaction() {
 											style={{
 												padding: '8px 0',
 												fontFamily: 'monospace',
-												wordBreak: 'break-all'
+												wordWrap: 'break-word'
 											}}
 										>
-											{isHash && value && link ? (
-												<HashDisplay value={value} />
+											{isHeight && value && link ? (
+												<HashDisplay value={value} truncate={false} />
 											) : (
 												<Text>{value}</Text>
 											)}

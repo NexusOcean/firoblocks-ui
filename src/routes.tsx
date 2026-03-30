@@ -14,7 +14,7 @@ const routes: RouteObject[] = [
 		element: <AppLayout />,
 		children: [
 			{ index: true, element: <Home /> },
-			{ path: 'block/:hash', element: <Block /> },
+			{ path: 'block/:height', element: <Block /> },
 			{ path: 'tx/:txid', element: <Transaction /> },
 			{ path: 'address/:address', element: <Address /> },
 			{ path: '404', element: <Error404 /> },

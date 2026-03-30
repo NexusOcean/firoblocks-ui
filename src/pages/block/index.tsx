@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, Navigate } from 'react-router-dom';
 import { Typography, Table, Card, Tag, Row, Col, Skeleton } from 'antd';
 import { useBlockDetail } from '@/hooks/useBlock';
 import HashDisplay from '@/components/HashDisplay';
@@ -18,27 +18,26 @@ const TX_TYPE_COLORS: Record<TransactionType, string> = {
 const formatSize = (bytes: number) => `${(bytes / 1024).toFixed(2)} KB`;
 
 export default function Block() {
-	const { hash } = useParams<{ hash: string }>();
-	const { data: block, isLoading, isError } = useBlockDetail(hash ?? '');
+	const { height } = useParams<{ height: string }>();
+	const { data: block, isLoading, isError } = useBlockDetail(height ?? '');
 	const navigate = useNavigate();
 
-	if (isError) {
-		return <Text type="danger">Block not found.</Text>;
+	if (isError || !height) {
+		return <Navigate to="/404" />;
 	}
 
 	const details = block
 		? [
-				{ label: 'Height', value: block.height.toLocaleString() },
+				{
+					label: 'Height',
+					value: <HashDisplay value={block.height.toLocaleString()} truncate={false} />
+				},
 				{ label: 'Confirmations', value: block.confirmations.toLocaleString() },
 				{ label: 'Timestamp', value: new Date(block.time * 1000).toLocaleString() },
 				{ label: 'Transactions', value: block.nTx.toLocaleString() },
 				{ label: 'Size', value: formatSize(block.size) },
 				{ label: 'Difficulty', value: block.difficulty.toFixed(0) },
-				{ label: 'Chainlock', value: block.chainlock ? 'Yes' : 'No' },
-				{ label: 'Previous Block', value: block.previousBlockHash, isHash: true },
-				...(block.nextBlockHash
-					? [{ label: 'Next Block', value: block.nextBlockHash, isHash: true }]
-					: [])
+				{ label: 'Chainlock', value: block.chainlock ? 'Yes' : 'No' }
 			]
 		: [];
 
@@ -59,7 +58,7 @@ export default function Block() {
 
 	const title = isLoading
 		? 'FiroBlocks — Firo Block Explorer'
-		: `FiroBlocks — Block #${block!.hash}`;
+		: `FiroBlocks — Block #${block?.height}`;
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
@@ -70,7 +69,7 @@ export default function Block() {
 				{isLoading ? (
 					<Skeleton.Input active style={{ width: 500 }} />
 				) : (
-					block && <HashDisplay value={block.hash} truncate={false} />
+					block && <HashDisplay value={block.hash} truncate={false} copy={false} />
 				)}
 			</div>
 
@@ -81,13 +80,13 @@ export default function Block() {
 					<div style={{ overflowX: 'auto' }}>
 						<table style={{ width: '100%', borderCollapse: 'collapse' }}>
 							<tbody>
-								{details.map(({ label, value, isHash }) => (
-									<tr key={label}>
+								{details.map(({ label, value }) => (
+									<tr key={label} style={{ width: 360 }}>
 										<td
 											style={{
 												padding: '8px 16px 8px 0',
-												width: 180,
 												verticalAlign: 'top',
+												width: 180,
 												whiteSpace: 'nowrap'
 											}}
 										>
@@ -97,14 +96,10 @@ export default function Block() {
 											style={{
 												padding: '8px 0',
 												fontFamily: 'monospace',
-												wordBreak: 'break-all'
+												wordWrap: 'break-word'
 											}}
 										>
-											{isHash && value ? (
-												<HashDisplay value={value} />
-											) : (
-												<Text>{value}</Text>
-											)}
+											<Text>{value}</Text>
 										</td>
 									</tr>
 								))}
@@ -134,15 +129,15 @@ export default function Block() {
 			{!isLoading && block && (
 				<Row justify="space-between">
 					<Col>
-						<Link to={`/block/${block.previousBlockHash}`} className="block-nav">
+						<Link to={`/block/${block.previousBlockHeight}`} className="block-nav">
 							<ArrowLeftOutlined className="arrow-left" />
-							Previous
+							Previous Block
 						</Link>
 					</Col>
-					{block.nextBlockHash && (
+					{block.nextBlockHeight && (
 						<Col>
-							<Link to={`/block/${block.nextBlockHash}`} className="block-nav">
-								Next
+							<Link to={`/block/${block.nextBlockHeight}`} className="block-nav">
+								Next Block
 								<ArrowRightOutlined className="arrow-right" />
 							</Link>
 						</Col>
