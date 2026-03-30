@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const { VITE_LOCAL_API, VITE_API_URL } = import.meta.env;
 
-const LOCAL_API = VITE_LOCAL_API === 'true';
+const LOCAL_API = VITE_LOCAL_API === 'false';
 
-const BASE = !LOCAL_API ? VITE_API_URL : 'http://localhost:3000/v1';
+const BASE = LOCAL_API ? VITE_API_URL : 'http://localhost:3000/v1';
 
 const axiosInstance = axios.create({ baseURL: BASE, timeout: 15_000 });
 
