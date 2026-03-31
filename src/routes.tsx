@@ -9,19 +9,22 @@ const Address = lazy(() => import('./pages/address'));
 const Error404 = lazy(() => import('./pages/error'));
 const Maintenance = lazy(() => import('./pages/maintenance'));
 
+const { VITE_MAINTENANCE_PLANNED } = import.meta.env;
+const planned = VITE_MAINTENANCE_PLANNED === 'true';
+
 const routes: RouteObject[] = [
 	{
 		element: <AppLayout />,
 		children: [
-			{ index: true, element: <Home /> },
+			{ index: true, element: !planned ? <Home /> : <Maintenance planned /> },
 			{ path: 'block/:height', element: <Block /> },
 			{ path: 'tx/:txid', element: <Transaction /> },
 			{ path: 'address/:address', element: <Address /> },
 			{ path: '404', element: <Error404 /> },
+			{ path: '/maintenance', element: <Maintenance planned={planned} /> },
 			{ path: '*', element: <Error404 /> }
 		]
-	},
-	{ path: 'maintenance', element: <Maintenance /> }
+	}
 ];
 
 export default routes;

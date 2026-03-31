@@ -1,5 +1,5 @@
 import { Layout, Typography } from 'antd';
-import { Outlet, Link, Navigate, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import Search from './components/Search';
 import { GithubOutlined } from '@ant-design/icons';
 import './styles.less';
@@ -7,10 +7,6 @@ import { useEffect } from 'react';
 
 const { Header, Content, Footer } = Layout;
 const { Text } = Typography;
-
-const { VITE_MAINTENANCE_PLANNED } = import.meta.env;
-
-const maintenance = VITE_MAINTENANCE_PLANNED === 'true';
 
 export default function AppLayout() {
 	const { pathname } = useLocation();
@@ -32,7 +28,7 @@ export default function AppLayout() {
 			</Header>
 
 			<Content className="app-content">
-				{!maintenance ? <Outlet /> : <Navigate to="/maintenance" />}
+				<Outlet />
 			</Content>
 
 			<Footer className="app-footer">
