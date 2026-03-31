@@ -45,14 +45,17 @@ export default function Maintenance({ planned }: MaintenanceProps) {
 					? "We're down for scheduled maintenance. We'll be back shortly."
 					: "We're currently looking into it. Please check back soon."}
 			</Text>
-			<Link
-				to="/"
-				className="block-nav"
-				style={{ color: '#ba2a45', fontSize: 16, maxWidth: 300, display: 'block' }}
-			>
-				<ArrowLeftOutlined className="arrow-left" />
-				Back to Home
-			</Link>
+
+			{!planned && (
+				<Link
+					to="/"
+					className="block-nav"
+					style={{ color: '#ba2a45', fontSize: 16, maxWidth: 300, display: 'block' }}
+				>
+					<ArrowLeftOutlined className="arrow-left" />
+					Back to Home
+				</Link>
+			)}
 		</div>
 	);
 }
