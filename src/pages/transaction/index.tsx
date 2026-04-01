@@ -90,8 +90,8 @@ export default function Transaction() {
 				{ label: 'Confirmations', value: tx.confirmations.toLocaleString() },
 				{ label: 'Timestamp', value: new Date(tx.time * 1000).toLocaleString() },
 				{ label: 'Size', value: `${tx.size.toLocaleString()} bytes` },
-				{ label: 'Fee', value: tx.fee != null ? `${tx.fee.toFixed(4)} FIRO` : '—' },
-				{ label: 'Total Output', value: `${valueOut?.toFixed(4)} FIRO` },
+				{ label: 'Fee', value: tx.fee != null ? `${tx.fee.toFixed(2)} FIRO` : '—' },
+				{ label: 'Total Output', value: `${valueOut?.toFixed(2)} FIRO` },
 				{ label: 'Chainlock', value: tx.chainlock ? 'Yes' : 'No' }
 			]
 		: [];

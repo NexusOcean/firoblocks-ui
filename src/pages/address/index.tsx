@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { Typography, Card, Table, Tag, Skeleton, Pagination } from 'antd';
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useAddressDetail } from '@/hooks/useAddress';
 import HashDisplay from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
@@ -21,7 +21,8 @@ const PAGE_SIZE = 25;
 export default function Address() {
 	const { address } = useParams<{ address: string }>();
 	const navigate = useNavigate();
-	const [page, setPage] = useState(1);
+	const [searchParams, setSearchParams] = useSearchParams();
+	const page = parseInt(searchParams.get('page') ?? '1', 10);
 	const { data, isLoading, isError } = useAddressDetail(address ?? '', page);
 
 	if (!address || !/^a[1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address)) {
@@ -29,11 +30,18 @@ export default function Address() {
 	}
 	if (isError) return <Navigate to="/maintenance" />;
 
+	const setPage = (newPage: number) => {
+		setSearchParams({ page: String(newPage) });
+	};
+
 	const details = data
 		? [
 				{ label: 'Balance', value: `${data.balance.toFixed(2)} FIRO` },
 				{ label: 'Total Received', value: `${data.received.toFixed(2)} FIRO` },
-				{ label: 'Transactions', value: data.totalTxCount.toLocaleString() }
+				{
+					label: 'Transactions',
+					value: data.totalTxCount >= 1000 ? '1000+' : data.totalTxCount.toLocaleString()
+				}
 			]
 		: [];
 
@@ -58,7 +66,7 @@ export default function Address() {
 				v != null ? (
 					<Text style={{ color: v >= 0 ? '#52c41a' : '#ff4d4f' }}>
 						{v >= 0 ? '+' : ''}
-						{v.toFixed(4)} FIRO
+						{v.toFixed(2)} FIRO
 					</Text>
 				) : (
 					'—'
@@ -125,7 +133,9 @@ export default function Address() {
 				)}
 			</Card>
 
-			<Card title={`Transactions${data ? ` (${data.totalTxCount.toLocaleString()})` : ''}`}>
+			<Card
+				title={`Transactions${data ? ` (${data.totalTxCount >= 1000 ? '1000+' : data.totalTxCount.toLocaleString()})` : ''}`}
+			>
 				<Table<AddressTxSummaryDto>
 					dataSource={data?.transactions}
 					columns={txColumns}
