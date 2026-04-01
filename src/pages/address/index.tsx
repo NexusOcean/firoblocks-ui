@@ -40,7 +40,7 @@ export default function Address() {
 				{ label: 'Total Received', value: `${data.received.toFixed(2)} FIRO` },
 				{
 					label: 'Transactions',
-					value: data.totalTxCount >= 1000 ? '1000+' : data.totalTxCount.toLocaleString()
+					value: data.totalTxCount >= 1000 ? '1,000+' : data.totalTxCount.toLocaleString()
 				}
 			]
 		: [];
@@ -134,7 +134,7 @@ export default function Address() {
 			</Card>
 
 			<Card
-				title={`Transactions${data ? ` (${data.totalTxCount >= 1000 ? '1000+' : data.totalTxCount.toLocaleString()})` : ''}`}
+				title={`Transactions${data ? ` (${data.totalTxCount >= 1000 ? '1,000+' : data.totalTxCount.toLocaleString()})` : ''}`}
 			>
 				<Table<AddressTxSummaryDto>
 					dataSource={data?.transactions}
