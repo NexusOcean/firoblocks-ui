@@ -28,7 +28,7 @@ const blockColumns = [
 		title: 'Height',
 		dataIndex: 'height',
 		key: 'height',
-		render: (h: number) => <HashLink value={String(h)} to={`/block/${h}`} mono />
+		render: (h: number) => <HashLink value={h.toLocaleString()} to={`/block/${h}`} mono />
 	},
 	{
 		title: 'Hash',
