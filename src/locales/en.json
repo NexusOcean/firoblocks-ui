@@ -1,0 +1,98 @@
+{
+	"home": {
+		"pageTitle": "FiroBlocks — Firo Block Explorer",
+		"heading": "FiroBlocks",
+		"stat": {
+			"blockHeight": "Block Height",
+			"hashrate": "Hashrate",
+			"difficulty": "Difficulty",
+			"supply": "Supply",
+			"transactions": "Transactions"
+		},
+		"latestBlocks": "Latest Blocks",
+		"latestTransactions": "Latest Transactions"
+	},
+	"block": {
+		"heading": "Block",
+		"pageTitle": "FiroBlocks — Firo Block Explorer",
+		"pageTitleWithHeight": "FiroBlocks — Block #{{height}}",
+		"detailsTitle": "Block Details",
+		"transactionsTitle": "Transactions",
+		"previousBlock": "Previous Block",
+		"nextBlock": "Next Block",
+		"detail": {
+			"height": "Height",
+			"confirmations": "Confirmations",
+			"timestamp": "Timestamp",
+			"transactions": "Transactions",
+			"size": "Size",
+			"difficulty": "Difficulty",
+			"chainlock": "Chainlock"
+		}
+	},
+	"tx": {
+		"heading": "Transaction",
+		"pageTitle": "FiroBlocks — Firo Block Explorer",
+		"pageTitleWithTxid": "FiroBlocks — Transaction {{txid}}",
+		"detailsTitle": "Transaction Details",
+		"inputs": "Inputs",
+		"outputs": "Outputs",
+		"coinbase": "Coinbase",
+		"anonymizedInput": "Anonymized input",
+		"anonymizedOutput": "Anonymized output",
+		"detail": {
+			"blockHeight": "Block Height",
+			"blockHash": "Block Hash",
+			"confirmations": "Confirmations",
+			"timestamp": "Timestamp",
+			"size": "Size",
+			"fee": "Fee",
+			"totalOutput": "Total Output",
+			"chainlock": "Chainlock"
+		}
+	},
+	"address": {
+		"heading": "Address",
+		"pageTitle": "FiroBlocks — Firo Block Explorer",
+		"pageTitleWithAddress": "FiroBlocks — Address {{address}}",
+		"detailsTitle": "Address Details",
+		"transactionsTitle": "Transactions",
+		"detail": {
+			"balance": "Balance",
+			"totalReceived": "Total Received",
+			"transactions": "Transactions"
+		}
+	},
+	"search": {
+		"placeholder": "Search by block, transaction, or address...",
+		"notFound": "No results found."
+	},
+	"table": {
+		"height": "Height",
+		"hash": "Hash",
+		"txs": "Txs",
+		"size": "Size",
+		"age": "Age",
+		"txid": "Txid",
+		"type": "Type",
+		"value": "Value",
+		"address": "Address"
+	},
+	"common": {
+		"yes": "Yes",
+		"no": "No",
+		"backToHome": "Back to Home"
+	},
+	"error404": {
+		"pageTitle": "FiroBlocks — Not Found",
+		"message": "The page you requested could not be found."
+	},
+	"maintenance": {
+		"pageTitle": "FiroBlocks — Maintenance",
+		"plannedMessage": "We're down for scheduled maintenance. We'll be back shortly.",
+		"unplannedMessage": "We're currently looking into it. Please check back soon."
+	},
+	"nav": {
+		"github": "GitHub"
+	}
+}

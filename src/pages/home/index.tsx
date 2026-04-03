@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Typography, Row, Col, Table, Tag } from 'antd';
 import { useLatestBlocks, useLatestTransactions, useNetworkStats } from '@/hooks/useHomeData';
 import StatCard from '@/components/StatCard';
@@ -13,6 +14,7 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { truncateHash } from '@/components/HashDisplay';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 
@@ -23,78 +25,87 @@ const TX_TYPE_COLORS: Record<TransactionType | 'coinbase' | 'unknown', string> =
 	unknown: 'default'
 };
 
-const blockColumns = [
-	{
-		title: 'Height',
-		dataIndex: 'height',
-		key: 'height',
-		render: (h: number) => <HashLink value={h.toLocaleString()} to={`/block/${h}`} mono />
-	},
-	{
-		title: 'Hash',
-		dataIndex: 'hash',
-		key: 'hash',
-		render: (h: string) => <span style={{ color: '#ba2a45' }}>{truncateHash(h)}</span>
-	},
-	{ title: 'Txs', dataIndex: 'nTx', key: 'nTx' },
-	{
-		title: 'Size',
-		dataIndex: 'size',
-		key: 'size',
-		render: (s: number) => `${(s / 1024).toFixed(1)} KB`
-	},
-	{
-		title: 'Age',
-		dataIndex: 'time',
-		key: 'time',
-		render: (t: number) => <TimeAgo timestamp={t} />
-	}
-];
-
-const txColumns = [
-	{
-		title: 'Txid',
-		dataIndex: 'txid',
-		key: 'txid',
-		render: (id: string) => <HashLink value={id} to={`/tx/${id}`} truncate />
-	},
-	{
-		title: 'Type',
-		dataIndex: 'type',
-		key: 'type',
-		render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
-	},
-	{
-		title: 'Value',
-		dataIndex: 'valueOut',
-		key: 'valueOut',
-		render: (v: string) => `${v} FIRO`
-	},
-	{
-		title: 'Age',
-		dataIndex: 'time',
-		key: 'time',
-		render: (t: number) => <TimeAgo timestamp={t} />
-	}
-];
-
 export default function Home() {
+	const { t } = useTranslation();
 	const { data: stats, isLoading: statsLoading } = useNetworkStats();
 	const { data: blocks, isLoading: blocksLoading } = useLatestBlocks();
 	const { data: txs, isLoading: txsLoading } = useLatestTransactions();
 	const navigate = useNavigate();
 
+	const blockColumns = useMemo(
+		() => [
+			{
+				title: t('table.height'),
+				dataIndex: 'height',
+				key: 'height',
+				render: (h: number) => (
+					<HashLink value={h.toLocaleString()} to={`/block/${h}`} mono />
+				)
+			},
+			{
+				title: t('table.hash'),
+				dataIndex: 'hash',
+				key: 'hash',
+				render: (h: string) => <span style={{ color: '#ba2a45' }}>{truncateHash(h)}</span>
+			},
+			{ title: t('table.txs'), dataIndex: 'nTx', key: 'nTx' },
+			{
+				title: t('table.size'),
+				dataIndex: 'size',
+				key: 'size',
+				render: (s: number) => `${(s / 1024).toFixed(1)} KB`
+			},
+			{
+				title: t('table.age'),
+				dataIndex: 'time',
+				key: 'time',
+				render: (time: number) => <TimeAgo timestamp={time} />
+			}
+		],
+		[t]
+	);
+
+	const txColumns = useMemo(
+		() => [
+			{
+				title: t('table.txid'),
+				dataIndex: 'txid',
+				key: 'txid',
+				render: (id: string) => <HashLink value={id} to={`/tx/${id}`} truncate />
+			},
+			{
+				title: t('table.type'),
+				dataIndex: 'type',
+				key: 'type',
+				render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
+			},
+			{
+				title: t('table.value'),
+				dataIndex: 'valueOut',
+				key: 'valueOut',
+				render: (v: string) => `${v} FIRO`
+			},
+			{
+				title: t('table.age'),
+				dataIndex: 'time',
+				key: 'time',
+				render: (time: number) => <TimeAgo timestamp={time} />
+			}
+		],
+		[t]
+	);
+
 	return (
 		<div style={{ padding: '24px 16px' }}>
 			<Title level={2} style={{ marginBottom: 24 }}>
-				FiroBlocks
+				{t('home.heading')}
 			</Title>
-			<title>FiroBlocks — Firo Block Explorer</title>
+			<title>{t('home.pageTitle')}</title>
 
 			<Row gutter={[16, 16]} justify="center" style={{ marginBottom: 32 }}>
 				<Col xs={24} sm={12} lg={4}>
 					<StatCard
-						label="Block Height"
+						label={t('home.stat.blockHeight')}
 						value={stats?.blockHeight}
 						loading={statsLoading}
 						icon={<BlockOutlined />}
@@ -102,7 +113,7 @@ export default function Home() {
 				</Col>
 				<Col xs={24} sm={12} lg={4}>
 					<StatCard
-						label="Hashrate"
+						label={t('home.stat.hashrate')}
 						value={stats?.hashrate}
 						loading={statsLoading}
 						icon={<ThunderboltOutlined />}
@@ -110,7 +121,7 @@ export default function Home() {
 				</Col>
 				<Col xs={24} sm={12} lg={4}>
 					<StatCard
-						label="Difficulty"
+						label={t('home.stat.difficulty')}
 						value={stats?.difficulty}
 						loading={statsLoading}
 						icon={<AimOutlined />}
@@ -118,7 +129,7 @@ export default function Home() {
 				</Col>
 				<Col xs={24} sm={12} lg={4}>
 					<StatCard
-						label="Supply"
+						label={t('home.stat.supply')}
 						value={stats?.supply}
 						loading={statsLoading}
 						icon={<DollarOutlined />}
@@ -126,7 +137,7 @@ export default function Home() {
 				</Col>
 				<Col xs={24} sm={12} lg={4}>
 					<StatCard
-						label="Transactions"
+						label={t('home.stat.transactions')}
 						value={stats?.txCount}
 						loading={statsLoading}
 						icon={<SwapOutlined />}
@@ -136,7 +147,7 @@ export default function Home() {
 
 			<Row gutter={[24, 24]}>
 				<Col xs={24} xl={12}>
-					<Title level={4}>Latest Blocks</Title>
+					<Title level={4}>{t('home.latestBlocks')}</Title>
 					<Table<BlockSummaryDto>
 						dataSource={blocks}
 						columns={blockColumns}
@@ -150,7 +161,7 @@ export default function Home() {
 					/>
 				</Col>
 				<Col xs={24} xl={12}>
-					<Title level={4}>Latest Transactions</Title>
+					<Title level={4}>{t('home.latestTransactions')}</Title>
 					<Table
 						dataSource={txs}
 						columns={txColumns}

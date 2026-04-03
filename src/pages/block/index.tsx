@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { useParams, Link, useNavigate, Navigate } from 'react-router-dom';
 import { Typography, Table, Card, Tag, Row, Col, Skeleton } from 'antd';
@@ -5,6 +6,7 @@ import { useBlockDetail } from '@/hooks/useBlock';
 import HashDisplay from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import type { TransactionType } from '@/types/dto';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
@@ -18,9 +20,28 @@ const TX_TYPE_COLORS: Record<TransactionType, string> = {
 const formatSize = (bytes: number) => `${(bytes / 1024).toFixed(2)} KB`;
 
 export default function Block() {
+	const { t } = useTranslation();
 	const { height } = useParams<{ height: string }>();
 	const { data: block, isLoading, isError } = useBlockDetail(height ?? '');
 	const navigate = useNavigate();
+
+	const txColumns = useMemo(
+		() => [
+			{
+				title: t('table.txid'),
+				dataIndex: 'txid',
+				key: 'txid',
+				render: (id: string) => <HashLink value={id} to={`/tx/${id}`} truncate />
+			},
+			{
+				title: t('table.type'),
+				dataIndex: 'type',
+				key: 'type',
+				render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
+			}
+		],
+		[t]
+	);
 
 	if (!height || !/^\d+$/.test(height)) return <Navigate to="/404" />;
 
@@ -29,41 +50,35 @@ export default function Block() {
 	const details = block
 		? [
 				{
-					label: 'Height',
+					label: t('block.detail.height'),
 					value: <HashDisplay value={block.height.toLocaleString()} truncate={false} />
 				},
-				{ label: 'Confirmations', value: block.confirmations.toLocaleString() },
-				{ label: 'Timestamp', value: new Date(block.time * 1000).toLocaleString() },
-				{ label: 'Transactions', value: block.nTx.toLocaleString() },
-				{ label: 'Size', value: formatSize(block.size) },
-				{ label: 'Difficulty', value: block.difficulty.toFixed(0) },
-				{ label: 'Chainlock', value: block.chainlock ? 'Yes' : 'No' }
+				{
+					label: t('block.detail.confirmations'),
+					value: block.confirmations.toLocaleString()
+				},
+				{
+					label: t('block.detail.timestamp'),
+					value: new Date(block.time * 1000).toLocaleString()
+				},
+				{ label: t('block.detail.transactions'), value: block.nTx.toLocaleString() },
+				{ label: t('block.detail.size'), value: formatSize(block.size) },
+				{ label: t('block.detail.difficulty'), value: block.difficulty.toFixed(0) },
+				{
+					label: t('block.detail.chainlock'),
+					value: block.chainlock ? t('common.yes') : t('common.no')
+				}
 			]
 		: [];
 
-	const txColumns = [
-		{
-			title: 'Txid',
-			dataIndex: 'txid',
-			key: 'txid',
-			render: (id: string) => <HashLink value={id} to={`/tx/${id}`} truncate />
-		},
-		{
-			title: 'Type',
-			dataIndex: 'type',
-			key: 'type',
-			render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
-		}
-	];
-
 	const title = isLoading
-		? 'FiroBlocks — Firo Block Explorer'
-		: `FiroBlocks — Block #${block?.height}`;
+		? t('block.pageTitle')
+		: t('block.pageTitleWithHeight', { height: block?.height });
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
 			<div>
-				<Title level={3}>Block</Title>
+				<Title level={3}>{t('block.heading')}</Title>
 				<title>{title}</title>
 
 				{isLoading ? (
@@ -73,7 +88,7 @@ export default function Block() {
 				)}
 			</div>
 
-			<Card title="Block Details">
+			<Card title={t('block.detailsTitle')}>
 				{isLoading ? (
 					<Skeleton active />
 				) : (
@@ -109,7 +124,7 @@ export default function Block() {
 				)}
 			</Card>
 
-			<Card title="Transactions">
+			<Card title={t('block.transactionsTitle')}>
 				<Table
 					dataSource={block?.txids.map((txid) => ({
 						txid,
@@ -131,13 +146,13 @@ export default function Block() {
 					<Col>
 						<Link to={`/block/${block.previousBlockHeight}`} className="block-nav">
 							<ArrowLeftOutlined className="arrow-left" />
-							Previous Block
+							{t('block.previousBlock')}
 						</Link>
 					</Col>
 					{block.nextBlockHeight && (
 						<Col>
 							<Link to={`/block/${block.nextBlockHeight}`} className="block-nav">
-								Next Block
+								{t('block.nextBlock')}
 								<ArrowRightOutlined className="arrow-right" />
 							</Link>
 						</Col>

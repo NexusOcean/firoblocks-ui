@@ -1,9 +1,11 @@
+import { useMemo } from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { Typography, Card, Table, Tag, Row, Col, Skeleton } from 'antd';
 import { useTransactionDetail } from '@/hooks/useTransaction';
 import HashDisplay, { truncateHash } from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import type { TransactionType, TxVinDto, TxVoutDto } from '@/types/dto';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
@@ -14,60 +16,67 @@ const TX_TYPE_COLORS: Record<TransactionType, string> = {
 	unknown: 'default'
 };
 
-const inputColumns = [
-	{
-		title: 'Address',
-		dataIndex: 'address',
-		key: 'address',
-		render: (_: unknown, row: TxVinDto) =>
-			row.address ? (
-				<HashLink value={row.address} to={`/address/${row.address}`} truncate />
-			) : (
-				<Text type="secondary" italic>
-					{row.coinbase ? 'Coinbase' : 'Anonymized input'}
-				</Text>
-			)
-	},
-	{
-		title: 'Value',
-		dataIndex: 'value',
-		key: 'value',
-		render: (v?: number) => <Text>{v != null ? `${v.toFixed(2)} FIRO` : '—'}</Text>
-	}
-];
-
-const outputColumns = [
-	{
-		title: 'Address',
-		dataIndex: 'addresses',
-		key: 'addresses',
-		render: (addresses: string[]) =>
-			addresses?.length ? (
-				<HashLink value={addresses[0]} to={`/address/${addresses[0]}`} truncate />
-			) : (
-				<Text type="secondary" italic>
-					Anonymized output
-				</Text>
-			)
-	},
-	{
-		title: 'Type',
-		dataIndex: 'type',
-		key: 'type',
-		render: (type: string) => <Tag>{type}</Tag>
-	},
-	{
-		title: 'Value',
-		dataIndex: 'value',
-		key: 'value',
-		render: (v: number) => `${v.toFixed(2)} FIRO`
-	}
-];
-
 export default function Transaction() {
+	const { t } = useTranslation();
 	const { txid } = useParams<{ txid: string }>();
 	const { data: tx, isLoading, isError } = useTransactionDetail(txid ?? '');
 	const navigate = useNavigate();
+
+	const inputColumns = useMemo(
+		() => [
+			{
+				title: t('table.address'),
+				dataIndex: 'address',
+				key: 'address',
+				render: (_: unknown, row: TxVinDto) =>
+					row.address ? (
+						<HashLink value={row.address} to={`/address/${row.address}`} truncate />
+					) : (
+						<Text type="secondary" italic>
+							{row.coinbase ? t('tx.coinbase') : t('tx.anonymizedInput')}
+						</Text>
+					)
+			},
+			{
+				title: t('table.value'),
+				dataIndex: 'value',
+				key: 'value',
+				render: (v?: number) => <Text>{v != null ? `${v.toFixed(2)} FIRO` : '—'}</Text>
+			}
+		],
+		[t]
+	);
+
+	const outputColumns = useMemo(
+		() => [
+			{
+				title: t('table.address'),
+				dataIndex: 'addresses',
+				key: 'addresses',
+				render: (addresses: string[]) =>
+					addresses?.length ? (
+						<HashLink value={addresses[0]} to={`/address/${addresses[0]}`} truncate />
+					) : (
+						<Text type="secondary" italic>
+							{t('tx.anonymizedOutput')}
+						</Text>
+					)
+			},
+			{
+				title: t('table.type'),
+				dataIndex: 'type',
+				key: 'type',
+				render: (type: string) => <Tag>{type}</Tag>
+			},
+			{
+				title: t('table.value'),
+				dataIndex: 'value',
+				key: 'value',
+				render: (v: number) => `${v.toFixed(2)} FIRO`
+			}
+		],
+		[t]
+	);
 
 	if (!txid || !/^[a-fA-F0-9]{64}$/.test(txid)) return <Navigate to="/404" />;
 
@@ -78,33 +87,40 @@ export default function Transaction() {
 	const details = tx
 		? [
 				{
-					label: 'Block Height',
+					label: t('tx.detail.blockHeight'),
 					value: tx.blockHeight.toLocaleString(),
 					isHeight: true,
 					link: `/block/${tx.blockHeight}`
 				},
 				{
-					label: 'Block Hash',
+					label: t('tx.detail.blockHash'),
 					value: truncateHash(tx.blockHash)
 				},
-				{ label: 'Confirmations', value: tx.confirmations.toLocaleString() },
-				{ label: 'Timestamp', value: new Date(tx.time * 1000).toLocaleString() },
-				{ label: 'Size', value: `${tx.size.toLocaleString()} bytes` },
-				{ label: 'Fee', value: tx.fee != null ? `${tx.fee.toFixed(2)} FIRO` : '—' },
-				{ label: 'Total Output', value: `${valueOut?.toFixed(2)} FIRO` },
-				{ label: 'Chainlock', value: tx.chainlock ? 'Yes' : 'No' }
+				{ label: t('tx.detail.confirmations'), value: tx.confirmations.toLocaleString() },
+				{
+					label: t('tx.detail.timestamp'),
+					value: new Date(tx.time * 1000).toLocaleString()
+				},
+				{ label: t('tx.detail.size'), value: `${tx.size.toLocaleString()} bytes` },
+				{
+					label: t('tx.detail.fee'),
+					value: tx.fee != null ? `${tx.fee.toFixed(2)} FIRO` : '—'
+				},
+				{ label: t('tx.detail.totalOutput'), value: `${valueOut?.toFixed(2)} FIRO` },
+				{
+					label: t('tx.detail.chainlock'),
+					value: tx.chainlock ? t('common.yes') : t('common.no')
+				}
 			]
 		: [];
 
-	const title = isLoading
-		? 'FiroBlocks — Firo Block Explorer'
-		: `FiroBlocks — Transaction ${tx!.txid}`;
+	const title = isLoading ? t('tx.pageTitle') : t('tx.pageTitleWithTxid', { txid: tx!.txid });
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
 			<div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
 				<Title level={3} style={{ margin: 0 }}>
-					Transaction
+					{t('tx.heading')}
 				</Title>
 				<title>{title}</title>
 
@@ -121,7 +137,7 @@ export default function Transaction() {
 				tx && <HashDisplay value={tx.txid} truncate={false} />
 			)}
 
-			<Card title="Transaction Details">
+			<Card title={t('tx.detailsTitle')}>
 				{isLoading ? (
 					<Skeleton active />
 				) : (
@@ -163,7 +179,7 @@ export default function Transaction() {
 
 			<Row gutter={24}>
 				<Col xs={24} xl={12}>
-					<Card title={`Inputs${tx ? ` (${tx.vin.length})` : ''}`}>
+					<Card title={tx ? `${t('tx.inputs')} (${tx.vin.length})` : t('tx.inputs')}>
 						<Table
 							dataSource={tx?.vin}
 							columns={inputColumns}
@@ -180,7 +196,7 @@ export default function Transaction() {
 					</Card>
 				</Col>
 				<Col xs={24} xl={12}>
-					<Card title={`Outputs${tx ? ` (${tx.vout.length})` : ''}`}>
+					<Card title={tx ? `${t('tx.outputs')} (${tx.vout.length})` : t('tx.outputs')}>
 						<Table
 							dataSource={tx?.vout}
 							columns={outputColumns}

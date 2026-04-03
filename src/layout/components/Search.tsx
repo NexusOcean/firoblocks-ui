@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Input } from 'antd';
 import type { InputRef } from 'antd';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import './search.less';
 
 function detectLocal(value: string): string | null {
@@ -15,6 +16,7 @@ function detectLocal(value: string): string | null {
 }
 
 export default function Search() {
+	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
 	const [value, setValue] = useState('');
 	const [error, setError] = useState(false);
@@ -82,7 +84,7 @@ export default function Search() {
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') handleSubmit();
 				}}
-				placeholder="Search by block, transaction, or address..."
+				placeholder={t('search.placeholder')}
 				status={error ? 'error' : ''}
 				prefix={loading ? <SearchOutlined spin /> : <SearchOutlined />}
 				suffix={<CloseOutlined onClick={close} className="search-close" />}

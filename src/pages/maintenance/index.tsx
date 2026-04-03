@@ -1,6 +1,7 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
@@ -9,6 +10,7 @@ interface MaintenanceProps {
 }
 
 export default function Maintenance({ planned }: MaintenanceProps) {
+	const { t } = useTranslation();
 	return (
 		<div
 			style={{
@@ -38,12 +40,10 @@ export default function Maintenance({ planned }: MaintenanceProps) {
 			>
 				{planned ? '🔧' : '503'}
 			</Title>
-			<title>FiroBlocks — Maintenance</title>
+			<title>{t('maintenance.pageTitle')}</title>
 
 			<Text style={{ fontSize: 18, color: '#d1d5db', maxWidth: 300, display: 'block' }}>
-				{planned
-					? "We're down for scheduled maintenance. We'll be back shortly."
-					: "We're currently looking into it. Please check back soon."}
+				{planned ? t('maintenance.plannedMessage') : t('maintenance.unplannedMessage')}
 			</Text>
 
 			{!planned && (
@@ -53,7 +53,7 @@ export default function Maintenance({ planned }: MaintenanceProps) {
 					style={{ color: '#ba2a45', fontSize: 16, maxWidth: 300, display: 'block' }}
 				>
 					<ArrowLeftOutlined className="arrow-left" />
-					Back to Home
+					{t('common.backToHome')}
 				</Link>
 			)}
 		</div>

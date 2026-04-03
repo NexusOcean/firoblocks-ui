@@ -4,11 +4,13 @@ import Search from './components/Search';
 import { GithubOutlined } from '@ant-design/icons';
 import './styles.less';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const { Header, Content, Footer } = Layout;
 const { Text } = Typography;
 
 export default function AppLayout() {
+	const { t } = useTranslation();
 	const { pathname } = useLocation();
 	useEffect(() => window.scrollTo(0, 0), [pathname]);
 
@@ -41,7 +43,7 @@ export default function AppLayout() {
 					rel="noreferrer"
 					className="app-footer-link"
 				>
-					GitHub <GithubOutlined className="git-hub" />
+					{t('nav.github')} <GithubOutlined className="git-hub" />
 				</a>
 			</Footer>
 		</Layout>
