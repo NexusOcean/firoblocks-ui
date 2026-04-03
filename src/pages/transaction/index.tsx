@@ -32,7 +32,7 @@ const inputColumns = [
 		title: 'Value',
 		dataIndex: 'value',
 		key: 'value',
-		render: (v?: number) => <Text>{v != null ? `${v.toFixed(4)} FIRO` : '—'}</Text>
+		render: (v?: number) => <Text>{v != null ? `${v.toFixed(2)} FIRO` : '—'}</Text>
 	}
 ];
 
@@ -60,7 +60,7 @@ const outputColumns = [
 		title: 'Value',
 		dataIndex: 'value',
 		key: 'value',
-		render: (v: number) => `${v.toFixed(4)} FIRO`
+		render: (v: number) => `${v.toFixed(2)} FIRO`
 	}
 ];
 
