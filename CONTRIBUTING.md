@@ -12,7 +12,7 @@ Thanks for your interest in contributing. This is a community infrastructure pro
 
 ## Development Setup
 
-See [README.md](./README.md) for environment setup. You will need a running FiroBlocks API and Sync instance.
+See [README.md](./README.md) for environment setup. You may use the public api for development.
 
 ## Guidelines
 
