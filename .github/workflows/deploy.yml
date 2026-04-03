@@ -23,6 +23,10 @@ jobs:
                   cache: 'pnpm'
             - run: pnpm install --frozen-lockfile
             - run: pnpm run build
+              env:
+                  VITE_API_URL: 'https://api.firoblocks.app/v1'
+                  VITE_MAINTENANCE_PLANNED: 'false'
+                  VITE_LOCAL_API: 'false'
             - name: Deploy
               uses: cloudflare/wrangler-action@v3
               with:
