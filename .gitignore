@@ -13,7 +13,9 @@ dist-ssr
 *.local
 *.yml
 .env
+.env.local
 .wrangler
+!deploy.yml
 
 # Editor directories and files
 .vscode/*
