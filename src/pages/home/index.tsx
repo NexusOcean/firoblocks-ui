@@ -1,5 +1,5 @@
 import { Typography, Row, Col, Table, Tag } from 'antd';
-import { useLatestBlocks, useLatestTransactions, useNetworkStats } from '@/hooks/useHomeData';
+import { useLatestBlocks, useLatestTransactions, useNetworkStats } from '@/hooks/useStats';
 import StatCard from '@/components/StatCard';
 import HashLink from '@/components/HashLink';
 import TimeAgo from '@/components/TimeAgo';

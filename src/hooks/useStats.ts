@@ -12,7 +12,7 @@ export const useNetworkStats = () =>
 			supply: `${Math.round(data.totalSupply).toLocaleString()} FIRO`,
 			txCount: data.transactions.toLocaleString()
 		}),
-		refetchInterval: 60_000
+		refetchInterval: 120_000
 	});
 
 export const useLatestBlocks = () =>

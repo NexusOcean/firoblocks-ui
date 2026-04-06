@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Input } from 'antd';
 import type { InputRef } from 'antd';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
-import './search.less';
 
 function detectLocal(value: string): string | null {
 	const trimmed = value.trim();
