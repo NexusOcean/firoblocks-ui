@@ -11,7 +11,7 @@ export const useNetworkStats = () =>
 
 			return {
 				blockHeight: data.height.toLocaleString(),
-				hashrate: `${(data.hashrate / 1_000_000_000).toFixed(2)} GH/s`,
+				hashrate: `${(data.hashrate / 1_000_000_000).toFixed(1)} GH/s`,
 				difficulty: data.difficulty.toFixed(0),
 				avgBlockTime: `~${avgBlockMinutes.toFixed(1)} min`,
 				supply: `${Math.round(data.totalSupply).toLocaleString()}`,
