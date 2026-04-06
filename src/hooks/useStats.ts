@@ -5,13 +5,19 @@ export const useNetworkStats = () =>
 	useQuery({
 		queryKey: ['network', 'stats'],
 		queryFn: getNetworkStats,
-		select: (data) => ({
-			blockHeight: data.height.toLocaleString(),
-			hashrate: `${(data.hashrate / 1_000_000_000).toFixed(2)} GH/s`,
-			difficulty: data.difficulty.toFixed(0),
-			supply: `${Math.round(data.totalSupply).toLocaleString()} FIRO`,
-			txCount: data.transactions.toLocaleString()
-		}),
+		select: (data) => {
+			const avgBlockSeconds = (data.difficulty * 2 ** 32) / data.hashrate;
+			const avgBlockMinutes = avgBlockSeconds / 60;
+
+			return {
+				blockHeight: data.height.toLocaleString(),
+				hashrate: `${(data.hashrate / 1_000_000_000).toFixed(2)} GH/s`,
+				difficulty: data.difficulty.toFixed(0),
+				avgBlockTime: `~${avgBlockMinutes.toFixed(1)} min`,
+				supply: `${Math.round(data.totalSupply).toLocaleString()}`,
+				txCount: data.transactions.toLocaleString()
+			};
+		},
 		refetchInterval: 120_000
 	});
 

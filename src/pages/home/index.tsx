@@ -7,6 +7,7 @@ import type { BlockSummaryDto, TransactionType } from '@/types/dto';
 import {
 	AimOutlined,
 	BlockOutlined,
+	ClockCircleOutlined,
 	DollarOutlined,
 	SwapOutlined,
 	ThunderboltOutlined
@@ -92,7 +93,7 @@ export default function Home() {
 			<title>FiroBlocks — Firo Block Explorer</title>
 
 			<Row gutter={[16, 16]} justify="center" style={{ marginBottom: 32 }}>
-				<Col xs={24} sm={12} lg={4}>
+				<Col xs={24} sm={12} lg={5} xl={4}>
 					<StatCard
 						label="Block Height"
 						value={stats?.blockHeight}
@@ -100,7 +101,7 @@ export default function Home() {
 						icon={<BlockOutlined />}
 					/>
 				</Col>
-				<Col xs={24} sm={12} lg={4}>
+				<Col xs={24} sm={12} lg={5} xl={4}>
 					<StatCard
 						label="Hashrate"
 						value={stats?.hashrate}
@@ -108,7 +109,7 @@ export default function Home() {
 						icon={<ThunderboltOutlined />}
 					/>
 				</Col>
-				<Col xs={24} sm={12} lg={4}>
+				<Col xs={24} sm={12} lg={5} xl={4}>
 					<StatCard
 						label="Difficulty"
 						value={stats?.difficulty}
@@ -116,7 +117,15 @@ export default function Home() {
 						icon={<AimOutlined />}
 					/>
 				</Col>
-				<Col xs={24} sm={12} lg={4}>
+				<Col xs={24} sm={12} lg={5} xl={4}>
+					<StatCard
+						label="Block Time"
+						value={stats?.avgBlockTime}
+						loading={statsLoading}
+						icon={<ClockCircleOutlined />}
+					/>
+				</Col>
+				<Col xs={24} sm={12} lg={5} xl={4}>
 					<StatCard
 						label="Supply"
 						value={stats?.supply}
@@ -124,7 +133,7 @@ export default function Home() {
 						icon={<DollarOutlined />}
 					/>
 				</Col>
-				<Col xs={24} sm={12} lg={4}>
+				<Col xs={24} sm={12} lg={5} xl={4}>
 					<StatCard
 						label="Transactions"
 						value={stats?.txCount}

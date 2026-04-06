@@ -30,7 +30,7 @@ export default function StatCard({ label, value, loading, icon }: StatCardProps)
 					>
 						{label}
 					</Text>
-					<Title level={3} style={{ margin: 0 }}>
+					<Title level={3} style={{ margin: 0, fontSize: 24 }}>
 						{value ?? '—'}
 					</Title>
 				</>
