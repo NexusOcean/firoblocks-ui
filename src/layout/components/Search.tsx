@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Input } from 'antd';
 import type { InputRef } from 'antd';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
+import { ThemeToggle } from './Theme';
 
 function detectLocal(value: string): string | null {
 	const trimmed = value.trim();
@@ -55,12 +56,16 @@ export default function Search() {
 
 	if (!open) {
 		return (
-			<Button
-				type="text"
-				icon={<SearchOutlined />}
-				onClick={() => setOpen(true)}
-				className="search-toggle"
-			/>
+			<span>
+				<Button
+					type="text"
+					icon={<SearchOutlined />}
+					onClick={() => setOpen(true)}
+					className="search-toggle"
+				/>
+
+				<ThemeToggle />
+			</span>
 		);
 	}
 

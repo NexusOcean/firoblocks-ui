@@ -32,16 +32,15 @@ export default function AppLayout() {
 			</Content>
 
 			<Footer className="app-footer">
-				<Text type="secondary" className="app-footer-text">
-					FiroBlocks — {new Date().getFullYear()}
-				</Text>
+				<Text className="app-footer-text">© {new Date().getFullYear()} FiroBlocks</Text>
 				<a
 					href="https://github.com/nexusocean"
 					target="_blank"
 					rel="noreferrer"
 					className="app-footer-link"
 				>
-					GitHub <GithubOutlined className="git-hub" />
+					GitHub
+					<GithubOutlined className="git-hub" />
 				</a>
 			</Footer>
 		</Layout>
