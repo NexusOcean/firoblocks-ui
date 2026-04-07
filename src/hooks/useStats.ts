@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getBlocks, getNetworkStats, getRecentTransactions } from '@/services/api';
+import { formatFiro } from '@/utils';
 
 export const useNetworkStats = () =>
 	useQuery({
@@ -11,9 +12,9 @@ export const useNetworkStats = () =>
 
 			return {
 				blockHeight: data.height.toLocaleString(),
-				hashrate: `${(data.hashrate / 1_000_000_000).toFixed(1)} GH/s`,
+				hashrate: `${(data.hashrate / 1_000_000_000).toFixed(2)} GH/s`,
 				difficulty: data.difficulty.toFixed(0),
-				avgBlockTime: `~${avgBlockMinutes.toFixed(1)} min`,
+				avgBlockTime: `~${avgBlockMinutes.toFixed(2)} min`,
 				supply: `${Math.round(data.totalSupply).toLocaleString()}`,
 				txCount: data.transactions.toLocaleString()
 			};
@@ -34,11 +35,15 @@ export const useLatestTransactions = () =>
 		queryKey: ['transactions', 'latest'],
 		queryFn: () => getRecentTransactions(10),
 		select: (data) =>
-			data.map((tx) => ({
-				txid: tx.txid,
-				time: tx.time,
-				type: tx.type,
-				valueOut: tx.vout.reduce((sum, o) => sum + o.value, 0).toFixed(2)
-			})),
+			data.map((tx) => {
+				const amount = tx.vout.reduce((sum, o) => sum + o.value, 0);
+
+				return {
+					txid: tx.txid,
+					time: tx.time,
+					type: tx.type,
+					valueOut: formatFiro(amount)
+				};
+			}),
 		refetchInterval: 120_000
 	});

@@ -14,15 +14,9 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { truncateHash } from '@/components/HashDisplay';
+import { TX_TYPE_COLORS } from '@/utils';
 
 const { Title } = Typography;
-
-const TX_TYPE_COLORS: Record<TransactionType | 'coinbase' | 'unknown', string> = {
-	transparent: 'default',
-	spark: 'error',
-	coinbase: 'warning',
-	unknown: 'default'
-};
 
 const blockColumns = [
 	{
@@ -127,7 +121,7 @@ export default function Home() {
 				</Col>
 				<Col xs={24} sm={12} lg={5} xl={4}>
 					<StatCard
-						label="Supply"
+						label="FIRO Supply"
 						value={stats?.supply}
 						loading={statsLoading}
 						icon={<DollarOutlined />}

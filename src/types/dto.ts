@@ -38,7 +38,7 @@ export interface BlockDto {
 // Transactions
 // --------------------------------------------------------
 
-export type TransactionType = 'coinbase' | 'transparent' | 'spark' | 'unknown';
+export type TransactionType = 'coinbase' | 'transparent' | 'spark' | 'masternode' | 'unknown';
 
 export interface TxVinDto {
 	txid?: string;

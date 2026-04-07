@@ -5,15 +5,9 @@ import { useBlockDetail } from '@/hooks/useBlock';
 import HashDisplay from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import type { TransactionType } from '@/types/dto';
+import { TX_TYPE_COLORS } from '@/utils';
 
 const { Title, Text } = Typography;
-
-const TX_TYPE_COLORS: Record<TransactionType, string> = {
-	transparent: 'default',
-	spark: 'error',
-	coinbase: 'warning',
-	unknown: 'default'
-};
 
 const formatSize = (bytes: number) => `${(bytes / 1024).toFixed(2)} KB`;
 

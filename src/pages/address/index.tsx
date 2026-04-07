@@ -6,15 +6,9 @@ import HashDisplay from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import TimeAgo from '@/components/TimeAgo';
 import type { AddressTxSummaryDto, TransactionType } from '@/types/dto';
+import { formatFiro, TX_TYPE_COLORS } from '@/utils';
 
 const { Title, Text } = Typography;
-
-const TX_TYPE_COLORS: Record<string, string> = {
-	transparent: 'default',
-	spark: 'error',
-	coinbase: 'warning',
-	unknown: 'default'
-};
 
 const PAGE_SIZE = 25;
 
@@ -36,8 +30,8 @@ export default function Address() {
 
 	const details = data
 		? [
-				{ label: 'Balance', value: `${data.balance.toFixed(2)} FIRO` },
-				{ label: 'Total Received', value: `${data.received.toFixed(2)} FIRO` },
+				{ label: 'Balance', value: `${formatFiro(data.balance)} FIRO` },
+				{ label: 'Total Received', value: `${formatFiro(data.received)} FIRO` },
 				{
 					label: 'Transactions',
 					value: data.totalTxCount >= 1000 ? '1,000+' : data.totalTxCount.toLocaleString()
@@ -66,7 +60,7 @@ export default function Address() {
 				v != null ? (
 					<Text style={{ color: v >= 0 ? '#52c41a' : '#ff4d4f' }}>
 						{v >= 0 ? '+' : ''}
-						{v.toFixed(2)} FIRO
+						{`${formatFiro(v)} FIRO`}
 					</Text>
 				) : (
 					'—'
@@ -134,7 +128,7 @@ export default function Address() {
 			</Card>
 
 			<Card
-				title={`Transactions${data ? ` (${data.totalTxCount >= 1000 ? '1,000+' : data.totalTxCount.toLocaleString()})` : ''}`}
+				title={`Transactions${data ? ` (${data.totalTxCount > 1000 ? '1,000+' : data.totalTxCount.toLocaleString()})` : ''}`}
 			>
 				<Table<AddressTxSummaryDto>
 					dataSource={data?.transactions}

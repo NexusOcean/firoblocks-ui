@@ -3,16 +3,10 @@ import { Typography, Card, Table, Tag, Row, Col, Skeleton } from 'antd';
 import { useTransactionDetail } from '@/hooks/useTransaction';
 import HashDisplay, { truncateHash } from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
-import type { TransactionType, TxVinDto, TxVoutDto } from '@/types/dto';
+import type { TxVinDto, TxVoutDto } from '@/types/dto';
+import { formatFiro, TX_TYPE_COLORS } from '@/utils';
 
 const { Title, Text } = Typography;
-
-const TX_TYPE_COLORS: Record<TransactionType, string> = {
-	transparent: 'default',
-	spark: 'error',
-	coinbase: 'warning',
-	unknown: 'default'
-};
 
 const inputColumns = [
 	{
@@ -60,7 +54,7 @@ const outputColumns = [
 		title: 'Value',
 		dataIndex: 'value',
 		key: 'value',
-		render: (v: number) => `${v.toFixed(2)} FIRO`
+		render: (v: number) => `${formatFiro(v)} FIRO`
 	}
 ];
 
@@ -90,8 +84,14 @@ export default function Transaction() {
 				{ label: 'Confirmations', value: tx.confirmations.toLocaleString() },
 				{ label: 'Timestamp', value: new Date(tx.time * 1000).toLocaleString() },
 				{ label: 'Size', value: `${tx.size.toLocaleString()} bytes` },
-				{ label: 'Fee', value: tx.fee != null ? `${tx.fee.toFixed(2)} FIRO` : '—' },
-				{ label: 'Total Output', value: `${valueOut?.toFixed(2)} FIRO` },
+				{
+					label: 'Fee',
+					value: tx.fee ? `${formatFiro(tx.fee)} FIRO` : '—'
+				},
+				{
+					label: 'Total Output',
+					value: valueOut ? `${formatFiro(valueOut)}  FIRO` : '—'
+				},
 				{ label: 'Chainlock', value: tx.chainlock ? 'Yes' : 'No' }
 			]
 		: [];
