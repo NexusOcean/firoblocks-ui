@@ -5,7 +5,7 @@ import { useBlockDetail } from '@/hooks/useBlock';
 import HashDisplay from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import type { TransactionType } from '@/types/dto';
-import { TX_TYPE_COLORS } from '@/utils';
+import { TX_TYPE_COLORS } from '@/types';
 
 const { Title, Text } = Typography;
 

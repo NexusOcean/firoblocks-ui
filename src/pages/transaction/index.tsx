@@ -4,7 +4,8 @@ import { useTransactionDetail } from '@/hooks/useTransaction';
 import HashDisplay, { truncateHash } from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import type { TxVinDto, TxVoutDto } from '@/types/dto';
-import { formatFiro, TX_TYPE_COLORS } from '@/utils';
+import { formatFiro } from '@/utils';
+import { TX_TYPE_COLORS, VIN_KIND_LABELS, VOUT_KIND_COLORS, VOUT_KIND_LABELS } from '@/types';
 
 const { Title, Text } = Typography;
 
@@ -18,7 +19,7 @@ const inputColumns = [
 				<HashLink value={row.address} to={`/address/${row.address}`} truncate />
 			) : (
 				<Text type="secondary" italic>
-					{row.coinbase ? 'Coinbase' : 'Anonymized input'}
+					{VIN_KIND_LABELS[row.kind]}
 				</Text>
 			)
 	},
@@ -35,20 +36,22 @@ const outputColumns = [
 		title: 'Address',
 		dataIndex: 'addresses',
 		key: 'addresses',
-		render: (addresses: string[]) =>
-			addresses?.length ? (
-				<HashLink value={addresses[0]} to={`/address/${addresses[0]}`} truncate />
+		render: (_: unknown, row: TxVoutDto) =>
+			row.addresses?.length ? (
+				<HashLink value={row.addresses[0]} to={`/address/${row.addresses[0]}`} truncate />
 			) : (
 				<Text type="secondary" italic>
-					Anonymized output
+					{VOUT_KIND_LABELS[row.kind]}
 				</Text>
 			)
 	},
 	{
 		title: 'Type',
-		dataIndex: 'type',
-		key: 'type',
-		render: (type: string) => <Tag>{type}</Tag>
+		dataIndex: 'kind',
+		key: 'kind',
+		render: (_: unknown, row: TxVoutDto) => (
+			<Tag color={VOUT_KIND_COLORS[row.kind]}>{VOUT_KIND_LABELS[row.kind]}</Tag>
+		)
 	},
 	{
 		title: 'Value',
@@ -111,7 +114,11 @@ export default function Transaction() {
 				{isLoading ? (
 					<Skeleton.Input active style={{ width: 80 }} />
 				) : (
-					tx && <Tag color={TX_TYPE_COLORS[tx.type]}>{tx.type}</Tag>
+					tx && (
+						<Tag color={TX_TYPE_COLORS[tx.type]}>
+							{`${tx.type.charAt(0).toLocaleUpperCase()}${tx.type.slice(1)}`}
+						</Tag>
+					)
 				)}
 			</div>
 

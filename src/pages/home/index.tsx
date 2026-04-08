@@ -3,7 +3,6 @@ import { useLatestBlocks, useLatestTransactions, useNetworkStats } from '@/hooks
 import StatCard from '@/components/StatCard';
 import HashLink from '@/components/HashLink';
 import TimeAgo from '@/components/TimeAgo';
-import type { BlockSummaryDto, TransactionType } from '@/types/dto';
 import {
 	AimOutlined,
 	BlockOutlined,
@@ -14,7 +13,8 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { truncateHash } from '@/components/HashDisplay';
-import { TX_TYPE_COLORS } from '@/utils';
+import { TX_CATEGORY_LABELS, TX_CATEGORY_COLORS } from '@/types';
+import type { TransactionCategory, BlockSummaryDto } from '@/types/dto';
 
 const { Title } = Typography;
 
@@ -55,9 +55,11 @@ const txColumns = [
 	},
 	{
 		title: 'Type',
-		dataIndex: 'type',
-		key: 'type',
-		render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
+		dataIndex: 'category',
+		key: 'category',
+		render: (c: TransactionCategory) => (
+			<Tag color={TX_CATEGORY_COLORS[c]}>{TX_CATEGORY_LABELS[c]}</Tag>
+		)
 	},
 	{
 		title: 'Value',

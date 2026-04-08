@@ -21,7 +21,7 @@ const routes: RouteObject[] = [
 			{ path: 'tx/:txid', element: <Transaction /> },
 			{ path: 'address/:address', element: <Address /> },
 			{ path: '404', element: <Error404 /> },
-			{ path: '/maintenance', element: <Maintenance planned={planned} /> },
+			{ path: 'maintenance', element: <Maintenance planned={planned} /> },
 			{ path: '*', element: <Error404 /> }
 		]
 	}
