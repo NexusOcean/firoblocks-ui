@@ -46,7 +46,11 @@ export default function Block() {
 			title: 'Type',
 			dataIndex: 'type',
 			key: 'type',
-			render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
+			render: (type: TransactionType) => (
+				<Tag color={TX_TYPE_COLORS[type]}>
+					{`${type.charAt(0).toLocaleUpperCase()}${type.slice(1)}`}
+				</Tag>
+			)
 		}
 	];
 

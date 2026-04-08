@@ -10,7 +10,7 @@ function detectLocal(value: string): string | null {
 	if (!trimmed) return null;
 	if (/^\d+$/.test(trimmed)) return `/block/${trimmed}`;
 	if (/^[a-fA-F0-9]{64}$/.test(trimmed)) return `/tx/${trimmed}`;
-	if (/^a[1-9A-HJ-NP-Za-km-z]{25,40}$/.test(trimmed)) return `/address/${trimmed}`;
+	if (/^[a4][1-9A-HJ-NP-Za-km-z]{25,40}$/.test(trimmed)) return `/address/${trimmed}`;
 	return null;
 }
 

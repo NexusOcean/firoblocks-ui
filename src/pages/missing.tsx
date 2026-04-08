@@ -4,7 +4,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
-export default function Error404() {
+export default function Missing() {
 	return (
 		<div
 			style={{

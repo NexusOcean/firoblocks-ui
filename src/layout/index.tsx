@@ -1,9 +1,8 @@
 import { Layout, Typography } from 'antd';
-import { Outlet, Link, useLocation } from 'react-router-dom';
-import Search from './components/Search';
 import { GithubOutlined } from '@ant-design/icons';
-import './styles.less';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import Search from './Search';
 
 const { Header, Content, Footer } = Layout;
 const { Text } = Typography;
