@@ -9,56 +9,6 @@ import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
-const inputColumns = [
-	{
-		title: 'Address',
-		dataIndex: 'address',
-		key: 'address',
-		render: (_: unknown, row: TxVinDto) =>
-			row.address ? (
-				<HashLink value={row.address} to={`/address/${row.address}`} truncate />
-			) : (
-				<Text type="secondary" italic>
-					{row.coinbase ? 'Coinbase' : 'Anonymized input'}
-				</Text>
-			)
-	},
-	{
-		title: 'Value',
-		dataIndex: 'value',
-		key: 'value',
-		render: (v?: number) => <Text>{v != null ? `${v.toFixed(2)} FIRO` : '—'}</Text>
-	}
-];
-
-const outputColumns = [
-	{
-		title: 'Address',
-		dataIndex: 'addresses',
-		key: 'addresses',
-		render: (addresses: string[]) =>
-			addresses?.length ? (
-				<HashLink value={addresses[0]} to={`/address/${addresses[0]}`} truncate />
-			) : (
-				<Text type="secondary" italic>
-					Anonymized output
-				</Text>
-			)
-	},
-	{
-		title: 'Type',
-		dataIndex: 'type',
-		key: 'type',
-		render: (type: string) => <Tag>{type}</Tag>
-	},
-	{
-		title: 'Value',
-		dataIndex: 'value',
-		key: 'value',
-		render: (v: number) => `${formatFiro(v)} FIRO`
-	}
-];
-
 export default function Transaction() {
 	const { txid } = useParams<{ txid: string }>();
 	const { data: tx, isLoading, isError } = useTransactionDetail(txid ?? '');
@@ -66,10 +16,59 @@ export default function Transaction() {
 	const { t } = useTranslation();
 
 	if (!txid || !/^[a-fA-F0-9]{64}$/.test(txid)) return <Navigate to="/404" />;
-
 	if (isError) return <Navigate to="/maintenance" />;
 
-	const valueOut = tx?.vout.reduce((sum, o) => sum + o.value, 0);
+	const valueOut = tx?.vout.reduce((sum, output) => sum + output.value, 0);
+
+	const inputColumns = [
+		{
+			title: t('labels.address'),
+			dataIndex: 'address',
+			key: 'address',
+			render: (_: unknown, row: TxVinDto) =>
+				row.address ? (
+					<HashLink value={row.address} to={`/address/${row.address}`} truncate />
+				) : (
+					<Text type="secondary" italic>
+						{row.coinbase ? t('labels.coinbase') : t('labels.anonymizedInput')}
+					</Text>
+				)
+		},
+		{
+			title: t('labels.value'),
+			dataIndex: 'value',
+			key: 'value',
+			render: (v?: number) => <Text>{v != null ? `${v.toFixed(2)} FIRO` : '—'}</Text>
+		}
+	];
+
+	const outputColumns = [
+		{
+			title: t('labels.address'),
+			dataIndex: 'addresses',
+			key: 'addresses',
+			render: (addresses: string[]) =>
+				addresses?.length ? (
+					<HashLink value={addresses[0]} to={`/address/${addresses[0]}`} truncate />
+				) : (
+					<Text type="secondary" italic>
+						{t('labels.anonymizedOutput')}
+					</Text>
+				)
+		},
+		{
+			title: t('labels.type'),
+			dataIndex: 'type',
+			key: 'type',
+			render: (type: string) => <Tag>{type}</Tag>
+		},
+		{
+			title: t('labels.value'),
+			dataIndex: 'value',
+			key: 'value',
+			render: (v: number) => `${formatFiro(v)} FIRO`
+		}
+	];
 
 	const details = tx
 		? [
@@ -85,16 +84,19 @@ export default function Transaction() {
 				},
 				{ label: t('labels.confirmations'), value: tx.confirmations.toLocaleString() },
 				{ label: t('labels.timestamp'), value: new Date(tx.time * 1000).toLocaleString() },
-				{ label: t('labels.size'), value: `${tx.size.toLocaleString()} bytes` },
 				{
-					label: t('labels.fee'),
-					value: tx.fee ? `${formatFiro(tx.fee)} FIRO` : '—'
+					label: t('labels.size'),
+					value: `${tx.size.toLocaleString()} ${t('labels.bytes')}`
 				},
+				{ label: t('labels.fee'), value: tx.fee ? `${formatFiro(tx.fee)} FIRO` : '—' },
 				{
 					label: t('labels.totalOutput'),
-					value: valueOut ? `${formatFiro(valueOut)}  FIRO` : '—'
+					value: valueOut ? `${formatFiro(valueOut)} FIRO` : '—'
 				},
-				{ label: t('labels.chainlock'), value: tx.chainlock ? 'Yes' : 'No' }
+				{
+					label: t('labels.chainlock'),
+					value: tx.chainlock ? t('labels.yes') : t('labels.no')
+				}
 			]
 		: [];
 
@@ -123,7 +125,7 @@ export default function Transaction() {
 				tx && <HashDisplay value={tx.txid} truncate={false} />
 			)}
 
-			<Card title="Transaction Details">
+			<Card title={t('titles.transactionDetails')}>
 				{isLoading ? (
 					<Skeleton active />
 				) : (
@@ -165,7 +167,7 @@ export default function Transaction() {
 
 			<Row gutter={24}>
 				<Col xs={24} xl={12}>
-					<Card title={`Inputs${tx ? ` (${tx.vin.length})` : ''}`}>
+					<Card title={t('titles.inputs', { len: tx ? ` (${tx.vin.length})` : '' })}>
 						<Table
 							dataSource={tx?.vin}
 							columns={inputColumns}
@@ -182,7 +184,7 @@ export default function Transaction() {
 					</Card>
 				</Col>
 				<Col xs={24} xl={12}>
-					<Card title={`Outputs${tx ? ` (${tx.vout.length})` : ''}`}>
+					<Card title={t('titles.outputs', { len: tx ? ` (${tx.vout.length})` : '' })}>
 						<Table
 							dataSource={tx?.vout}
 							columns={outputColumns}

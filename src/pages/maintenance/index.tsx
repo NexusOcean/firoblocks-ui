@@ -25,7 +25,7 @@ export default function Maintenance({ planned }: MaintenanceProps) {
 		>
 			<img
 				src="/images/banner-light.svg"
-				alt="FiroBlocks"
+				alt={t('titles.firoblock')}
 				style={{ width: 300, height: 'auto' }}
 			/>
 			<Title

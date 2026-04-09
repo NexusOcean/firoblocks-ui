@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Tooltip, Typography } from 'antd';
 import { CopyOutlined, CheckOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const { Text } = Typography;
 
@@ -17,6 +18,7 @@ export const truncateHash = (hash: string) => {
 
 export default function HashDisplay({ value, truncate = true, copy = true }: HashDisplayProps) {
 	const [copied, setCopied] = useState(false);
+	const { t } = useTranslation();
 
 	const handleCopy = async () => {
 		const text = value.replaceAll(',', '');
@@ -38,7 +40,7 @@ export default function HashDisplay({ value, truncate = true, copy = true }: Has
 				{truncate ? truncateHash(value) : value}
 			</Text>
 			{copy && (
-				<Tooltip title={copied ? 'Copied!' : 'Copy'}>
+				<Tooltip title={copied ? t('labels.copied') : t('labels.copy')}>
 					<span
 						onClick={handleCopy}
 						style={{ cursor: 'pointer', color: copied ? '#52c41a' : '' }}

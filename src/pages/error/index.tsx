@@ -21,7 +21,7 @@ export default function Error404() {
 		>
 			<img
 				src="/images/banner-light.svg"
-				alt="FiroBlocks"
+				alt={t('titles.firoblock')}
 				style={{ width: 300, height: 'auto' }}
 			/>
 			<Title
@@ -47,7 +47,7 @@ export default function Error404() {
 				style={{ color: '#ba2a45', fontSize: 16, maxWidth: 300, display: 'block' }}
 			>
 				<ArrowLeftOutlined className="arrow-left" />
-				{t('backToHome')}
+				{t('links.backToHome')}
 			</Link>
 		</div>
 	);

@@ -19,67 +19,67 @@ import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 
-const blockColumns = [
-	{
-		title: 'Height',
-		dataIndex: 'height',
-		key: 'height',
-		render: (h: number) => <HashLink value={h.toLocaleString()} to={`/block/${h}`} mono />
-	},
-	{
-		title: 'Hash',
-		dataIndex: 'hash',
-		key: 'hash',
-		render: (h: string) => <span style={{ color: '#ba2a45' }}>{truncateHash(h)}</span>
-	},
-	{ title: 'Txs', dataIndex: 'nTx', key: 'nTx' },
-	{
-		title: 'Size',
-		dataIndex: 'size',
-		key: 'size',
-		render: (s: number) => `${(s / 1024).toFixed(1)} KB`
-	},
-	{
-		title: 'Age',
-		dataIndex: 'time',
-		key: 'time',
-		render: (t: number) => <TimeAgo timestamp={t} />
-	}
-];
-
-const txColumns = [
-	{
-		title: 'Txid',
-		dataIndex: 'txid',
-		key: 'txid',
-		render: (id: string) => <HashLink value={id} to={`/tx/${id}`} truncate />
-	},
-	{
-		title: 'Type',
-		dataIndex: 'type',
-		key: 'type',
-		render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
-	},
-	{
-		title: 'Value',
-		dataIndex: 'valueOut',
-		key: 'valueOut',
-		render: (v: string) => `${v} FIRO`
-	},
-	{
-		title: 'Age',
-		dataIndex: 'time',
-		key: 'time',
-		render: (t: number) => <TimeAgo timestamp={t} />
-	}
-];
-
 export default function Home() {
 	const { data: stats, isLoading: statsLoading } = useNetworkStats();
 	const { data: blocks, isLoading: blocksLoading } = useLatestBlocks();
 	const { data: txs, isLoading: txsLoading } = useLatestTransactions();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
+
+	const blockColumns = [
+		{
+			title: t('labels.height'),
+			dataIndex: 'height',
+			key: 'height',
+			render: (h: number) => <HashLink value={h.toLocaleString()} to={`/block/${h}`} mono />
+		},
+		{
+			title: t('labels.hash'),
+			dataIndex: 'hash',
+			key: 'hash',
+			render: (h: string) => <span style={{ color: '#ba2a45' }}>{truncateHash(h)}</span>
+		},
+		{ title: t('labels.txs'), dataIndex: 'nTx', key: 'nTx' },
+		{
+			title: t('labels.size'),
+			dataIndex: 'size',
+			key: 'size',
+			render: (s: number) => `${(s / 1024).toFixed(1)} ${t('labels.kilobytes')}`
+		},
+		{
+			title: t('labels.age'),
+			dataIndex: 'time',
+			key: 'time',
+			render: (time: number) => <TimeAgo timestamp={time} />
+		}
+	];
+
+	const txColumns = [
+		{
+			title: t('labels.txid'),
+			dataIndex: 'txid',
+			key: 'txid',
+			render: (id: string) => <HashLink value={id} to={`/tx/${id}`} truncate />
+		},
+		{
+			title: t('labels.type'),
+			dataIndex: 'type',
+			key: 'type',
+			render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
+		},
+		{
+			title: t('labels.value'),
+			dataIndex: 'valueOut',
+			key: 'valueOut',
+			render: (v: string) => `${v} FIRO`
+		},
+		{
+			title: t('labels.age'),
+			dataIndex: 'time',
+			key: 'time',
+			render: (time: number) => <TimeAgo timestamp={time} />
+		}
+	];
 
 	return (
 		<div style={{ padding: '24px 16px' }}>

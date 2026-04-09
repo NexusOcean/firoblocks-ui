@@ -10,8 +10,6 @@ import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
-const formatSize = (bytes: number) => `${(bytes / 1024).toFixed(2)} KB`;
-
 export default function Block() {
 	const { height } = useParams<{ height: string }>();
 	const { data: block, isLoading, isError } = useBlockDetail(height ?? '');
@@ -19,8 +17,9 @@ export default function Block() {
 	const { t } = useTranslation();
 
 	if (!height || !/^\d+$/.test(height)) return <Navigate to="/404" />;
-
 	if (isError) return <Navigate to="/maintenance" />;
+
+	const formatSize = (bytes: number) => `${(bytes / 1024).toFixed(2)} ${t('labels.kilobytes')}`;
 
 	const details = block
 		? [
@@ -36,19 +35,22 @@ export default function Block() {
 				{ label: t('labels.transactions'), value: block.nTx.toLocaleString() },
 				{ label: t('labels.size'), value: formatSize(block.size) },
 				{ label: t('labels.difficulty'), value: block.difficulty.toFixed(0) },
-				{ label: t('labels.chainlock'), value: block.chainlock ? 'Yes' : 'No' }
+				{
+					label: t('labels.chainlock'),
+					value: block.chainlock ? t('labels.yes') : t('labels.no')
+				}
 			]
 		: [];
 
 	const txColumns = [
 		{
-			title: t('txid'),
+			title: t('labels.txid'),
 			dataIndex: 'txid',
 			key: 'txid',
 			render: (id: string) => <HashLink value={id} to={`/tx/${id}`} truncate />
 		},
 		{
-			title: t('type'),
+			title: t('labels.type'),
 			dataIndex: 'type',
 			key: 'type',
 			render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
@@ -72,7 +74,7 @@ export default function Block() {
 				)}
 			</div>
 
-			<Card title="Block Details">
+			<Card title={t('titles.blockDetails')}>
 				{isLoading ? (
 					<Skeleton active />
 				) : (
@@ -108,7 +110,7 @@ export default function Block() {
 				)}
 			</Card>
 
-			<Card title="Transactions">
+			<Card title={t('titles.transactions')}>
 				<Table
 					dataSource={block?.txids.map((txid) => ({
 						txid,

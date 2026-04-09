@@ -17,13 +17,16 @@ export default function AppLayout() {
 	return (
 		<Layout className="app-layout">
 			<Header className="app-header">
-				<Link to="/" className="app-logo" title="Home">
-					<img src="/images/logo.svg" alt="FiroBlocks" className="app-logo-img" />
+				<Link to="/" className="app-logo" title={t('titles.home')}>
+					<img
+						src="/images/logo.svg"
+						alt={t('titles.firoblock')}
+						className="app-logo-img"
+					/>
 					<Text strong className="app-logo-text">
 						{t('titles.firoblock')}
 					</Text>
 				</Link>
-				<Link to="/" className="app-logo" title="Home"></Link>
 				<div className="app-header-right">
 					<Search />
 				</div>
