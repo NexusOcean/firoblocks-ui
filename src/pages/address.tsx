@@ -19,7 +19,7 @@ export default function Address() {
 	const limit = parseInt(searchParams.get('limit') ?? '10');
 	const { data, isLoading, isError } = useAddressDetail(address ?? '', page, limit);
 
-	if (!address || !/^[a34][1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address)) {
+	if (!address || !/^[a4][1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address)) {
 		return <Navigate to="/404" />;
 	}
 
