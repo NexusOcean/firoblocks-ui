@@ -4,24 +4,29 @@ import Search from './components/Search';
 import { GithubOutlined } from '@ant-design/icons';
 import './styles.less';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const { Header, Content, Footer } = Layout;
 const { Text } = Typography;
 
 export default function AppLayout() {
 	const { pathname } = useLocation();
+	const { t } = useTranslation();
 	useEffect(() => window.scrollTo(0, 0), [pathname]);
 
 	return (
 		<Layout className="app-layout">
 			<Header className="app-header">
-				<Link to="/" className="app-logo" title="Home">
-					<img src="/images/logo.svg" alt="FiroBlocks" className="app-logo-img" />
+				<Link to="/" className="app-logo" title={t('titles.home')}>
+					<img
+						src="/images/logo.svg"
+						alt={t('titles.firoblock')}
+						className="app-logo-img"
+					/>
 					<Text strong className="app-logo-text">
-						FiroBlocks
+						{t('titles.firoblock')}
 					</Text>
 				</Link>
-				<Link to="/" className="app-logo" title="Home"></Link>
 				<div className="app-header-right">
 					<Search />
 				</div>
@@ -32,14 +37,16 @@ export default function AppLayout() {
 			</Content>
 
 			<Footer className="app-footer">
-				<Text className="app-footer-text">© {new Date().getFullYear()} FiroBlocks</Text>
+				<Text className="app-footer-text">
+					© {new Date().getFullYear()} {t('messages.firoblocks')}
+				</Text>
 				<a
 					href="https://github.com/nexusocean"
 					target="_blank"
 					rel="noreferrer"
 					className="app-footer-link"
 				>
-					GitHub
+					{t('links.github')}
 					<GithubOutlined className="git-hub" />
 				</a>
 			</Footer>

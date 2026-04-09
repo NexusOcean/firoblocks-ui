@@ -7,6 +7,7 @@ import HashLink from '@/components/HashLink';
 import TimeAgo from '@/components/TimeAgo';
 import type { AddressTxSummaryDto, TransactionType } from '@/types/dto';
 import { formatFiro, TX_TYPE_COLORS } from '@/utils';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
@@ -15,9 +16,13 @@ const PAGE_SIZE = 25;
 export default function Address() {
 	const { address } = useParams<{ address: string }>();
 	const navigate = useNavigate();
+	const { t } = useTranslation();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const page = parseInt(searchParams.get('page') ?? '1', 10);
 	const { data, isLoading, isError } = useAddressDetail(address ?? '', page);
+	const txCountSuffix = data
+		? ` (${data.totalTxCount > 1000 ? t('labels.oneThousandPlus') : data.totalTxCount.toLocaleString()})`
+		: '';
 
 	if (!address || !/^a[1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address)) {
 		return <Navigate to="/404" />;
@@ -30,30 +35,33 @@ export default function Address() {
 
 	const details = data
 		? [
-				{ label: 'Balance', value: `${formatFiro(data.balance)} FIRO` },
-				{ label: 'Total Received', value: `${formatFiro(data.received)} FIRO` },
+				{ label: t('labels.balance'), value: `${formatFiro(data.balance)} FIRO` },
+				{ label: t('labels.totalReceived'), value: `${formatFiro(data.received)} FIRO` },
 				{
-					label: 'Transactions',
-					value: data.totalTxCount >= 1000 ? '1,000+' : data.totalTxCount.toLocaleString()
+					label: t('labels.transactions'),
+					value:
+						data.totalTxCount >= 1000
+							? t('labels.oneThousandPlus')
+							: data.totalTxCount.toLocaleString()
 				}
 			]
 		: [];
 
 	const txColumns = [
 		{
-			title: 'Txid',
+			title: t('labels.txid'),
 			dataIndex: 'txid',
 			key: 'txid',
 			render: (id: string) => <HashLink value={id} to={`/tx/${id}`} truncate />
 		},
 		{
-			title: 'Type',
+			title: t('labels.type'),
 			dataIndex: 'type',
 			key: 'type',
 			render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
 		},
 		{
-			title: 'Value',
+			title: t('labels.value'),
 			dataIndex: 'valueDelta',
 			key: 'valueDelta',
 			render: (v?: number) =>
@@ -67,7 +75,7 @@ export default function Address() {
 				)
 		},
 		{
-			title: 'Age',
+			title: t('labels.age'),
 			dataIndex: 'time',
 			key: 'time',
 			render: (t: number) => <TimeAgo timestamp={t} />
@@ -75,13 +83,13 @@ export default function Address() {
 	];
 
 	const title = isLoading
-		? 'FiroBlocks — Firo Block Explorer'
-		: `FiroBlocks — Address ${data!.address}`;
+		? t('titles.firoblockWithAddress')
+		: t('titles.firoblockWithAddressNumber', { address: data!.address });
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
 			<div>
-				<Title level={3}>Address</Title>
+				<Title level={3}>{t('titles.address')}</Title>
 				<title>{title}</title>
 
 				{isLoading ? (
@@ -91,7 +99,7 @@ export default function Address() {
 				)}
 			</div>
 
-			<Card title="Address Details">
+			<Card title={t('titles.addressDetails')}>
 				{isLoading ? (
 					<Skeleton active />
 				) : (
@@ -127,9 +135,7 @@ export default function Address() {
 				)}
 			</Card>
 
-			<Card
-				title={`Transactions${data ? ` (${data.totalTxCount > 1000 ? '1,000+' : data.totalTxCount.toLocaleString()})` : ''}`}
-			>
+			<Card title={t('titles.transactionsWithCount', { len: txCountSuffix })}>
 				<Table<AddressTxSummaryDto>
 					dataSource={data?.transactions}
 					columns={txColumns}
