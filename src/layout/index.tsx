@@ -4,12 +4,14 @@ import Search from './components/Search';
 import { GithubOutlined } from '@ant-design/icons';
 import './styles.less';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const { Header, Content, Footer } = Layout;
 const { Text } = Typography;
 
 export default function AppLayout() {
 	const { pathname } = useLocation();
+	const { t } = useTranslation();
 	useEffect(() => window.scrollTo(0, 0), [pathname]);
 
 	return (
@@ -18,7 +20,7 @@ export default function AppLayout() {
 				<Link to="/" className="app-logo" title="Home">
 					<img src="/images/logo.svg" alt="FiroBlocks" className="app-logo-img" />
 					<Text strong className="app-logo-text">
-						FiroBlocks
+						{t('titles.firoblock')}
 					</Text>
 				</Link>
 				<Link to="/" className="app-logo" title="Home"></Link>
@@ -32,14 +34,16 @@ export default function AppLayout() {
 			</Content>
 
 			<Footer className="app-footer">
-				<Text className="app-footer-text">© {new Date().getFullYear()} FiroBlocks</Text>
+				<Text className="app-footer-text">
+					© {new Date().getFullYear()} {t('messages.firoblocks')}
+				</Text>
 				<a
 					href="https://github.com/nexusocean"
 					target="_blank"
 					rel="noreferrer"
 					className="app-footer-link"
 				>
-					GitHub
+					{t('links.github')}
 					<GithubOutlined className="git-hub" />
 				</a>
 			</Footer>

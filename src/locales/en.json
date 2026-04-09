@@ -1,1 +1,48 @@
-{}
+{
+	"titles": {
+		"firoblock": "Firoblock",
+		"address": "Address",
+		"block": "Block",
+		"type": "Type",
+		"txid": "Txid",
+		"transactions": "Transactions",
+		"latestBlocks": "Latest Blocks",
+		"latestTransactions": "Latest Transactions",
+		"firoblockWithNoBlockNumber": "FiroBlocks — Firo Block Explorer",
+		"firoblockWithBlockNumber": "FiroBlocks — Block #{{height}}",
+		"firoblockWithTransactionNumber": "FiroBlocks — Transaction #{{txid}}",
+		"firoblockNotFound": "FiroBlocks — Not Found",
+		"firoblockMaintenance": "FiroBlocks — Maintenance"
+	},
+	"links": {
+		"previousBlock": "Previous Block",
+		"nextBlock": "Next Block",
+		"github": "Github",
+		"backToHome": "Back to Home"
+	},
+	"labels": {
+		"height": "Height",
+		"confirmations": "Confirmations",
+		"timestamp": "Timestamp",
+		"transactions": "Transactions",
+		"size": "Size",
+		"difficulty": "Difficulty",
+		"chainlock": "Chainlock",
+		"blockHeight": "Block Height",
+		"hashrate": "Hash Rate",
+		"blockTime": "Block Time",
+		"firoSupply": "Firo Supply",
+		"blockhash": "Block Hash",
+		"fee": "Fee",
+		"totalOutput": "Total Output"
+	},
+	"messages": {
+		"pageNotFound": "The page you requested could not be found.",
+		"firoblocks": "Firoblocks",
+		"plannedDowntime": "We're down for scheduled maintenance. We'll be back shortly.",
+		"unPlannedDowntime": "We're currently looking into it. Please check back soon."
+	},
+	"placeholders": {
+		"searchByBlockTransactionAddress": "Search by block, transaction, or address..."
+	}
+}

@@ -7,6 +7,7 @@ import HashLink from '@/components/HashLink';
 import TimeAgo from '@/components/TimeAgo';
 import type { AddressTxSummaryDto, TransactionType } from '@/types/dto';
 import { formatFiro, TX_TYPE_COLORS } from '@/utils';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
@@ -15,6 +16,7 @@ const PAGE_SIZE = 25;
 export default function Address() {
 	const { address } = useParams<{ address: string }>();
 	const navigate = useNavigate();
+	const { t } = useTranslation();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const page = parseInt(searchParams.get('page') ?? '1', 10);
 	const { data, isLoading, isError } = useAddressDetail(address ?? '', page);
@@ -81,7 +83,7 @@ export default function Address() {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
 			<div>
-				<Title level={3}>Address</Title>
+				<Title level={3}>{t('titles.address')}</Title>
 				<title>{title}</title>
 
 				{isLoading ? (

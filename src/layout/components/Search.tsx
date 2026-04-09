@@ -4,6 +4,7 @@ import { Button, Input } from 'antd';
 import type { InputRef } from 'antd';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
 import { ThemeToggle } from './Theme';
+import { useTranslation } from 'react-i18next';
 
 function detectLocal(value: string): string | null {
 	const trimmed = value.trim();
@@ -21,6 +22,7 @@ export default function Search() {
 	const [loading, setLoading] = useState(false);
 	const inputRef = useRef<InputRef>(null);
 	const navigate = useNavigate();
+	const { t } = useTranslation();
 
 	function close() {
 		setOpen(false);
@@ -86,7 +88,7 @@ export default function Search() {
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') handleSubmit();
 				}}
-				placeholder="Search by block, transaction, or address..."
+				placeholder={t('placeholders.searchByBlockTransactionAddress')}
 				status={error ? 'error' : ''}
 				prefix={loading ? <SearchOutlined spin /> : <SearchOutlined />}
 				suffix={<CloseOutlined onClick={close} className="search-close" />}

@@ -5,6 +5,7 @@ import HashDisplay, { truncateHash } from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import type { TxVinDto, TxVoutDto } from '@/types/dto';
 import { formatFiro, TX_TYPE_COLORS } from '@/utils';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
@@ -62,6 +63,7 @@ export default function Transaction() {
 	const { txid } = useParams<{ txid: string }>();
 	const { data: tx, isLoading, isError } = useTransactionDetail(txid ?? '');
 	const navigate = useNavigate();
+	const { t } = useTranslation();
 
 	if (!txid || !/^[a-fA-F0-9]{64}$/.test(txid)) return <Navigate to="/404" />;
 
@@ -72,39 +74,39 @@ export default function Transaction() {
 	const details = tx
 		? [
 				{
-					label: 'Block Height',
+					label: t('labels.blockHeight'),
 					value: tx.blockHeight.toLocaleString(),
 					isHeight: true,
 					link: `/block/${tx.blockHeight}`
 				},
 				{
-					label: 'Block Hash',
+					label: t('labels.blockhash'),
 					value: truncateHash(tx.blockHash)
 				},
-				{ label: 'Confirmations', value: tx.confirmations.toLocaleString() },
-				{ label: 'Timestamp', value: new Date(tx.time * 1000).toLocaleString() },
-				{ label: 'Size', value: `${tx.size.toLocaleString()} bytes` },
+				{ label: t('labels.confirmations'), value: tx.confirmations.toLocaleString() },
+				{ label: t('labels.timestamp'), value: new Date(tx.time * 1000).toLocaleString() },
+				{ label: t('labels.size'), value: `${tx.size.toLocaleString()} bytes` },
 				{
-					label: 'Fee',
+					label: t('labels.fee'),
 					value: tx.fee ? `${formatFiro(tx.fee)} FIRO` : '—'
 				},
 				{
-					label: 'Total Output',
+					label: t('labels.totalOutput'),
 					value: valueOut ? `${formatFiro(valueOut)}  FIRO` : '—'
 				},
-				{ label: 'Chainlock', value: tx.chainlock ? 'Yes' : 'No' }
+				{ label: t('labels.chainlock'), value: tx.chainlock ? 'Yes' : 'No' }
 			]
 		: [];
 
 	const title = isLoading
-		? 'FiroBlocks — Firo Block Explorer'
-		: `FiroBlocks — Transaction ${tx!.txid}`;
+		? t('titles.firoblockWithNoBlockNumber')
+		: t('titles.firoblockWithTransactionNumber', { txid: tx!.txid });
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
 			<div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
 				<Title level={3} style={{ margin: 0 }}>
-					Transaction
+					{t('titles.transactions')}
 				</Title>
 				<title>{title}</title>
 

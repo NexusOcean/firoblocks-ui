@@ -1,10 +1,12 @@
 import { Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
 export default function Error404() {
+	const { t } = useTranslation();
 	return (
 		<div
 			style={{
@@ -34,10 +36,10 @@ export default function Error404() {
 			>
 				404
 			</Title>
-			<title>FiroBlocks — Not Found</title>
+			<title>{t('titles.firoblockNotFound')}</title>
 
 			<Text style={{ fontSize: 18, color: '#d1d5db', maxWidth: 300, display: 'block' }}>
-				The page you requested could not be found.
+				{t('messages.pageNotFound')}
 			</Text>
 			<Link
 				to="/"
@@ -45,7 +47,7 @@ export default function Error404() {
 				style={{ color: '#ba2a45', fontSize: 16, maxWidth: 300, display: 'block' }}
 			>
 				<ArrowLeftOutlined className="arrow-left" />
-				Back to Home
+				{t('backToHome')}
 			</Link>
 		</div>
 	);
