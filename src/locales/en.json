@@ -1,11 +1,11 @@
 {
 	"titles": {
-		"firoblock": "Firoblock",
+		"firoblock": "FiroBlocks",
 		"home": "Home",
 		"address": "Address",
 		"block": "Block",
 		"type": "Type",
-		"txid": "Txid",
+		"txid": "TxId",
 		"blockDetails": "Block Details",
 		"transactionDetails": "Transaction Details",
 		"addressDetails": "Address Details",
@@ -37,10 +37,10 @@
 		"hash": "Hash",
 		"confirmations": "Confirmations",
 		"timestamp": "Timestamp",
-		"txid": "Txid",
+		"txid": "TxId",
 		"txs": "Txs",
 		"value": "Value",
-		"oneThousandPlus": "1,000+",
+		"oneThousandPlus": "1,000",
 		"transactions": "Transactions",
 		"size": "Size",
 		"bytes": "bytes",
@@ -55,6 +55,7 @@
 		"fee": "Fee",
 		"totalOutput": "Total Output",
 		"totalReceived": "Total Received",
+		"type": "Type",
 		"copy": "Copy",
 		"copied": "Copied!",
 		"coinbase": "Coinbase",
@@ -65,7 +66,7 @@
 	},
 	"messages": {
 		"pageNotFound": "The page you requested could not be found.",
-		"firoblocks": "Firoblocks",
+		"firoblocks": "FiroBlocks",
 		"plannedDowntime": "We're down for scheduled maintenance. We'll be back shortly.",
 		"unPlannedDowntime": "We're currently looking into it. Please check back soon."
 	},
