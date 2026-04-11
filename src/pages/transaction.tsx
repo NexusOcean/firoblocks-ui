@@ -203,8 +203,8 @@ export default function Transaction() {
 							pagination={false}
 							size="small"
 							scroll={{ x: true }}
-							rowKey={(row) => row.addresses?.[0] && `/address/${row.addresses[0]}`}
 							className="pointer"
+							rowKey={(row) => row.addresses?.[0] && `/address/${row.addresses[0]}`}
 							onRow={(row) => ({
 								onClick: () =>
 									row.addresses?.[0] && navigate(`/address/${row.addresses[0]}`)
