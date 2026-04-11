@@ -189,7 +189,7 @@ export default function Transaction() {
 							className="pointer"
 							rowKey={(row) => `/address/${row.address}`}
 							onRow={(row) => ({
-								onClick: () => row.address && navigate(`/vin/${row.address}`)
+								onClick: () => row.address && navigate(`/address/${row.address}`)
 							})}
 						/>
 					</Card>
