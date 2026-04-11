@@ -25,7 +25,7 @@ export const useNetworkStats = () =>
 export const useLatestBlocks = () =>
 	useQuery({
 		queryKey: ['blocks', 'latest'],
-		queryFn: () => getBlocks(undefined, 10),
+		queryFn: () => getBlocks(undefined, 15),
 		select: (data) => data.blocks,
 		refetchInterval: 120_000
 	});
@@ -33,7 +33,7 @@ export const useLatestBlocks = () =>
 export const useLatestTransactions = () =>
 	useQuery({
 		queryKey: ['transactions', 'latest'],
-		queryFn: () => getRecentTransactions(10),
+		queryFn: () => getRecentTransactions(15),
 		select: (data) =>
 			data.map((tx) => {
 				const amount = tx.vout.reduce((sum, o) => sum + o.value, 0);
@@ -42,6 +42,7 @@ export const useLatestTransactions = () =>
 					txid: tx.txid,
 					time: tx.time,
 					type: tx.type,
+					category: tx.category,
 					valueOut: formatFiro(amount)
 				};
 			}),

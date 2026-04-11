@@ -12,6 +12,7 @@
 		"inputs": "Inputs{{len}}",
 		"outputs": "Outputs{{len}}",
 		"transactions": "Transactions",
+		"transaction": "Transaction",
 		"transactionsWithCount": "Transactions{{len}}",
 		"firoblockWithAddressNumber": "FiroBlocks — Address {{address}}",
 		"firoblockWithAddress": "FiroBlocks — Address",
@@ -26,7 +27,7 @@
 	"links": {
 		"previousBlock": "Previous Block",
 		"nextBlock": "Next Block",
-		"github": "Github",
+		"github": "GitHub",
 		"backToHome": "Back to Home"
 	},
 	"labels": {
@@ -41,6 +42,7 @@
 		"txs": "Txs",
 		"value": "Value",
 		"oneThousandPlus": "1,000",
+		"recent": "Recent Transactions",
 		"transactions": "Transactions",
 		"size": "Size",
 		"bytes": "bytes",

@@ -6,12 +6,11 @@ import HashDisplay from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import TimeAgo from '@/components/TimeAgo';
 import type { AddressTxSummaryDto, TransactionType } from '@/types/dto';
-import { formatFiro, TX_TYPE_COLORS } from '@/utils';
+import { formatFiro } from '@/utils';
 import { useTranslation } from 'react-i18next';
+import { TX_TYPE_COLORS } from '@/types';
 
 const { Title, Text } = Typography;
-
-const PAGE_SIZE = 25;
 
 export default function Address() {
 	const { address } = useParams<{ address: string }>();
@@ -19,18 +18,20 @@ export default function Address() {
 	const { t } = useTranslation();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const page = parseInt(searchParams.get('page') ?? '1', 10);
-	const { data, isLoading, isError } = useAddressDetail(address ?? '', page);
+	const limit = parseInt(searchParams.get('limit') ?? '10');
+	const { data, isLoading, isError } = useAddressDetail(address ?? '', page, limit);
 	const txCountSuffix = data
 		? ` (${data.totalTxCount > 1000 ? t('labels.oneThousandPlus') : data.totalTxCount.toLocaleString()})`
 		: '';
 
-	if (!address || !/^a[1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address)) {
+	if (!address || !/^[a4][1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address)) {
 		return <Navigate to="/404" />;
 	}
+
 	if (isError) return <Navigate to="/maintenance" />;
 
-	const setPage = (newPage: number) => {
-		setSearchParams({ page: String(newPage) });
+	const handleSetPage = (newPage: number, newLimit: number) => {
+		setSearchParams({ page: String(newPage), limit: String(newLimit) });
 	};
 
 	const details = data
@@ -38,7 +39,7 @@ export default function Address() {
 				{ label: t('labels.balance'), value: `${formatFiro(data.balance)} FIRO` },
 				{ label: t('labels.totalReceived'), value: `${formatFiro(data.received)} FIRO` },
 				{
-					label: t('labels.transactions'),
+					label: t('labels.recent'),
 					value:
 						data.totalTxCount >= 1000
 							? t('labels.oneThousandPlus')
@@ -58,7 +59,11 @@ export default function Address() {
 			title: t('labels.type'),
 			dataIndex: 'type',
 			key: 'type',
-			render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
+			render: (type: TransactionType) => (
+				<Tag color={TX_TYPE_COLORS[type]}>
+					{`${type.charAt(0).toLocaleUpperCase()}${type.slice(1)}`}
+				</Tag>
+			)
 		},
 		{
 			title: t('labels.value'),
@@ -66,9 +71,13 @@ export default function Address() {
 			key: 'valueDelta',
 			render: (v?: number) =>
 				v != null ? (
-					<Text style={{ color: v >= 0 ? '#52c41a' : '#ff4d4f' }}>
+					<Text
+						style={{
+							color: v > 0.01 ? '#52c41a' : 'var(--ant-color-text-description)'
+						}}
+					>
 						{v >= 0 ? '+' : ''}
-						{`${formatFiro(v)} FIRO`}
+						{`${!formatFiro(v).includes('<') ? formatFiro(v) : '—'}`}
 					</Text>
 				) : (
 					'—'
@@ -139,12 +148,12 @@ export default function Address() {
 				<Table<AddressTxSummaryDto>
 					dataSource={data?.transactions}
 					columns={txColumns}
-					rowKey="txid"
 					loading={isLoading}
 					pagination={false}
 					size="small"
 					scroll={{ x: true }}
 					className="pointer"
+					rowKey={(row) => row.txid}
 					onRow={(row) => ({ onClick: () => navigate(`/tx/${row.txid}`) })}
 				/>
 				{data && data.totalPages > 1 && (
@@ -152,9 +161,10 @@ export default function Address() {
 						<Pagination
 							current={page}
 							total={data.totalTxCount}
-							pageSize={PAGE_SIZE}
-							onChange={setPage}
-							showSizeChanger={false}
+							pageSize={limit}
+							onChange={handleSetPage}
+							showSizeChanger={true}
+							pageSizeOptions={[5, 10, 20]}
 						/>
 					</div>
 				)}

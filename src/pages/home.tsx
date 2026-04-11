@@ -3,7 +3,6 @@ import { useLatestBlocks, useLatestTransactions, useNetworkStats } from '@/hooks
 import StatCard from '@/components/StatCard';
 import HashLink from '@/components/HashLink';
 import TimeAgo from '@/components/TimeAgo';
-import type { BlockSummaryDto, TransactionType } from '@/types/dto';
 import {
 	AimOutlined,
 	BlockOutlined,
@@ -14,8 +13,9 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { truncateHash } from '@/components/HashDisplay';
-import { TX_TYPE_COLORS } from '@/utils';
 import { useTranslation } from 'react-i18next';
+import type { BlockSummaryDto, TransactionCategory } from '@/types/dto';
+import { TX_CATEGORY_COLORS, TX_CATEGORY_LABELS } from '@/types';
 
 const { Title } = Typography;
 
@@ -50,7 +50,7 @@ export default function Home() {
 			title: t('labels.age'),
 			dataIndex: 'time',
 			key: 'time',
-			render: (time: number) => <TimeAgo timestamp={time} />
+			render: (t: number) => <TimeAgo timestamp={t} />
 		}
 	];
 
@@ -65,7 +65,9 @@ export default function Home() {
 			title: t('labels.type'),
 			dataIndex: 'type',
 			key: 'type',
-			render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
+			render: (c: TransactionCategory) => (
+				<Tag color={TX_CATEGORY_COLORS[c]}>{TX_CATEGORY_LABELS[c]}</Tag>
+			)
 		},
 		{
 			title: t('labels.value'),
@@ -77,7 +79,7 @@ export default function Home() {
 			title: t('labels.age'),
 			dataIndex: 'time',
 			key: 'time',
-			render: (time: number) => <TimeAgo timestamp={time} />
+			render: (t: number) => <TimeAgo timestamp={t} />
 		}
 	];
 
@@ -145,12 +147,12 @@ export default function Home() {
 					<Table<BlockSummaryDto>
 						dataSource={blocks}
 						columns={blockColumns}
-						rowKey="hash"
 						loading={blocksLoading}
 						pagination={false}
 						size="small"
 						scroll={{ x: true }}
 						className="pointer"
+						rowKey={(row) => row.height}
 						onRow={(row) => ({ onClick: () => navigate(`/block/${row.height}`) })}
 					/>
 				</Col>
@@ -159,12 +161,12 @@ export default function Home() {
 					<Table
 						dataSource={txs}
 						columns={txColumns}
-						rowKey="txid"
 						loading={txsLoading}
 						pagination={false}
 						size="small"
 						scroll={{ x: true }}
 						className="pointer"
+						rowKey={(row) => row.txid}
 						onRow={(row) => ({ onClick: () => navigate(`/tx/${row.txid}`) })}
 					/>
 				</Col>

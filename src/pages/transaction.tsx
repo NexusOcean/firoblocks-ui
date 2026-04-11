@@ -4,8 +4,9 @@ import { useTransactionDetail } from '@/hooks/useTransaction';
 import HashDisplay, { truncateHash } from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import type { TxVinDto, TxVoutDto } from '@/types/dto';
-import { formatFiro, TX_TYPE_COLORS } from '@/utils';
+import { formatFiro } from '@/utils';
 import { useTranslation } from 'react-i18next';
+import { TX_TYPE_COLORS, VIN_KIND_LABELS, VOUT_KIND_COLORS, VOUT_KIND_LABELS } from '@/types';
 
 const { Title, Text } = Typography;
 
@@ -30,7 +31,7 @@ export default function Transaction() {
 					<HashLink value={row.address} to={`/address/${row.address}`} truncate />
 				) : (
 					<Text type="secondary" italic>
-						{row.coinbase ? t('labels.coinbase') : t('labels.anonymizedInput')}
+						{VIN_KIND_LABELS[row.kind]}
 					</Text>
 				)
 		},
@@ -47,12 +48,16 @@ export default function Transaction() {
 			title: t('labels.address'),
 			dataIndex: 'addresses',
 			key: 'addresses',
-			render: (addresses: string[]) =>
-				addresses?.length ? (
-					<HashLink value={addresses[0]} to={`/address/${addresses[0]}`} truncate />
+			render: (_: unknown, row: TxVoutDto) =>
+				row.addresses?.length ? (
+					<HashLink
+						value={row.addresses[0]}
+						to={`/address/${row.addresses[0]}`}
+						truncate
+					/>
 				) : (
 					<Text type="secondary" italic>
-						{t('labels.anonymizedOutput')}
+						{VOUT_KIND_LABELS[row.kind]}
 					</Text>
 				)
 		},
@@ -60,7 +65,9 @@ export default function Transaction() {
 			title: t('labels.type'),
 			dataIndex: 'type',
 			key: 'type',
-			render: (type: string) => <Tag>{type}</Tag>
+			render: (_: unknown, row: TxVoutDto) => (
+				<Tag color={VOUT_KIND_COLORS[row.kind]}>{VOUT_KIND_LABELS[row.kind]}</Tag>
+			)
 		},
 		{
 			title: t('labels.value'),
@@ -108,14 +115,18 @@ export default function Transaction() {
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
 			<div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
 				<Title level={3} style={{ margin: 0 }}>
-					{t('titles.transactions')}
+					{t('titles.transaction')}
 				</Title>
 				<title>{title}</title>
 
 				{isLoading ? (
 					<Skeleton.Input active style={{ width: 80 }} />
 				) : (
-					tx && <Tag color={TX_TYPE_COLORS[tx.type]}>{tx.type}</Tag>
+					tx && (
+						<Tag color={TX_TYPE_COLORS[tx.type]}>
+							{`${tx.type.charAt(0).toLocaleUpperCase()}${tx.type.slice(1)}`}
+						</Tag>
+					)
 				)}
 			</div>
 
@@ -171,14 +182,14 @@ export default function Transaction() {
 						<Table
 							dataSource={tx?.vin}
 							columns={inputColumns}
-							rowKey={(_, i) => String(i)}
 							loading={isLoading}
 							pagination={false}
 							size="small"
 							scroll={{ x: true }}
 							className="pointer"
+							rowKey={(row) => `/address/${row.address}`}
 							onRow={(row) => ({
-								onClick: () => row.address && navigate(`/address/${row.address}`)
+								onClick: () => row.address && navigate(`/vin/${row.address}`)
 							})}
 						/>
 					</Card>
@@ -188,11 +199,11 @@ export default function Transaction() {
 						<Table
 							dataSource={tx?.vout}
 							columns={outputColumns}
-							rowKey={(row: TxVoutDto) => String(row.n)}
 							loading={isLoading}
 							pagination={false}
 							size="small"
 							scroll={{ x: true }}
+							rowKey={(row) => row.addresses?.[0] && `/vout/${row.addresses[0]}`}
 							className="pointer"
 							onRow={(row) => ({
 								onClick: () =>

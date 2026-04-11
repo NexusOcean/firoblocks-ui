@@ -5,8 +5,8 @@ import { useBlockDetail } from '@/hooks/useBlock';
 import HashDisplay from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import type { TransactionType } from '@/types/dto';
-import { TX_TYPE_COLORS } from '@/utils';
 import { useTranslation } from 'react-i18next';
+import { TX_TYPE_COLORS } from '@/types';
 
 const { Title, Text } = Typography;
 
@@ -53,7 +53,11 @@ export default function Block() {
 			title: t('labels.type'),
 			dataIndex: 'type',
 			key: 'type',
-			render: (type: TransactionType) => <Tag color={TX_TYPE_COLORS[type]}>{type}</Tag>
+			render: (type: TransactionType) => (
+				<Tag color={TX_TYPE_COLORS[type]}>
+					{`${type.charAt(0).toLocaleUpperCase()}${type.slice(1)}`}
+				</Tag>
+			)
 		}
 	];
 
@@ -117,12 +121,12 @@ export default function Block() {
 						type: 'unknown' as TransactionType
 					}))}
 					columns={txColumns}
-					rowKey="txid"
 					loading={isLoading}
 					pagination={false}
 					size="small"
 					scroll={{ x: true }}
 					className="pointer"
+					rowKey={(row) => row.txid}
 					onRow={(row) => ({ onClick: () => navigate(`/tx/${row.txid}`) })}
 				/>
 			</Card>

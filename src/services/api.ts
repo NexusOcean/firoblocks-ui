@@ -32,8 +32,12 @@ export const getRecentTransactions = async (limit?: number): Promise<Transaction
 export const getTransaction = async (txid: string): Promise<TransactionDto> =>
 	(await axiosInstance.get(`${BASE}/transactions/${txid}`)).data;
 
-export const getAddress = async (address: string, page?: number): Promise<AddressDto> =>
-	(await axiosInstance.get(`${BASE}/addresses/${address}`, { params: { page } })).data;
+export const getAddress = async (
+	address: string,
+	page?: number,
+	limit?: number
+): Promise<AddressDto> =>
+	(await axiosInstance.get(`${BASE}/addresses/${address}`, { params: { page, limit } })).data;
 
 export const getMempool = async (): Promise<MempoolDto> =>
 	(await axiosInstance.get(`${BASE}/mempool`)).data;

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
-export default function Error404() {
+export default function Missing() {
 	const { t } = useTranslation();
 	return (
 		<div
