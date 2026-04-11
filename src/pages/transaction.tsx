@@ -203,7 +203,7 @@ export default function Transaction() {
 							pagination={false}
 							size="small"
 							scroll={{ x: true }}
-							rowKey={(row) => row.addresses?.[0] && `/vout/${row.addresses[0]}`}
+							rowKey={(row) => row.addresses?.[0] && `/address/${row.addresses[0]}`}
 							className="pointer"
 							onRow={(row) => ({
 								onClick: () =>
