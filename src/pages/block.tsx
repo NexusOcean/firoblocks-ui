@@ -6,7 +6,7 @@ import HashDisplay from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
 import type { TransactionCategory } from '@/types/dto';
 import { useTranslation } from 'react-i18next';
-import { TX_CATEGORY_COLORS } from '@/types';
+import { TX_CATEGORY_COLORS, TX_CATEGORY_LABELS } from '@/types';
 
 const { Title, Text } = Typography;
 
@@ -53,10 +53,8 @@ export default function Block() {
 			title: t('labels.type'),
 			dataIndex: 'type',
 			key: 'type',
-			render: (type: TransactionCategory) => (
-				<Tag color={TX_CATEGORY_COLORS[type]}>
-					{`${type.charAt(0).toLocaleUpperCase()}${type.slice(1)}`}
-				</Tag>
+			render: (c: TransactionCategory) => (
+				<Tag color={TX_CATEGORY_COLORS[c]}>{TX_CATEGORY_LABELS[c]}</Tag>
 			)
 		}
 	];
