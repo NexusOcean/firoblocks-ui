@@ -99,7 +99,7 @@ export const VOUT_KIND_LABELS: Record<VoutKind, string> = {
 	lelantus_jmint: 'Lelantus Change',
 	sigma_mint: 'Sigma Mint',
 	zerocoin_mint: 'Zerocoin Mint',
-	op_return: 'OP_RETURN',
+	op_return: 'OP RETURN',
 	exchange_addr: 'Exchange Address',
 	unknown: 'Unknown'
 };
