@@ -63,8 +63,8 @@ export default function Home() {
 		},
 		{
 			title: t('labels.type'),
-			dataIndex: 'type',
-			key: 'type',
+			dataIndex: 'category',
+			key: 'category',
 			render: (c: TransactionCategory) => (
 				<Tag color={TX_CATEGORY_COLORS[c]}>{TX_CATEGORY_LABELS[c]}</Tag>
 			)

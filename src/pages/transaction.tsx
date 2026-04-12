@@ -189,7 +189,7 @@ export default function Transaction() {
 							className="pointer"
 							rowKey={(row) => `/address/${row.address}`}
 							onRow={(row) => ({
-								onClick: () => row.address && navigate(`/vin/${row.address}`)
+								onClick: () => row.address && navigate(`/address/${row.address}`)
 							})}
 						/>
 					</Card>
@@ -203,8 +203,8 @@ export default function Transaction() {
 							pagination={false}
 							size="small"
 							scroll={{ x: true }}
-							rowKey={(row) => row.addresses?.[0] && `/vout/${row.addresses[0]}`}
 							className="pointer"
+							rowKey={(row) => row.addresses?.[0] && `/address/${row.addresses[0]}`}
 							onRow={(row) => ({
 								onClick: () =>
 									row.addresses?.[0] && navigate(`/address/${row.addresses[0]}`)

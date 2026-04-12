@@ -4,9 +4,9 @@ import { Typography, Table, Card, Tag, Row, Col, Skeleton } from 'antd';
 import { useBlockDetail } from '@/hooks/useBlock';
 import HashDisplay from '@/components/HashDisplay';
 import HashLink from '@/components/HashLink';
-import type { TransactionType } from '@/types/dto';
+import type { TransactionCategory } from '@/types/dto';
 import { useTranslation } from 'react-i18next';
-import { TX_TYPE_COLORS } from '@/types';
+import { TX_CATEGORY_COLORS } from '@/types';
 
 const { Title, Text } = Typography;
 
@@ -53,8 +53,8 @@ export default function Block() {
 			title: t('labels.type'),
 			dataIndex: 'type',
 			key: 'type',
-			render: (type: TransactionType) => (
-				<Tag color={TX_TYPE_COLORS[type]}>
+			render: (type: TransactionCategory) => (
+				<Tag color={TX_CATEGORY_COLORS[type]}>
 					{`${type.charAt(0).toLocaleUpperCase()}${type.slice(1)}`}
 				</Tag>
 			)
@@ -118,7 +118,7 @@ export default function Block() {
 				<Table
 					dataSource={block?.txids.map((txid) => ({
 						txid,
-						type: 'unknown' as TransactionType
+						type: (block.txTypes?.[txid] ?? 'unknown') as TransactionCategory
 					}))}
 					columns={txColumns}
 					loading={isLoading}

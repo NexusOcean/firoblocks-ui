@@ -32,6 +32,7 @@ export interface BlockDto {
 	previousBlockHeight?: string;
 	nextBlockHeight?: string;
 	txids: string[];
+	txTypes?: Record<string, TransactionCategory>;
 }
 
 // --------------------------------------------------------
