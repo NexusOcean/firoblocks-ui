@@ -24,9 +24,9 @@ export default function Maintenance({ planned }: MaintenanceProps) {
 			}}
 		>
 			<img
-				src="/images/banner-light.svg"
+				src="/images/logo.svg"
 				alt={t('titles.firoblock')}
-				style={{ width: 300, height: 'auto' }}
+				style={{ width: 200, height: 'auto' }}
 			/>
 			<Title
 				style={{
@@ -50,7 +50,7 @@ export default function Maintenance({ planned }: MaintenanceProps) {
 				<Link
 					to="/"
 					className="block-nav"
-					style={{ color: '#ba2a45', fontSize: 16, maxWidth: 300, display: 'block' }}
+					style={{ color: '#ba2a45', fontSize: 18, maxWidth: 300, display: 'block' }}
 				>
 					<ArrowLeftOutlined className="arrow-left" />
 					{t('links.backToHome')}

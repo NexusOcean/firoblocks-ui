@@ -92,13 +92,13 @@ body {
 }
 
 .app-logo-img {
-	height: 36px;
-	width: 36px;
+	height: 48px;
+	width: 48px;
 	border-radius: 50%;
 }
 
 .app-logo-text {
-	font-family: 'Saira Semi Condensed', system-ui, sans-serif;
+	font-family: monospace;
 	font-size: 24px;
 	font-weight: 700;
 	letter-spacing: 0.5px;

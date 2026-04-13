@@ -85,7 +85,7 @@ export default function Home() {
 
 	return (
 		<div style={{ padding: '24px 16px' }}>
-			<Title level={2} style={{ marginBottom: 24 }}>
+			<Title level={2} style={{ marginBottom: 24, fontFamily: 'monospace' }}>
 				{t('titles.firoblock')}
 			</Title>
 			<title>{t('titles.firoblockWithNoBlockNumber')}</title>
