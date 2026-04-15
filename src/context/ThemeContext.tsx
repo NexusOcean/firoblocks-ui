@@ -9,8 +9,8 @@ const darkTheme = {
 	algorithm: darkAlgorithm,
 	token: {
 		colorPrimary: '#ba2a45',
-		colorBgBase: '#141414',
-		colorBgContainer: '#1a1a1a',
+		colorBgBase: '#0a0a0a',
+		colorBgContainer: '#2a2a2a',
 		fontFamily: "'Source Sans Pro', system-ui, sans-serif",
 		fontSize: 16
 	}
@@ -20,8 +20,8 @@ const lightTheme = {
 	algorithm: defaultAlgorithm,
 	token: {
 		colorPrimary: '#ba2a45',
-		colorBgBase: '#ebebeb',
-		colorBgContainer: '#e5e5e5',
+		colorBgBase: '#f9f7f7',
+		colorBgContainer: '#ffffff',
 		fontFamily: "'Source Sans Pro', system-ui, sans-serif",
 		fontSize: 16
 	}

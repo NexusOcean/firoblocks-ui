@@ -66,7 +66,9 @@ export default function Block() {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
 			<div>
-				<Title level={3}>{t('titles.block')}</Title>
+				<Title level={3}>
+					{t('titles.block')} {block && `#${block.height.toLocaleString()}`}
+				</Title>
 				<title>{title}</title>
 
 				{isLoading ? (

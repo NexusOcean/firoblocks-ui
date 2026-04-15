@@ -39,7 +39,7 @@ export default function Transaction() {
 			title: t('labels.value'),
 			dataIndex: 'value',
 			key: 'value',
-			render: (v?: number) => <Text>{v != null ? `${v.toFixed(2)} FIRO` : '—'}</Text>
+			render: (v?: number) => <Text>{v != null ? `${formatFiro(v)} FIRO` : '<0.01'}</Text>
 		}
 	];
 

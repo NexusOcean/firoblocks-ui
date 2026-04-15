@@ -24,7 +24,7 @@ export default function Address() {
 		? ` (${data.totalTxCount > 1000 ? t('labels.oneThousandPlus') : data.totalTxCount.toLocaleString()})`
 		: '';
 
-	if (!address || !/^[a4][1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address)) {
+	if (!address || !/^[aZ34][1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address)) {
 		return <Navigate to="/404" />;
 	}
 
@@ -77,7 +77,7 @@ export default function Address() {
 						}}
 					>
 						{v >= 0 ? '+' : ''}
-						{`${!formatFiro(v).includes('<') ? formatFiro(v) : '—'}`}
+						{`${formatFiro(v)}`}
 					</Text>
 				) : (
 					'—'

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from 'antd';
 import type { InputRef } from 'antd';
-import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined, HomeFilled } from '@ant-design/icons';
 import { ThemeToggle } from './Theme';
 import { useTranslation } from 'react-i18next';
 
@@ -11,7 +11,7 @@ function detectLocal(value: string): string | null {
 	if (!trimmed) return null;
 	if (/^\d+$/.test(trimmed)) return `/block/${trimmed}`;
 	if (/^[a-fA-F0-9]{64}$/.test(trimmed)) return `/tx/${trimmed}`;
-	if (/^[a4][1-9A-HJ-NP-Za-km-z]{25,40}$/.test(trimmed)) return `/address/${trimmed}`;
+	if (/^[aZ34][1-9A-HJ-NP-Za-km-z]{25,40}$/.test(trimmed)) return `/address/${trimmed}`;
 	return null;
 }
 
@@ -67,6 +67,13 @@ export default function Search() {
 				/>
 
 				<ThemeToggle />
+
+				<Button
+					type="text"
+					icon={<HomeFilled />}
+					onClick={() => navigate('/')}
+					className="search-toggle"
+				/>
 			</span>
 		);
 	}
