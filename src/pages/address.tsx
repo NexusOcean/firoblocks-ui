@@ -76,7 +76,7 @@ export default function Address() {
 							color: v > 0.01 ? '#52c41a' : 'var(--ant-color-text-description)'
 						}}
 					>
-						{v >= 0 ? '+' : ''}
+						{v >= 0.01 ? '+' : ''}
 						{`${formatFiro(v)}`}
 					</Text>
 				) : (
