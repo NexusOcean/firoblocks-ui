@@ -39,15 +39,26 @@ export default function AppLayout() {
 				<Text className="app-footer-text">
 					© {new Date().getFullYear()} {t('messages.firoblocks')}
 				</Text>
-				<a
-					href="https://github.com/nexusocean"
-					target="_blank"
-					rel="noreferrer"
-					className="app-footer-link"
-				>
-					{t('links.github')}
-					<GithubOutlined className="git-hub" />
-				</a>
+				<span className="foot-links">
+					<a
+						className="app-footer-donate"
+						href="https://cointr.ee/firoblocks"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Donate
+					</a>
+
+					<a
+						href="https://github.com/nexusocean"
+						target="_blank"
+						rel="noreferrer"
+						className="app-footer-link"
+					>
+						{t('links.github')}
+						<GithubOutlined className="git-hub" />
+					</a>
+				</span>
 			</Footer>
 		</Layout>
 	);
