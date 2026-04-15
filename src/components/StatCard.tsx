@@ -25,6 +25,7 @@ export default function StatCard({ label, value, loading, icon }: StatCardProps)
 							letterSpacing: 1,
 							textTransform: 'uppercase',
 							display: 'block',
+							fontWeight: 600,
 							marginBottom: 6
 						}}
 					>

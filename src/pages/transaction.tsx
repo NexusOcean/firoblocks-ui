@@ -95,7 +95,7 @@ export default function Transaction() {
 					label: t('labels.size'),
 					value: `${tx.size.toLocaleString()} ${t('labels.bytes')}`
 				},
-				{ label: t('labels.fee'), value: tx.fee ? `${formatFiro(tx.fee)} FIRO` : '—' },
+				{ label: t('labels.fee'), value: tx.fee ? `${formatFiro(tx.fee)} FIRO` : '<0.01' },
 				{
 					label: t('labels.totalOutput'),
 					value: valueOut ? `${formatFiro(valueOut)} FIRO` : '—'
