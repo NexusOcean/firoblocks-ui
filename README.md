@@ -4,7 +4,7 @@ React frontend for [FiroBlocks](https://firoblocks.app) — a block explorer for
 
 The public API is available at api.firoblocks.app/v1 — as seen in `.env.example` no local node required.
 
-- [Swagger Docs](https://api.firoblocks.app/v1/docs)
+- [Swagger Docs](https://api.firoblocks.app/docs)
 
 ## Requirements
 
