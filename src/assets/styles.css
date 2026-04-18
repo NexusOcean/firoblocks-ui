@@ -84,6 +84,7 @@ body {
 	gap: 10px;
 	text-decoration: none;
 	flex-shrink: 0;
+	border: none;
 
 	&:hover {
 		opacity: 0.8;
@@ -94,7 +95,6 @@ body {
 .app-logo-img {
 	height: 48px;
 	width: 48px;
-	border-radius: 50%;
 }
 
 .app-logo-text {
@@ -129,19 +129,22 @@ body {
 	font-size: 16px;
 	color: var(--ant-color-text-secondary);
 }
-.foot-links {
+
+.footer-links {
 	display: flex;
+	flex-direction: row;
 }
 
 .app-footer-link {
 	font-size: 16px;
 	color: var(--ant-color-primary);
 	display: flex;
-	margin-left: 16px;
+	margin-right: 16px;
+	align-items: center;
 
 	&:hover {
 		transition: color 0.2s ease;
-		color: var(--ant-typography);
+		color: var(--ant-color-text-secondary);
 	}
 }
 
