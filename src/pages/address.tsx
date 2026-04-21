@@ -165,6 +165,7 @@ export default function Address() {
 							onChange={handleSetPage}
 							showSizeChanger={true}
 							pageSizeOptions={[5, 10, 20]}
+							showLessItems
 						/>
 					</div>
 				)}
