@@ -17,7 +17,6 @@ dist-ssr
 .wrangler
 !deploy.yml
 !.env.example
-_headers
 
 # Editor directories and files
 .vscode/*
