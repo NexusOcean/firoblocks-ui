@@ -13,9 +13,11 @@ dist-ssr
 *.local
 *.yml
 .env
-.env.local
+.env.*
 .wrangler
 !deploy.yml
+!.env.example
+_headers
 
 # Editor directories and files
 .vscode/*
