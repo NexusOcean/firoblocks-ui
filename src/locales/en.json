@@ -1,6 +1,7 @@
 {
 	"titles": {
 		"firoblock": "FiroBlocks",
+		"explorer": "Firo Block Explorer",
 		"home": "Home",
 		"address": "Address",
 		"block": "Block",
@@ -77,7 +78,8 @@
 		"masternodeStatsSummary": "Network Distribution",
 		"network": "Network Details",
 		"nodeDetails": "Masternodes",
-		"recentTransactions": "Transactions"
+		"recentTransactions": "Transactions",
+		"unknown": "Unknown"
 	},
 	"messages": {
 		"pageNotFound": "The page you requested could not be found.",

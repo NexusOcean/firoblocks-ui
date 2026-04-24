@@ -22,6 +22,7 @@ export default function Home() {
 
 	return (
 		<div>
+			<title>{`${t('titles.firoblock')} — ${t('titles.explorer')}`}</title>
 			<Row gutter={[16, 16]} justify="center" style={{ marginBottom: 36 }}>
 				<Col xs={24} sm={12} lg={5} xl={4}>
 					<StatCard

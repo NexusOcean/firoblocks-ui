@@ -1,6 +1,7 @@
 {
 	"titles": {
 		"firoblock": "FiroBlocks",
+		"explorer": "Обозреватель блоков Firo",
 		"home": "Главная",
 		"address": "Адрес",
 		"block": "Блок",
@@ -77,7 +78,8 @@
 		"masternodeStatsSummary": "Распределение сети",
 		"network": "Детали сети",
 		"nodeDetails": "Мастерноды",
-		"recentTransactions": "Транзакции"
+		"recentTransactions": "Транзакции",
+		"unknown": "Unknown"
 	},
 	"messages": {
 		"pageNotFound": "Запрашиваемая страница не найдена.",
