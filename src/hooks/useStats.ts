@@ -1,5 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { getBlocks, getNetworkStats, getRecentTransactions } from '@/services/api';
+import {
+	getBlocks,
+	getMasternodeStats,
+	getNetworkStats,
+	getRecentTransactions
+} from '@/services/api';
 import { formatFiro } from '@/utils';
 
 export const useNetworkStats = () =>
@@ -46,5 +51,12 @@ export const useLatestTransactions = () =>
 					valueOut: formatFiro(amount)
 				};
 			}),
+		refetchInterval: 120_000
+	});
+
+export const useMasternodeStats = () =>
+	useQuery({
+		queryKey: ['masternode', 'stats'],
+		queryFn: getMasternodeStats,
 		refetchInterval: 120_000
 	});

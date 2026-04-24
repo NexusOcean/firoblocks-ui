@@ -5,7 +5,8 @@ import type {
 	TransactionDto,
 	AddressDto,
 	MempoolDto,
-	NetworkStatsDto
+	NetworkStatsDto,
+	MasternodeStats
 } from '../types/dto';
 import axiosInstance from './axiosInstance';
 
@@ -36,3 +37,6 @@ export const getMempool = async (): Promise<MempoolDto> =>
 
 export const getNetworkStats = async (): Promise<NetworkStatsDto> =>
 	(await axiosInstance.get(`/network/stats`)).data;
+
+export const getMasternodeStats = async (): Promise<MasternodeStats> =>
+	(await axiosInstance.get(`/masternodes/stats`)).data;

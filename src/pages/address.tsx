@@ -97,16 +97,18 @@ export default function Address() {
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-			<div>
-				<Title level={3}>{t('titles.address')}</Title>
+			<div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+				<Title level={3} style={{ margin: 0 }}>
+					{t('titles.address')}
+				</Title>
 				<title>{title}</title>
-
-				{isLoading ? (
-					<Skeleton.Input active style={{ width: 500 }} />
-				) : (
-					data && <HashDisplay value={data.address} truncate={false} />
-				)}
 			</div>
+
+			{isLoading ? (
+				<Skeleton.Input active style={{ width: 500 }} />
+			) : (
+				data && <HashDisplay value={data.address} truncate={false} />
+			)}
 
 			<Card title={t('titles.addressDetails')}>
 				{isLoading ? (

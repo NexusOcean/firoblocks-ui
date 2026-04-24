@@ -188,3 +188,22 @@ export interface NetworkStatsDto {
 	bestBlockHash: string;
 	updatedAt: string; // ISO 8601 date-time
 }
+
+export interface MasternodeCountryDto {
+	countryCode: string;
+	country: string;
+	count: number;
+}
+
+export interface MasternodeAsnDto {
+	asn: number;
+	org: string;
+	count: number;
+}
+
+export interface MasternodeStats {
+	total: number;
+	resolved: number;
+	countries: MasternodeCountryDto[];
+	asns: MasternodeAsnDto[];
+}

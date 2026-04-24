@@ -66,6 +66,7 @@ body {
 
 .app-header {
 	display: flex;
+	position: relative;
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 32px;
@@ -76,6 +77,7 @@ body {
 	border-bottom: 1px solid var(--ant-color-border-secondary);
 	background: var(--ant-color-bg-container) !important;
 	overflow: visible !important;
+	z-index: 500;
 }
 
 .app-logo {
@@ -114,6 +116,12 @@ body {
 .app-content {
 	width: 100%;
 	padding: 40px 48px;
+}
+
+@media (max-width: 768px) {
+	.app-content {
+		padding: 16px 12px;
+	}
 }
 
 .app-footer {

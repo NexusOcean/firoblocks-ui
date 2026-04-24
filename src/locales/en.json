@@ -18,6 +18,9 @@
 		"firoblockWithAddress": "FiroBlocks — Address",
 		"latestBlocks": "Latest Blocks",
 		"latestTransactions": "Latest Transactions",
+		"networkDistribution": "Network Distribution",
+		"byCountry": "By Country",
+		"byProvider": "By Provider",
 		"firoblockWithNoBlockNumber": "FiroBlocks — Firo Block Explorer",
 		"firoblockWithBlockNumber": "FiroBlocks — Block #{{height}}",
 		"firoblockWithTransactionNumber": "FiroBlocks — Transaction #{{txid}}",
@@ -64,7 +67,17 @@
 		"anonymizedInput": "Anonymized input",
 		"anonymizedOutput": "Anonymized output",
 		"yes": "Yes",
-		"no": "No"
+		"no": "No",
+		"country": "Country",
+		"code": "Code",
+		"masternodes": "Masternodes",
+		"asn": "ASN",
+		"provider": "Provider",
+		"loading": "Loading...",
+		"masternodeStatsSummary": "Network Distribution",
+		"network": "Network Details",
+		"nodeDetails": "Masternodes",
+		"recentTransactions": "Transactions"
 	},
 	"messages": {
 		"pageNotFound": "The page you requested could not be found.",

@@ -5,6 +5,7 @@ import type { InputRef } from 'antd';
 import { SearchOutlined, CloseOutlined, HomeFilled } from '@ant-design/icons';
 import { ThemeToggle } from './Theme';
 import { useTranslation } from 'react-i18next';
+import LanguageToggle from './Language';
 
 function detectLocal(value: string): string | null {
 	const trimmed = value.trim();
@@ -66,14 +67,16 @@ export default function Search() {
 					className="search-toggle"
 				/>
 
-				<ThemeToggle />
-
 				<Button
 					type="text"
 					icon={<HomeFilled />}
 					onClick={() => navigate('/')}
 					className="search-toggle"
 				/>
+
+				<ThemeToggle />
+
+				<LanguageToggle />
 			</span>
 		);
 	}
