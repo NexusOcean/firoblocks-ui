@@ -62,7 +62,7 @@ export default function NetworkTables() {
 					size="small"
 					scroll={{ x: true }}
 					rowKey="countryCode"
-					pagination={{ pageSize: 15, showSizeChanger: false }}
+					pagination={{ pageSize: 15, showSizeChanger: false, size: 'medium' }}
 				/>
 			</Col>
 			<Col xs={24} xl={12}>
@@ -74,7 +74,7 @@ export default function NetworkTables() {
 					size="small"
 					scroll={{ x: true }}
 					rowKey="asn"
-					pagination={{ pageSize: 15, showSizeChanger: false }}
+					pagination={{ pageSize: 15, showSizeChanger: false, size: 'medium' }}
 				/>
 			</Col>
 		</Row>
