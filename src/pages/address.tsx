@@ -101,7 +101,9 @@ export default function Address() {
 				<Title level={3} style={{ margin: 0 }}>
 					{t('titles.address')}
 				</Title>
-				<title>{title}</title>
+				<title>
+					${t('titles.firoblock')} — {title}
+				</title>
 			</div>
 
 			{isLoading ? (

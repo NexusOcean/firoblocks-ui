@@ -26,7 +26,9 @@
 		"firoblockWithBlockNumber": "FiroBlocks — Block #{{height}}",
 		"firoblockWithTransactionNumber": "FiroBlocks — Transaction #{{txid}}",
 		"firoblockNotFound": "FiroBlocks — Not Found",
-		"firoblockMaintenance": "FiroBlocks — Maintenance"
+		"firoblockMaintenance": "FiroBlocks — Maintenance",
+		"faq": "Frequesntly Asked Questions",
+		"faqSubtitles": "Everything you need to know about using FiroBlocks"
 	},
 	"links": {
 		"previousBlock": "Previous Block",
@@ -81,7 +83,8 @@
 		"activity": "Current Activity",
 		"nodeDetails": "Masternodes",
 		"recentTransactions": "Transactions",
-		"unknown": "Unknown"
+		"unknown": "Unknown",
+		"swap": "Firo Swap"
 	},
 	"messages": {
 		"pageNotFound": "The page you requested could not be found.",

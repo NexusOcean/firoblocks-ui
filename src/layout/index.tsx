@@ -5,7 +5,8 @@ import {
 	SwapOutlined,
 	ClusterOutlined,
 	MenuOutlined,
-	NodeIndexOutlined
+	NodeIndexOutlined,
+	QuestionCircleOutlined
 } from '@ant-design/icons';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -25,7 +26,8 @@ const NAV_ITEMS = [
 		icon: <ClusterOutlined style={{ fontSize: 22 }} />,
 		label: 'Masternodes'
 	},
-	{ key: '/swap', icon: <SwapOutlined style={{ fontSize: 22 }} />, label: 'Swap' }
+	{ key: '/swap', icon: <SwapOutlined style={{ fontSize: 22 }} />, label: 'Swap' },
+	{ key: '/faq', icon: <QuestionCircleOutlined style={{ fontSize: 22 }} />, label: 'FAQ' }
 ];
 
 export default function AppLayout() {

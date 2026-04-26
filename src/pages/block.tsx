@@ -69,7 +69,9 @@ export default function Block() {
 				<Title level={3}>
 					{t('titles.block')} {block && `#${block.height.toLocaleString()}`}
 				</Title>
-				<title>{title}</title>
+				<title>
+					${t('titles.firoblock')} — {title}
+				</title>
 
 				{isLoading ? (
 					<Skeleton.Input active style={{ width: 500 }} />

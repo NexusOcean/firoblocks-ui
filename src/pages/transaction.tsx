@@ -117,7 +117,9 @@ export default function Transaction() {
 				<Title level={3} style={{ margin: 0 }}>
 					{t('titles.transaction')}
 				</Title>
-				<title>{title}</title>
+				<title>
+					${t('titles.firoblock')} — {title}
+				</title>
 
 				{isLoading ? (
 					<Skeleton.Input active style={{ width: 80 }} />

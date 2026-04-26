@@ -103,3 +103,60 @@ export const VOUT_KIND_LABELS: Record<VoutKind, string> = {
 	exchange_addr: 'Exchange Address',
 	unknown: 'Unknown'
 };
+
+export type ExchangeStatus =
+	| 'waiting'
+	| 'confirming'
+	| 'exchanging'
+	| 'sending'
+	| 'finished'
+	| 'failed'
+	| 'refunded'
+	| 'verifying';
+
+export type AllowedCoin = 'btc' | 'eth' | 'ltc' | 'xmr' | 'firo';
+
+export const COIN_VALIDATION: Record<AllowedCoin, string> = {
+	firo: '^[a4][1-9A-HJ-NP-Za-km-z]{25,40}$',
+	ltc: '^(L|M|3)[A-Za-z0-9]{33}$|^(ltc1)[0-9A-Za-z]{39}$',
+	eth: '^(0x)[0-9A-Fa-f]{40}$',
+	btc: '^[13][a-km-zA-HJ-NP-Z1-9]{25,80}$|^(bc1)[0-9A-Za-z]{25,80}$',
+	xmr: '^[48][a-zA-Z\\d]{94}([a-zA-Z\\d]{11})?$'
+};
+
+export interface EstimateRequest {
+	currency_from: AllowedCoin;
+	currency_to: AllowedCoin;
+	amount_from: string;
+}
+
+export interface EstimateResponse {
+	estimated_amount: string;
+}
+
+export interface CreateExchangeRequest {
+	currency_from: AllowedCoin;
+	currency_to: AllowedCoin;
+	address_to: string;
+	amount_from: string;
+	refund_address?: string;
+	extra_id_to?: string;
+	refund_extra_id?: string;
+}
+
+export interface Exchange {
+	id: string;
+	status: ExchangeStatus;
+	currency_from: AllowedCoin;
+	currency_to: AllowedCoin;
+	amount_from: string;
+	amount_to: string;
+	address_from: string;
+	address_to: string;
+	extra_id_from: string;
+	extra_id_to: string;
+	tx_from: string;
+	tx_to: string;
+	refund_address: string;
+	refund_extra_id: string;
+}

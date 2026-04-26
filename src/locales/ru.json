@@ -26,7 +26,9 @@
 		"firoblockWithBlockNumber": "FiroBlocks — Блок №{{height}}",
 		"firoblockWithTransactionNumber": "FiroBlocks — Транзакция №{{txid}}",
 		"firoblockNotFound": "FiroBlocks — Не найдено",
-		"firoblockMaintenance": "FiroBlocks — Техническое обслуживание"
+		"firoblockMaintenance": "FiroBlocks — Техническое обслуживание",
+		"faq": "Часто задаваемые вопросы",
+		"faqSubtitles": "Всё, что нужно знать об использовании FiroBlocks"
 	},
 	"links": {
 		"previousBlock": "Предыдущий блок",
@@ -75,11 +77,14 @@
 		"asn": "ASN",
 		"provider": "Провайдер",
 		"loading": "Загрузка...",
-		"masternodeStatsSummary": "Распределение сети",
-		"network": "Детали сети",
+		"distribution": "Распределение сети",
+		"stats": "Расположение узлов",
+		"network": "Статистика сети",
+		"activity": "Текущая активность",
 		"nodeDetails": "Мастерноды",
 		"recentTransactions": "Транзакции",
-		"unknown": "Unknown"
+		"unknown": "Неизвестно",
+		"swap": "Обмен Firo"
 	},
 	"messages": {
 		"pageNotFound": "Запрашиваемая страница не найдена.",
