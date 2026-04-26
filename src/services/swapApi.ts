@@ -6,7 +6,7 @@ const LOCAL_SWAP = VITE_LOCAL_SWAP === 'true';
 
 const BASE = !LOCAL_SWAP ? VITE_SWAP_URL : 'http://localhost:3000';
 
-const swapApi = axios.create({ baseURL: BASE, timeout: 15_000 });
+const swapApi = axios.create({ baseURL: BASE, timeout: 15_000, withCredentials: true });
 
 let failureCount = 0;
 const FAILURE_THRESHOLD = 3;
