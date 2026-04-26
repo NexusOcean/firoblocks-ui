@@ -258,7 +258,7 @@ export default function Swap() {
 	const { data: price } = useQuery({
 		queryKey: ['firo-price'],
 		queryFn: getPrice,
-		refetchInterval: 60_000
+		refetchInterval: 120_000
 	});
 
 	return (
