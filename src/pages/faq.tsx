@@ -142,7 +142,7 @@ export default function FAQ() {
 
 	return (
 		<div className="faq-page">
-			<title>{`${t('titles.firoblock')} — ${t('title.faq')}`}</title>
+			<title>{`${t('titles.firoblock')} — ${t('titles.faq')}`}</title>
 
 			<Title level={3} style={{ color: '#ba2a45' }}>
 				{t('titles.faq')}
