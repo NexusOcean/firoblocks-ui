@@ -8,7 +8,7 @@ import {
 	NodeIndexOutlined,
 	QuestionCircleOutlined
 } from '@ant-design/icons';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Search from './Search';
@@ -50,7 +50,7 @@ export default function AppLayout() {
 	return (
 		<Layout className="app-layout">
 			<Header className="app-header">
-				<div className="app-logo">
+				<NavLink to="/" className="app-logo">
 					<img
 						src="/images/logo.svg"
 						alt={t('titles.firoblock')}
@@ -61,7 +61,7 @@ export default function AppLayout() {
 							{t('titles.firoblock')}
 						</Text>
 					)}
-				</div>
+				</NavLink>
 				<div className="app-header-right">
 					<Search />
 					{!screens.md && (
