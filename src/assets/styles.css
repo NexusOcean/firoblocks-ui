@@ -73,11 +73,10 @@ body {
 	height: 64px;
 	position: sticky !important;
 	top: 0;
-	z-index: 100;
 	border-bottom: 1px solid var(--ant-color-border-secondary);
 	background: var(--ant-color-bg-container) !important;
 	overflow: visible !important;
-	z-index: 500;
+	z-index: 1111;
 }
 
 .app-logo {
