@@ -22,7 +22,7 @@ import { useTranslation } from 'react-i18next';
 
 const { Text, Title } = Typography;
 
-const isProd = import.meta.env.VITE_LOCAL_API === 'false';
+const isProd = import.meta.env.VITE_LOCAL_SWAP === 'false';
 
 const cookieOpts = {
 	path: '/',
