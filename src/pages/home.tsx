@@ -20,7 +20,7 @@ export default function Home() {
 
 	return (
 		<div>
-			<title>{`${t('titles.firoblock')} — ${t('titles.explorer')}`}</title>
+			<title>{t('titles.explorer')}</title>
 			<>
 				<Row gutter={[24, 24]}>
 					<Col>

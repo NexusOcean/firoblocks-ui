@@ -41,9 +41,7 @@ export default function Maintenance({ planned }: MaintenanceProps) {
 			>
 				{planned ? '🔧' : '503'}
 			</Title>
-			<title>
-				${t('titles.firoblock')} — {t('titles.firoblockMaintenance')}
-			</title>
+			<title>{t('titles.firoblockMaintenance')}</title>
 
 			<Text style={{ fontSize: 18, maxWidth: 300, display: 'block' }}>
 				{planned ? t('messages.plannedDowntime') : t('messages.unPlannedDowntime')}
