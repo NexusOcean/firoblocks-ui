@@ -263,7 +263,7 @@ export default function Swap() {
 
 	return (
 		<div>
-			<title>${t('titles.explorer')}</title>
+			<title>{`${t('titles.firoblock')} — ${t('labels.swap')}`}</title>
 			<Row gutter={[24, 24]}>
 				<Col>
 					<Title level={3} style={{ color: '#ba2a45' }}>

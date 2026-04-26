@@ -6,7 +6,7 @@ export default function Activity() {
 
 	return (
 		<div>
-			<title>{`${t('titles.explorer')}`}</title>
+			<title>{`${t('titles.firoblock')} — ${t('labels.activity')}`}</title>
 			<RecentTables />
 		</div>
 	);
