@@ -75,8 +75,10 @@
 		"asn": "ASN",
 		"provider": "Provider",
 		"loading": "Loading...",
-		"masternodeStatsSummary": "Network Distribution",
-		"network": "Network Details",
+		"distribution": "Network Distribution",
+		"stats": "Node Locations",
+		"network": "Network Stats",
+		"activity": "Current Activity",
 		"nodeDetails": "Masternodes",
 		"recentTransactions": "Transactions",
 		"unknown": "Unknown"

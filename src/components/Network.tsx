@@ -10,6 +10,8 @@ import { useMasternodeStats } from '@/hooks/useStats';
 import 'leaflet/dist/leaflet.css';
 import { useTheme } from '@/hooks/useTheme';
 
+const { Title } = Typography;
+
 const worldGeo = feature(
 	// eslint-disable-next-line
 	countries110m as any,
@@ -58,13 +60,13 @@ export default function Network() {
 		<>
 			<Row gutter={[24, 24]} style={{ marginBottom: 24 }}>
 				<Col xs={0} lg={24}>
-					<Typography.Paragraph style={{ color: '#ba2a45' }}>
+					<Title level={3} style={{ color: '#ba2a45' }}>
 						{isLoading
 							? t('labels.loading')
-							: t('labels.masternodeStatsSummary', {
+							: t('labels.distribution', {
 									total: stats?.total ?? 0
 								})}
-					</Typography.Paragraph>
+					</Title>
 
 					<div
 						style={{

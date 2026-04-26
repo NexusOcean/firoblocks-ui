@@ -38,7 +38,7 @@ export default function Missing() {
 			</Title>
 			<title>{t('titles.firoblockNotFound')}</title>
 
-			<Text style={{ fontSize: 18, color: '#d1d5db', maxWidth: 300, display: 'block' }}>
+			<Text style={{ fontSize: 18, maxWidth: 300, display: 'block' }}>
 				{t('messages.pageNotFound')}
 			</Text>
 			<Link

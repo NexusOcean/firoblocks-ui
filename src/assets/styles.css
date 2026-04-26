@@ -257,3 +257,46 @@ body {
 .pointer td {
 	cursor: pointer;
 }
+
+/* ─── Sider ──────────────────────────────────────────────────────────────── */
+/* ─── Sider ──────────────────────────────────────────────────────────────── */
+
+.app-sider {
+	border-right: 1px solid var(--ant-color-border-secondary);
+	background: var(--ant-color-bg-container) !important;
+	position: sticky;
+	top: 64px;
+	height: calc(100vh - 64px);
+	padding-top: 16px;
+	overflow-y: auto;
+}
+
+.app-sider .ant-menu {
+	margin-top: 24px;
+	background: transparent !important;
+	border-inline-end: none !important;
+}
+
+.app-sider .ant-menu-item {
+	background-color: #ba2a45 !important;
+	color: #ffffff !important;
+}
+
+.app-sider .ant-menu-item .ant-menu-item-icon,
+.app-sider .ant-menu-item .ant-menu-title-content {
+	color: #ffffff !important;
+}
+
+.app-sider .ant-menu-item-selected {
+	background-color: #8a1f32 !important;
+	color: #ffffff !important;
+}
+
+.app-sider .ant-menu-item:hover {
+	background-color: #9e2339 !important;
+	color: #ffffff !important;
+}
+
+.sidebar-item {
+	color: transparent !important;
+}

@@ -1,4 +1,4 @@
-import { Typography, Row, Col, Table, Tag } from 'antd';
+import { Typography, Row, Col, Table, Tag, Divider } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLatestBlocks, useLatestTransactions } from '@/hooks/useStats';
@@ -8,7 +8,7 @@ import { truncateHash } from '@/components/HashDisplay';
 import type { BlockSummaryDto, TransactionCategory } from '@/types/dto';
 import { TX_CATEGORY_COLORS, TX_CATEGORY_LABELS } from '@/types';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export default function RecentTables() {
 	const { t } = useTranslation();
@@ -74,35 +74,50 @@ export default function RecentTables() {
 	];
 
 	return (
-		<Row gutter={[24, 24]}>
-			<Col xs={24} xl={12}>
-				<Title level={4}>{t('titles.latestBlocks')}</Title>
-				<Table<BlockSummaryDto>
-					dataSource={blocks}
-					columns={blockColumns}
-					loading={blocksLoading}
-					pagination={false}
-					size="small"
-					scroll={{ x: true }}
-					className="pointer"
-					rowKey={(row) => row.height}
-					onRow={(row) => ({ onClick: () => navigate(`/block/${row.height}`) })}
-				/>
-			</Col>
-			<Col xs={24} xl={12}>
-				<Title level={4}>{t('titles.latestTransactions')}</Title>
-				<Table
-					dataSource={txs}
-					columns={txColumns}
-					loading={txsLoading}
-					pagination={false}
-					size="small"
-					scroll={{ x: true }}
-					className="pointer"
-					rowKey={(row) => row.txid}
-					onRow={(row) => ({ onClick: () => navigate(`/tx/${row.txid}`) })}
-				/>
-			</Col>
-		</Row>
+		<>
+			<Row gutter={[24, 24]}>
+				<Col>
+					<Title level={3} style={{ color: '#ba2a45' }}>
+						{t('labels.activity')}
+					</Title>
+				</Col>
+			</Row>
+			<Row gutter={[24, 24]} style={{ marginBottom: 24 }}>
+				<Col xs={24} xl={12}>
+					<Text style={{ fontSize: 24, fontWeight: 600 }}>
+						{t('titles.latestBlocks')}
+					</Text>
+					<Divider style={{ margin: '8px 0' }} />
+					<Table<BlockSummaryDto>
+						dataSource={blocks}
+						columns={blockColumns}
+						loading={blocksLoading}
+						pagination={false}
+						size="small"
+						scroll={{ x: true }}
+						className="pointer"
+						rowKey={(row) => row.height}
+						onRow={(row) => ({ onClick: () => navigate(`/block/${row.height}`) })}
+					/>
+				</Col>
+				<Col xs={24} xl={12}>
+					<Text style={{ fontSize: 24, fontWeight: 600 }}>
+						{t('titles.latestTransactions')}
+					</Text>
+					<Divider style={{ margin: '8px 0' }} />
+					<Table
+						dataSource={txs}
+						columns={txColumns}
+						loading={txsLoading}
+						pagination={false}
+						size="small"
+						scroll={{ x: true }}
+						className="pointer"
+						rowKey={(row) => row.txid}
+						onRow={(row) => ({ onClick: () => navigate(`/tx/${row.txid}`) })}
+					/>
+				</Col>
+			</Row>
+		</>
 	);
 }

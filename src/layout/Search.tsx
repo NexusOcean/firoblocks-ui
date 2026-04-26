@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from 'antd';
 import type { InputRef } from 'antd';
-import { SearchOutlined, CloseOutlined, HomeFilled } from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
 import { ThemeToggle } from './Theme';
 import { useTranslation } from 'react-i18next';
 import LanguageToggle from './Language';
@@ -64,13 +64,6 @@ export default function Search() {
 					type="text"
 					icon={<SearchOutlined />}
 					onClick={() => setOpen(true)}
-					className="search-toggle"
-				/>
-
-				<Button
-					type="text"
-					icon={<HomeFilled />}
-					onClick={() => navigate('/')}
 					className="search-toggle"
 				/>
 
