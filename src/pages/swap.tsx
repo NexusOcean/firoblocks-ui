@@ -267,7 +267,7 @@ export default function Swap() {
 			<Row gutter={[24, 24]}>
 				<Col>
 					<Title level={3} style={{ color: '#ba2a45' }}>
-						FIRO ${price?.usd.toFixed(2) ?? '—'}
+						FIRO ${price?.usd?.toFixed(2) ?? '—'}
 					</Title>
 					<Divider style={{ margin: '8px 0' }} />
 				</Col>
