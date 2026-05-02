@@ -371,6 +371,17 @@ body {
 	width: 150px;
 }
 
+.coin-dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.coin-label {
+	font-weight: 600;
+}
+
 .swap-memo-input {
 	width: 130px;
 }
