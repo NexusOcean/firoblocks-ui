@@ -1,6 +1,5 @@
 import { Layout, Typography, Grid, Menu, Button, Drawer } from 'antd';
 import {
-	GithubOutlined,
 	BlockOutlined,
 	SwapOutlined,
 	ClusterOutlined,
@@ -117,17 +116,6 @@ export default function AppLayout() {
 							© {new Date().getFullYear()} {t('messages.firoblocks')}
 						</Text>
 						<span className="footer-links">
-							{screens.md && (
-								<a
-									href="https://github.com/nexusocean"
-									target="_blank"
-									rel="noreferrer"
-									className="app-footer-link"
-								>
-									{t('links.github')}
-									<GithubOutlined className="git-hub" />
-								</a>
-							)}
 							<DonateModal />
 						</span>
 					</Footer>
