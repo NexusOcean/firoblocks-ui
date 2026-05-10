@@ -29,6 +29,7 @@ jobs:
                   VITE_LOCAL_API: 'false'
                   VITE_LOCAL_SWAP: 'false'
                   VITE_SWAP_URL: 'https://swap-api.firoblocks.app'
+            - run: pnpm add -g wrangler@4.8.0
             - name: Deploy
               uses: cloudflare/wrangler-action@v3
               with:
