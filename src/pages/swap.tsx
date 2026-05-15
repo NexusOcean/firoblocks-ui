@@ -161,7 +161,7 @@ export default function Swap() {
 			const res = await getEstimate({
 				currency_from: sendCoin,
 				currency_to: receiveCoin,
-				amount_from: Number(sendAmount)
+				amount_from: sendAmount
 			});
 			setReceiveAmount(res.estimated_amount);
 			setRateInfo({
@@ -194,7 +194,7 @@ export default function Swap() {
 				currency_from: sendCoin,
 				currency_to: receiveCoin,
 				address_to: receiveAddr,
-				amount_from: Number(sendAmount),
+				amount_from: sendAmount,
 				...(refundAddr && { refund_address: refundAddr })
 			});
 			setExchange(res.exchange);

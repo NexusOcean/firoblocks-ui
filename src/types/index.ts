@@ -127,7 +127,7 @@ export const COIN_VALIDATION: Record<AllowedCoin, string> = {
 export interface EstimateRequest {
 	currency_from: AllowedCoin;
 	currency_to: AllowedCoin;
-	amount_from: number;
+	amount_from: string;
 }
 
 export interface EstimateResponse {
@@ -138,7 +138,7 @@ export interface CreateExchangeRequest {
 	currency_from: AllowedCoin;
 	currency_to: AllowedCoin;
 	address_to: string;
-	amount_from: number;
+	amount_from: string;
 	refund_address?: string;
 	extra_id_to?: string;
 	refund_extra_id?: string;
