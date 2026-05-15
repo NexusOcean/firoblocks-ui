@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const { VITE_LOCAL_SWAP, VITE_SWAP_URL } = import.meta.env;
+const { VITE_LOCAL_API, VITE_API_URL } = import.meta.env;
 
-const LOCAL_SWAP = VITE_LOCAL_SWAP === 'true';
+const LOCAL_API = VITE_LOCAL_API === 'true';
 
-const BASE = !LOCAL_SWAP ? VITE_SWAP_URL : 'http://localhost:3000';
+const BASE = !LOCAL_API ? VITE_API_URL : 'http://localhost:3000/v1';
 
 const swapApi = axios.create({ baseURL: BASE, timeout: 15_000, withCredentials: true });
 
