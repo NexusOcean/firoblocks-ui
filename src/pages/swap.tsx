@@ -161,7 +161,7 @@ export default function Swap() {
 			const res = await getEstimate({
 				currency_from: sendCoin,
 				currency_to: receiveCoin,
-				amount_from: sendAmount
+				amount_from: Number(sendAmount)
 			});
 			setReceiveAmount(res.estimated_amount);
 			setRateInfo({
@@ -194,7 +194,7 @@ export default function Swap() {
 				currency_from: sendCoin,
 				currency_to: receiveCoin,
 				address_to: receiveAddr,
-				amount_from: sendAmount,
+				amount_from: Number(sendAmount),
 				...(refundAddr && { refund_address: refundAddr })
 			});
 			setExchange(res.exchange);
@@ -331,12 +331,15 @@ export default function Swap() {
 										<Input
 											placeholder="0.00"
 											onChange={(e) => {
-												setSendAmount(e.target.value);
-												setRateInfo(null);
+												const val = e.target.value;
+												if (val === '' || /^\d*\.?\d*$/.test(val)) {
+													setSendAmount(val);
+													setRateInfo(null);
+												}
 											}}
 											size="large"
-											type="number"
-											min={0}
+											type="text"
+											inputMode="decimal"
 											className="swap-receive-input"
 											value={displaySendAmount}
 										/>
