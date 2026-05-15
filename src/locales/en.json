@@ -34,7 +34,12 @@
 		"previousBlock": "Previous Block",
 		"nextBlock": "Next Block",
 		"github": "GitHub",
-		"backToHome": "Back to Home"
+		"backToHome": "Back to Home",
+		"network": "Network",
+		"activity": "Activity",
+		"masternodes": "Masternodes",
+		"swap": "Swap",
+		"faq": "FAQ"
 	},
 	"labels": {
 		"address": "Address",

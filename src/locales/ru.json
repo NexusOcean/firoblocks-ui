@@ -31,10 +31,15 @@
 		"faqSubtitles": "Всё, что нужно знать об использовании FiroBlocks"
 	},
 	"links": {
-		"previousBlock": "Предыдущий блок",
-		"nextBlock": "Следующий блок",
+		"previousBlock": "Previous Block",
+		"nextBlock": "Next Block",
 		"github": "GitHub",
-		"backToHome": "На главную"
+		"backToHome": "Back to Home",
+		"network": "Сеть",
+		"activity": "Активность",
+		"masternodes": "Мастерноды",
+		"swap": "Обмен",
+		"faq": "FAQ"
 	},
 	"labels": {
 		"address": "Адрес",

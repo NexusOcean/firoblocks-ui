@@ -17,18 +17,6 @@ const { Header, Content, Footer, Sider } = Layout;
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
 
-const NAV_ITEMS = [
-	{ key: '/', icon: <NodeIndexOutlined style={{ fontSize: 22 }} />, label: 'Network' },
-	{ key: '/activity', icon: <BlockOutlined style={{ fontSize: 22 }} />, label: 'Activity' },
-	{
-		key: '/masternodes',
-		icon: <ClusterOutlined style={{ fontSize: 22 }} />,
-		label: 'Masternodes'
-	},
-	{ key: '/swap', icon: <SwapOutlined style={{ fontSize: 22 }} />, label: 'Swap' },
-	{ key: '/faq', icon: <QuestionCircleOutlined style={{ fontSize: 22 }} />, label: 'FAQ' }
-];
-
 export default function AppLayout() {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
@@ -37,6 +25,30 @@ export default function AppLayout() {
 	const navigate = useNavigate();
 
 	useEffect(() => window.scrollTo(0, 0), [pathname]);
+
+	const NAV_ITEMS = [
+		{
+			key: '/',
+			icon: <NodeIndexOutlined style={{ fontSize: 22 }} />,
+			label: t('links.network')
+		},
+		{
+			key: '/activity',
+			icon: <BlockOutlined style={{ fontSize: 22 }} />,
+			label: t('links.activity')
+		},
+		{
+			key: '/masternodes',
+			icon: <ClusterOutlined style={{ fontSize: 22 }} />,
+			label: t('links.masternodes')
+		},
+		{ key: '/swap', icon: <SwapOutlined style={{ fontSize: 22 }} />, label: t('links.swap') },
+		{
+			key: '/faq',
+			icon: <QuestionCircleOutlined style={{ fontSize: 22 }} />,
+			label: t('links.faq')
+		}
+	];
 
 	const selectedKey =
 		NAV_ITEMS.find((item) => item.key !== '/' && pathname.startsWith(item.key))?.key ?? '/';
