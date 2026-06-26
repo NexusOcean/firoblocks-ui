@@ -13,132 +13,36 @@ import { useTranslation } from 'react-i18next';
 
 const { Text, Title } = Typography;
 
-const FAQ_ITEMS = [
-	{
-		category: 'Swaps',
-		icon: <SwapOutlined />,
-		color: '#1677ff',
-		questions: [
-			{
-				q: 'How does a swap work?',
-				a: 'FiroBlocks acts as a non-custodial exchange. You provide the coins you want to send, select what you want to receive, and we generate a deposit address. Once your coins are confirmed on-chain, we automatically send you the swapped amount to your receive address.'
-			},
-			{
-				q: 'How long does a swap take?',
-				a: 'Swap times depend on the blockchains involved. Typically swaps complete within 15-30 minutes, but some networks may take longer depending on congestion and the number of required confirmations. If no confirmations are received within 30 minutes, your swap will be recalculated at current market rates.'
-			},
-			{
-				q: 'What happens if my swap fails?',
-				a: 'If a swap cannot be completed, your funds will be returned to the refund address you provided. Note that if market rates have changed significantly by the time a failure occurs, the swap may be recalculated at current rates before a refund is issued. Network fees are deducted from refunds.'
-			},
-			{
-				q: 'What if I send too little?',
-				a: 'Your order will be partially filled for as much as you have deposited. Make sure to send the full quoted amount to receive the expected output.'
-			},
-			{
-				q: 'What if I accidentally send too much?',
-				a: 'The swap will be adjusted for the full amount sent if liquidity is available. If there is insufficient liquidity, the swap will fail and a refund will be issued minus network fees.'
-			},
-			{
-				q: 'What if my deposit confirmation takes too long?',
-				a: 'If no confirmations are received within 30 minutes, your swap will be recalculated at current market rates. If too much time passes without any network confirmations, the swap will fail and you will need to contact support for a refund.'
-			},
-			{
-				q: 'What if I send funds after the offer expires?',
-				a: 'Your swap will be recalculated at current market rates. If too much time has passed the swap will fail.'
-			},
-			{
-				q: 'Is there a minimum or maximum swap amount?',
-				a: 'Yes, each trading pair has minimum and maximum limits which are displayed when you fetch a rate. These limits exist to ensure liquidity and cover network fees.'
-			}
-		]
-	},
-	{
-		category: 'Privacy',
-		icon: <LockOutlined />,
-		color: '#9B1C2E',
-		questions: [
-			{
-				q: 'Do you collect my personal data?',
-				a: 'FiroBlocks does not require KYC or personal identification. We only store the minimum data necessary to process your swap. Please refer to our Privacy Policy for full details.'
-			},
-			{
-				q: 'Is FiroBlocks non-custodial?',
-				a: 'Yes. We never hold your funds beyond what is strictly necessary to execute a swap. You always remain in control of your refund and receive addresses.'
-			},
-			{
-				q: 'Do you use third-party infrastructure?',
-				a: 'Yes. Swap execution is powered by a third-party exchange provider. We do not share any personal information with them — only the technical details required to process your swap, such as addresses and amounts.'
-			},
-			{
-				q: 'Do you use cookies?',
-				a: 'We use a single strictly necessary cookie to track your active swap session. It stores your swap ID and creation time so you can recover your swap if you refresh the page. No personal data is stored and the cookie expires automatically. No cookie consent is required as this is a functional cookie.'
-			}
-		]
-	},
-	{
-		category: 'Wallets',
-		icon: <WalletOutlined />,
-		color: '#52c41a',
-		questions: [
-			{
-				q: 'What wallets are supported?',
-				a: "FiroBlocks works with any self-custodial wallet that supports the coins you're swapping. Do not send from a centralized exchange (CEX) such as Coinbase, Binance, or Kraken — we can only accept transactions from self-custodial wallets. Do not use exchange deposit addresses as your receive or refund address, as they may not be permanent."
-			},
-			{
-				q: 'Are private transactions supported?',
-				a: 'Currently only transparent (on-chain) transactions are supported. For Firo, do not send from Spark or Lelantus addresses. For Litecoin, do not send from MWEB addresses. Use a standard transparent address when initiating a swap.'
-			},
-			{
-				q: 'What is a refund address?',
-				a: "A refund address is a wallet address you own for the coin you're sending. If the swap cannot be completed, your funds will be returned to this address. Always double-check it before submitting."
-			}
-		]
-	},
-	{
-		category: 'Issues',
-		icon: <WarningOutlined />,
-		color: '#fa8c16',
-		questions: [
-			{
-				q: 'I sent coins but nothing happened. What do I do?',
-				a: "First, verify your transaction has the required number of confirmations on the blockchain explorer. If it's confirmed and nothing has happened after 60 minutes, please contact support with your swap ID and transaction hash."
-			},
-			{
-				q: 'I entered the wrong receive address. Can it be changed?',
-				a: 'Unfortunately, once a deposit is received we cannot change the destination address. Please always double-check your receive address before sending any funds.'
-			}
-		]
-	},
-	{
-		category: 'About',
-		icon: <InfoCircleOutlined />,
-		color: '#722ed1',
-		questions: [
-			{
-				q: 'What is FiroBlocks?',
-				a: 'FiroBlocks is a privacy-focused, non-custodial crypto swap service. Our goal is to make private exchanges accessible to everyone without requiring accounts or personal information.'
-			},
-			{
-				q: 'How do I contact support?',
-				a: 'You can reach us via Email or through SimpleX Chat, both linked below. We aim to respond within 24 hours.'
-			}
-		]
-	}
-];
+type FaqItem = { q: string; a: string };
+
+const FAQ_CATEGORIES = [
+	{ key: 'swaps', icon: <SwapOutlined />, color: '#1677ff' },
+	{ key: 'privacy', icon: <LockOutlined />, color: '#9B1C2E' },
+	{ key: 'wallets', icon: <WalletOutlined />, color: '#52c41a' },
+	{ key: 'issues', icon: <WarningOutlined />, color: '#fa8c16' },
+	{ key: 'about', icon: <InfoCircleOutlined />, color: '#722ed1' }
+] as const;
 
 export default function FAQ() {
 	const [search, setSearch] = useState('');
 	const { t } = useTranslation();
 
-	const filtered = FAQ_ITEMS.map((cat) => ({
+	const categories = FAQ_CATEGORIES.map((cat) => ({
 		...cat,
-		questions: cat.questions.filter(
-			({ q, a }) =>
-				q.toLowerCase().includes(search.toLowerCase()) ||
-				a.toLowerCase().includes(search.toLowerCase())
-		)
-	})).filter((cat) => cat.questions.length > 0);
+		label: t(`faq.categories.${cat.key}`),
+		questions: t(`faq.items.${cat.key}`, { returnObjects: true }) as FaqItem[]
+	}));
+
+	const filtered = categories
+		.map((cat) => ({
+			...cat,
+			questions: cat.questions.filter(
+				({ q, a }) =>
+					q.toLowerCase().includes(search.toLowerCase()) ||
+					a.toLowerCase().includes(search.toLowerCase())
+			)
+		}))
+		.filter((cat) => cat.questions.length > 0);
 
 	return (
 		<div className="faq-page">
@@ -150,21 +54,21 @@ export default function FAQ() {
 			<Text className="faq-subtitle">{t('titles.faqSubtitles')}</Text>
 
 			<Space wrap className="faq-tags">
-				{FAQ_ITEMS.map((cat) => (
+				{categories.map((cat) => (
 					<Tag
-						key={cat.category}
+						key={cat.key}
 						icon={cat.icon}
 						style={{ background: cat.color, color: '#fff', fontWeight: 'bold' }}
 						className="faq-tag"
 					>
-						{cat.category}
+						{cat.label}
 					</Tag>
 				))}
 			</Space>
 
 			<Input
 				prefix={<SearchOutlined className="faq-search-icon" />}
-				placeholder="Search questions..."
+				placeholder={t('faq.searchPlaceholder')}
 				value={search}
 				onChange={(e) => setSearch(e.target.value)}
 				size="large"
@@ -176,11 +80,11 @@ export default function FAQ() {
 				{filtered.length === 0 ? (
 					<div className="faq-empty">
 						<QuestionCircleOutlined className="faq-empty-icon" />
-						<Text type="secondary">No results found for "{search}"</Text>
+						<Text type="secondary">{t('faq.noResults', { search })}</Text>
 					</div>
 				) : (
 					filtered.map((cat, ci) => (
-						<div key={ci} className="faq-category">
+						<div key={cat.key} className="faq-category">
 							<Space className="faq-category-header">
 								<span style={{ color: cat.color, fontSize: 16 }}>{cat.icon}</span>
 								<Text
@@ -188,7 +92,7 @@ export default function FAQ() {
 									className="faq-category-label"
 									style={{ color: cat.color }}
 								>
-									{cat.category}
+									{cat.label}
 								</Text>
 							</Space>
 							<Collapse
@@ -218,14 +122,12 @@ export default function FAQ() {
 
 			<div className="faq-cta">
 				<Text strong className="faq-cta-title">
-					Still have questions?
+					{t('faq.stillHaveQuestions')}
 				</Text>
-				<Text className="faq-cta-subtitle">
-					Our team is happy to help — reach out anytime.
-				</Text>
+				<Text className="faq-cta-subtitle">{t('faq.ctaSubtitle')}</Text>
 				<Space className="faq-cta-links">
 					<a href="mailto:hello@firoblocks.app" className="faq-cta-link">
-						Email 📧
+						{t('faq.emailLink')}
 					</a>
 					<Text type="secondary">·</Text>
 					<a
@@ -234,7 +136,7 @@ export default function FAQ() {
 						rel="noreferrer"
 						className="faq-cta-link"
 					>
-						SimpleX 💬
+						{t('faq.simplexLink')}
 					</a>
 				</Space>
 			</div>

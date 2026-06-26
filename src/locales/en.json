@@ -99,5 +99,162 @@
 	},
 	"placeholders": {
 		"searchByBlockTransactionAddress": "Search by block, transaction, or address..."
+	},
+	"swap": {
+		"expiresIn": "Expires In: {{time}}",
+		"expired": "Expired",
+		"getExchangeRate": "Get Exchange Rate",
+		"status": "Status: {{status}}",
+		"warningTitle": "Do not send from an exchange.",
+		"warningDescription": "Only self-custodial wallet transactions are accepted.",
+		"youSend": "You Send",
+		"youReceive": "You Receive",
+		"sendPlaceholder": "Send",
+		"receivePlaceholder": "Receive",
+		"amountPlaceholder": "0.00",
+		"rateLabel": "Rate:",
+		"floatingRate": "Floating rate — final amount determined at deposit",
+		"refundAddress": "Refund Address",
+		"refundAddressPlaceholder": "Your {{coin}} refund address",
+		"refundAddressFallback": "Refund Address",
+		"refundAddressHint": "Used if the swap fails",
+		"receiveAddress": "Receive Address",
+		"receiveAddressPlaceholder": "Your {{coin}} address",
+		"receiveAddressHint": "Where you'll receive funds",
+		"newSwap": "New Swap",
+		"getRate": "Get Rate",
+		"swapButton": "Swap",
+		"swapCreated": "Swap Created! Send your coins to the address below.",
+		"sendCoinsHere": "📤 Send Coins Here",
+		"addressCopied": "Address copied",
+		"memoExtraId": "Memo / Extra ID",
+		"memoCopied": "Memo copied",
+		"sendExactly": "Send exactly {{amount}} {{coin}}.",
+		"depositWindow": "You have {{time}} to complete the deposit.",
+		"depositExpired": "Deposit window expired.",
+		"saveSwapId": "Save your Swap ID",
+		"swapIdCopied": "Swap ID copied",
+		"errorEstimate": "Failed to get estimate. Please try again.",
+		"errorInvalidReceive": "Invalid {{coin}} receive address.",
+		"errorInvalidRefund": "Invalid {{coin}} refund address.",
+		"errorCreateSwap": "Failed to create swap. Please try again.",
+		"statuses": {
+			"new": "New",
+			"waiting": "Waiting for deposit",
+			"confirming": "Confirming",
+			"confirmed": "Confirmed",
+			"exchanging": "Exchanging",
+			"sending": "Sending",
+			"finished": "Finished",
+			"failed": "Failed",
+			"refunded": "Refunded",
+			"verifying": "Verifying",
+			"expired": "Expired",
+			"hold": "On hold",
+			"overdue": "Overdue"
+		}
+	},
+	"faq": {
+		"searchPlaceholder": "Search questions...",
+		"noResults": "No results found for \"{{search}}\"",
+		"stillHaveQuestions": "Still have questions?",
+		"ctaSubtitle": "Our team is happy to help — reach out anytime.",
+		"emailLink": "Email 📧",
+		"simplexLink": "SimpleX 💬",
+		"categories": {
+			"swaps": "Swaps",
+			"privacy": "Privacy",
+			"wallets": "Wallets",
+			"issues": "Issues",
+			"about": "About"
+		},
+		"items": {
+			"swaps": [
+				{
+					"q": "How does a swap work?",
+					"a": "FiroBlocks acts as a non-custodial exchange. You provide the coins you want to send, select what you want to receive, and we generate a deposit address. Once your coins are confirmed on-chain, we automatically send you the swapped amount to your receive address."
+				},
+				{
+					"q": "How long does a swap take?",
+					"a": "Swap times depend on the blockchains involved. Typically swaps complete within 15-30 minutes, but some networks may take longer depending on congestion and the number of required confirmations. If no confirmations are received within 30 minutes, your swap will be recalculated at current market rates."
+				},
+				{
+					"q": "What happens if my swap fails?",
+					"a": "If a swap cannot be completed, your funds will be returned to the refund address you provided. Note that if market rates have changed significantly by the time a failure occurs, the swap may be recalculated at current rates before a refund is issued. Network fees are deducted from refunds."
+				},
+				{
+					"q": "What if I send too little?",
+					"a": "Your order will be partially filled for as much as you have deposited. Make sure to send the full quoted amount to receive the expected output."
+				},
+				{
+					"q": "What if I accidentally send too much?",
+					"a": "The swap will be adjusted for the full amount sent if liquidity is available. If there is insufficient liquidity, the swap will fail and a refund will be issued minus network fees."
+				},
+				{
+					"q": "What if my deposit confirmation takes too long?",
+					"a": "If no confirmations are received within 30 minutes, your swap will be recalculated at current market rates. If too much time passes without any network confirmations, the swap will fail and you will need to contact support for a refund."
+				},
+				{
+					"q": "What if I send funds after the offer expires?",
+					"a": "Your swap will be recalculated at current market rates. If too much time has passed the swap will fail."
+				},
+				{
+					"q": "Is there a minimum or maximum swap amount?",
+					"a": "Yes, each trading pair has minimum and maximum limits which are displayed when you fetch a rate. These limits exist to ensure liquidity and cover network fees."
+				}
+			],
+			"privacy": [
+				{
+					"q": "Do you collect my personal data?",
+					"a": "FiroBlocks does not require KYC or personal identification. We only store the minimum data necessary to process your swap. Please refer to our Privacy Policy for full details."
+				},
+				{
+					"q": "Is FiroBlocks non-custodial?",
+					"a": "Yes. We never hold your funds beyond what is strictly necessary to execute a swap. You always remain in control of your refund and receive addresses."
+				},
+				{
+					"q": "Do you use third-party infrastructure?",
+					"a": "Yes. Swap execution is powered by a third-party exchange provider. We do not share any personal information with them — only the technical details required to process your swap, such as addresses and amounts."
+				},
+				{
+					"q": "Do you use cookies?",
+					"a": "We use a single strictly necessary cookie to track your active swap session. It stores your swap ID and creation time so you can recover your swap if you refresh the page. No personal data is stored and the cookie expires automatically. No cookie consent is required as this is a functional cookie."
+				}
+			],
+			"wallets": [
+				{
+					"q": "What wallets are supported?",
+					"a": "FiroBlocks works with any self-custodial wallet that supports the coins you're swapping. Do not send from a centralized exchange (CEX) such as Coinbase, Binance, or Kraken — we can only accept transactions from self-custodial wallets. Do not use exchange deposit addresses as your receive or refund address, as they may not be permanent."
+				},
+				{
+					"q": "Are private transactions supported?",
+					"a": "Currently only transparent (on-chain) transactions are supported. For Firo, do not send from Spark or Lelantus addresses. For Litecoin, do not send from MWEB addresses. Use a standard transparent address when initiating a swap."
+				},
+				{
+					"q": "What is a refund address?",
+					"a": "A refund address is a wallet address you own for the coin you're sending. If the swap cannot be completed, your funds will be returned to this address. Always double-check it before submitting."
+				}
+			],
+			"issues": [
+				{
+					"q": "I sent coins but nothing happened. What do I do?",
+					"a": "First, verify your transaction has the required number of confirmations on the blockchain explorer. If it's confirmed and nothing has happened after 60 minutes, please contact support with your swap ID and transaction hash."
+				},
+				{
+					"q": "I entered the wrong receive address. Can it be changed?",
+					"a": "Unfortunately, once a deposit is received we cannot change the destination address. Please always double-check your receive address before sending any funds."
+				}
+			],
+			"about": [
+				{
+					"q": "What is FiroBlocks?",
+					"a": "FiroBlocks is a privacy-focused, non-custodial crypto swap service. Our goal is to make private exchanges accessible to everyone without requiring accounts or personal information."
+				},
+				{
+					"q": "How do I contact support?",
+					"a": "You can reach us via Email or through SimpleX Chat, both linked below. We aim to respond within 24 hours."
+				}
+			]
+		}
 	}
 }

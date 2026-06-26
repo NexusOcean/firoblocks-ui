@@ -36,7 +36,7 @@ function validateAddress(coin: AllowedCoin, address: string): boolean {
 	try {
 		return new RegExp(COIN_VALIDATION[coin]).test(address);
 	} catch {
-		return true; // fail open if regex is malformed
+		return true;
 	}
 }
 const TERMINAL_STATUSES: ExchangeStatus[] = ['finished', 'failed', 'refunded'];
@@ -63,7 +63,6 @@ export default function Swap() {
 	const [timeLeft, setTimeLeft] = useState(0);
 	const { t } = useTranslation();
 
-	// Restore from URL param first, fall back to cookie
 	useEffect(() => {
 		const urlSwapId = searchParams.get('swapId');
 		const cookieSwapId = Cookies.get('swapId') ?? null;
@@ -72,7 +71,6 @@ export default function Swap() {
 		if (swapId) {
 			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setOpaqueId(swapId);
-			// If URL doesn't have it but cookie does, sync URL for shareability
 			if (!urlSwapId && cookieSwapId) {
 				setSearchParams({ swapId: cookieSwapId }, { replace: true });
 			}
@@ -86,7 +84,6 @@ export default function Swap() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// Countdown: tick once per second, recompute from absolute expiry each tick
 	useEffect(() => {
 		if (!opaqueId || timeLeft <= 0) return;
 
@@ -145,7 +142,7 @@ export default function Swap() {
 				estimated: res.estimated_amount
 			});
 		} catch {
-			setError('Failed to get estimate. Please try again.');
+			setError(t('swap.errorEstimate'));
 		} finally {
 			setEstimating(false);
 		}
@@ -155,11 +152,11 @@ export default function Swap() {
 		if (!rateInfo || !receiveAddr || !sendCoin) return;
 
 		if (!validateAddress(receiveCoin, receiveAddr)) {
-			setError(`Invalid ${receiveCoin.toUpperCase()} receive address.`);
+			setError(t('swap.errorInvalidReceive', { coin: receiveCoin.toUpperCase() }));
 			return;
 		}
 		if (refundAddr && !validateAddress(sendCoin, refundAddr)) {
-			setError(`Invalid ${sendCoin.toUpperCase()} refund address.`);
+			setError(t('swap.errorInvalidRefund', { coin: sendCoin.toUpperCase() }));
 			return;
 		}
 
@@ -177,14 +174,13 @@ export default function Swap() {
 			setOpaqueId(res.opaqueId);
 			setSearchParams({ swapId: res.opaqueId }, { replace: true });
 
-			// Server has just set swapId + timeExpiry cookies; read fresh values
 			const timeExpiry = Cookies.get('timeExpiry');
 			if (timeExpiry) {
 				const remaining = Math.max(0, Math.floor((Number(timeExpiry) - Date.now()) / 1000));
 				setTimeLeft(remaining);
 			}
 		} catch {
-			setError('Failed to create swap. Please try again.');
+			setError(t('swap.errorCreateSwap'));
 		} finally {
 			setSwapping(false);
 		}
@@ -215,7 +211,6 @@ export default function Swap() {
 		setSearchParams({}, { replace: true });
 	};
 
-	// Unified values: prefer live swap data, then local exchange, then form state
 	const displaySendAmount = swap?.amount_from ? trimZeros(swap.amount_from) : sendAmount;
 	const displayReceiveAmount = swap?.amount_to ? trimZeros(swap.amount_to) : receiveAmount;
 	const displaySendCoin = swap?.currency_from ?? sendCoin;
@@ -228,9 +223,9 @@ export default function Swap() {
 
 	const titleText = swapLocked
 		? expiration
-			? `Expires In: ${expiration}`
-			: 'Expired'
-		: 'Get Exchange Rate';
+			? t('swap.expiresIn', { time: expiration })
+			: t('swap.expired')
+		: t('swap.getExchangeRate');
 
 	const { data: price } = useQuery({
 		queryKey: ['firo-price'],
@@ -269,13 +264,19 @@ export default function Swap() {
 									className="swap-card-title"
 									style={{ marginBottom: 24 }}
 								>
-									{swap ? `Status: ${swap.status}` : ''}
+									{swap
+										? t('swap.status', {
+												status: t(`swap.statuses.${swap.status}`, {
+													defaultValue: swap.status
+												})
+											})
+										: ''}
 								</Title>
 							</div>
 
 							<Alert
-								title="Do not send from an exchange."
-								description="Only self-custodial wallet transactions are accepted."
+								title={t('swap.warningTitle')}
+								description={t('swap.warningDescription')}
 								type="warning"
 								showIcon
 								style={{ fontSize: 16, marginBottom: 48 }}
@@ -285,11 +286,11 @@ export default function Swap() {
 							<div className="swap-row">
 								<div className="swap-field">
 									<Text strong className="swap-field-label">
-										You Send
+										{t('swap.youSend')}
 									</Text>
 									<Space.Compact style={{ width: '100%' }}>
 										<Input
-											placeholder="0.00"
+											placeholder={t('swap.amountPlaceholder')}
 											onChange={(e) => {
 												const val = e.target.value;
 												if (val === '' || /^\d*\.?\d*$/.test(val)) {
@@ -304,7 +305,7 @@ export default function Swap() {
 											value={displaySendAmount}
 										/>
 										<Select
-											placeholder="Send"
+											placeholder={t('swap.sendPlaceholder')}
 											options={coinOptions}
 											onChange={(v: AllowedCoin) => {
 												if (v !== receiveCoin) {
@@ -330,18 +331,18 @@ export default function Swap() {
 
 								<div className="swap-field">
 									<Text strong className="swap-field-label">
-										You Receive
+										{t('swap.youReceive')}
 									</Text>
 									<Space.Compact style={{ width: '100%' }}>
 										<Input
-											placeholder="0.00"
+											placeholder={t('swap.amountPlaceholder')}
 											readOnly
 											size="large"
 											className="swap-receive-input"
 											value={displayReceiveAmount}
 										/>
 										<Select
-											placeholder="Receive"
+											placeholder={t('swap.receivePlaceholder')}
 											options={coinOptions}
 											onChange={(v) => {
 												if (v !== sendCoin) {
@@ -360,11 +361,9 @@ export default function Swap() {
 							{rateInfo && (
 								<div className="swap-rate-info">
 									<Text className="swap-rate-text">
-										Rate: <b>{rateInfo.rate}</b>
+										{t('swap.rateLabel')} <b>{rateInfo.rate}</b>
 									</Text>
-									<Text className="swap-rate-text">
-										Floating rate — final amount determined at deposit
-									</Text>
+									<Text className="swap-rate-text">{t('swap.floatingRate')}</Text>
 								</div>
 							)}
 
@@ -373,34 +372,40 @@ export default function Swap() {
 							<div className="swap-row">
 								<div className="swap-field">
 									<Text strong className="swap-field-label">
-										Refund Address
+										{t('swap.refundAddress')}
 									</Text>
 									<Input
 										className="swap-receive-input"
 										placeholder={
 											sendCoin
-												? `Your ${sendCoin.toUpperCase()} refund address`
-												: 'Refund Address'
+												? t('swap.refundAddressPlaceholder', {
+														coin: sendCoin.toUpperCase()
+													})
+												: t('swap.refundAddressFallback')
 										}
 										value={displayRefundAddr}
 										onChange={(e) => setRefundAddr(e.target.value)}
 										size="large"
 									/>
-									<Text className="swap-field-hint">Used if the swap fails</Text>
+									<Text className="swap-field-hint">
+										{t('swap.refundAddressHint')}
+									</Text>
 								</div>
 								<div className="swap-field">
 									<Text strong className="swap-field-label">
-										Receive Address
+										{t('swap.receiveAddress')}
 									</Text>
 									<Input
 										className="swap-receive-input"
-										placeholder={`Your ${receiveCoin.toUpperCase()} address`}
+										placeholder={t('swap.receiveAddressPlaceholder', {
+											coin: receiveCoin.toUpperCase()
+										})}
 										value={displayReceiveAddr}
 										onChange={(e) => setReceiveAddr(e.target.value)}
 										size="large"
 									/>
 									<Text className="swap-field-hint">
-										Where you'll receive funds
+										{t('swap.receiveAddressHint')}
 									</Text>
 								</div>
 							</div>
@@ -418,7 +423,7 @@ export default function Swap() {
 							<div className="swap-actions">
 								{expiration === null && swapLocked ? (
 									<Button size="large" onClick={handleReset}>
-										New Swap
+										{t('swap.newSwap')}
 									</Button>
 								) : (
 									<>
@@ -433,7 +438,7 @@ export default function Swap() {
 											}
 											icon={estimating ? <LoadingOutlined /> : undefined}
 										>
-											Get Rate
+											{t('swap.getRate')}
 										</Button>
 										<Button
 											type="primary"
@@ -451,7 +456,7 @@ export default function Swap() {
 											}
 											className="swap-btn-primary"
 										>
-											Swap
+											{t('swap.swapButton')}
 										</Button>
 									</>
 								)}
@@ -461,13 +466,13 @@ export default function Swap() {
 						{depositData && (
 							<div className="swap-card swap-deposit-card">
 								<Alert
-									title="Swap Created! Send your coins to the address below."
+									title={t('swap.swapCreated')}
 									type="success"
 									showIcon
 									className="swap-deposit-alert"
 								/>
 								<Text strong className="swap-deposit-label">
-									📤 Send Coins Here
+									{t('swap.sendCoinsHere')}
 								</Text>
 								<Space.Compact style={{ width: '100%' }}>
 									<Input
@@ -481,10 +486,10 @@ export default function Swap() {
 										icon={<CopyOutlined />}
 										onClick={() => {
 											navigator.clipboard.writeText(depositData.address_from);
-											message.success('Address copied');
+											message.success(t('swap.addressCopied'));
 										}}
 									>
-										Copy
+										{t('labels.copy')}
 									</Button>
 								</Space.Compact>
 								{depositData.extra_id_from && (
@@ -494,7 +499,7 @@ export default function Swap() {
 											className="swap-deposit-label"
 											style={{ marginTop: 12 }}
 										>
-											Memo / Extra ID
+											{t('swap.memoExtraId')}
 										</Text>
 										<Space.Compact style={{ width: '100%' }}>
 											<Input
@@ -510,21 +515,23 @@ export default function Swap() {
 													navigator.clipboard.writeText(
 														depositData.extra_id_from
 													);
-													message.success('Memo copied');
+													message.success(t('swap.memoCopied'));
 												}}
 											>
-												Copy
+												{t('labels.copy')}
 											</Button>
 										</Space.Compact>
 									</>
 								)}
 
 								<Text className="swap-field-hint">
-									Send exactly {displaySendAmount}{' '}
-									{displaySendCoin?.toUpperCase()}.{' '}
+									{t('swap.sendExactly', {
+										amount: displaySendAmount,
+										coin: displaySendCoin?.toUpperCase() ?? ''
+									})}{' '}
 									{expiration
-										? `You have ${expiration} to complete the deposit.`
-										: 'Deposit window expired.'}
+										? t('swap.depositWindow', { time: expiration })
+										: t('swap.depositExpired')}
 								</Text>
 
 								{opaqueId && (
@@ -532,7 +539,7 @@ export default function Swap() {
 										type="info"
 										showIcon
 										style={{ marginTop: 12 }}
-										title="Save your Swap ID"
+										title={t('swap.saveSwapId')}
 										description={
 											<Space.Compact style={{ width: '100%', marginTop: 8 }}>
 												<Input value={opaqueId} readOnly size="large" />
@@ -541,10 +548,10 @@ export default function Swap() {
 													icon={<CopyOutlined />}
 													onClick={() => {
 														navigator.clipboard.writeText(opaqueId);
-														message.success('Swap ID copied');
+														message.success(t('swap.swapIdCopied'));
 													}}
 												>
-													Copy
+													{t('labels.copy')}
 												</Button>
 											</Space.Compact>
 										}
