@@ -117,8 +117,8 @@ export type ExchangeStatus =
 export type AllowedCoin = 'btc' | 'eth' | 'ltc' | 'xmr' | 'firo';
 
 export const COIN_VALIDATION: Record<AllowedCoin, string> = {
-	firo: '^[a4][1-9A-HJ-NP-Za-km-z]{25,40}$',
-	ltc: '^(L|M|3)[A-Za-z0-9]{33}$|^(ltc1)[0-9A-Za-z]{39}$',
+	firo: '^(sm1[a-z0-9]{100,}|[a4][1-9A-HJ-NP-Za-km-z]{25,40})$',
+	ltc: '^(L|M|3)[A-Za-z0-9]{33}$|^(ltc1)[0-9A-Za-z]{39}$|^(ltcmweb1)[a-z0-9]{100,}$',
 	eth: '^(0x)[0-9A-Fa-f]{40}$',
 	btc: '^[13][a-km-zA-HJ-NP-Z1-9]{25,80}$|^(bc1)[0-9A-Za-z]{25,80}$',
 	xmr: '^[48][a-zA-Z\\d]{94}([a-zA-Z\\d]{11})?$'

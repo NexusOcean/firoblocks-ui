@@ -1,17 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-	Button,
-	Input,
-	Select,
-	Typography,
-	Space,
-	Divider,
-	Alert,
-	message,
-	Modal,
-	Row,
-	Col
-} from 'antd';
+import { Button, Input, Select, Typography, Space, Divider, Alert, message, Row, Col } from 'antd';
 import { SwapOutlined, ArrowRightOutlined, CopyOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useSearchParams } from 'react-router-dom';
 import { getEstimate, createExchange, getExchange, getPrice } from '@/services/api';
@@ -72,7 +60,6 @@ export default function Swap() {
 	const [estimating, setEstimating] = useState(false);
 	const [swapping, setSwapping] = useState(false);
 	const [error, setError] = useState<string | null>(null);
-	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [timeLeft, setTimeLeft] = useState(0);
 	const { t } = useTranslation();
 
@@ -83,6 +70,7 @@ export default function Swap() {
 		const swapId = urlSwapId ?? cookieSwapId;
 
 		if (swapId) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setOpaqueId(swapId);
 			// If URL doesn't have it but cookie does, sync URL for shareability
 			if (!urlSwapId && cookieSwapId) {
@@ -132,20 +120,8 @@ export default function Swap() {
 
 	const confirmSwap = async () => {
 		if (!sendCoin) return;
-		if (['firo', 'ltc'].includes(sendCoin)) {
-			setIsModalOpen(true);
-		} else {
-			setIsModalOpen(false);
-			await handleSwap();
-		}
-	};
-
-	const handleOk = async () => {
-		setIsModalOpen(false);
 		await handleSwap();
 	};
-
-	const handleCancel = () => setIsModalOpen(false);
 
 	const coinOptions = COINS.map((c) => ({
 		value: c.value,
@@ -306,22 +282,6 @@ export default function Swap() {
 								closable={{ closeIcon: true }}
 							/>
 
-							<Modal
-								title="Notice!"
-								closable={{ 'aria-label': 'Custom Close Button' }}
-								open={isModalOpen}
-								onOk={handleOk}
-								onCancel={handleCancel}
-								style={{ marginLeft: 'auto', marginRight: 'auto' }}
-							>
-								<p>
-									{sendCoin === 'firo' &&
-										'Only transparent FIRO transactions are supported. Please do not send from a Spark address.'}
-									{sendCoin === 'ltc' &&
-										'Only transparent LTC transactions are supported. Please do not send from an MWEB address.'}
-								</p>
-							</Modal>
-
 							<div className="swap-row">
 								<div className="swap-field">
 									<Text strong className="swap-field-label">
@@ -399,10 +359,10 @@ export default function Swap() {
 
 							{rateInfo && (
 								<div className="swap-rate-info">
-									<Text type="secondary" className="swap-rate-text">
+									<Text className="swap-rate-text">
 										Rate: <b>{rateInfo.rate}</b>
 									</Text>
-									<Text type="secondary" className="swap-rate-text">
+									<Text className="swap-rate-text">
 										Floating rate — final amount determined at deposit
 									</Text>
 								</div>
@@ -426,9 +386,7 @@ export default function Swap() {
 										onChange={(e) => setRefundAddr(e.target.value)}
 										size="large"
 									/>
-									<Text type="secondary" className="swap-field-hint">
-										Used if the swap fails
-									</Text>
+									<Text className="swap-field-hint">Used if the swap fails</Text>
 								</div>
 								<div className="swap-field">
 									<Text strong className="swap-field-label">
@@ -441,7 +399,7 @@ export default function Swap() {
 										onChange={(e) => setReceiveAddr(e.target.value)}
 										size="large"
 									/>
-									<Text type="secondary" className="swap-field-hint">
+									<Text className="swap-field-hint">
 										Where you'll receive funds
 									</Text>
 								</div>
@@ -560,19 +518,21 @@ export default function Swap() {
 										</Space.Compact>
 									</>
 								)}
-								<Text type="secondary" className="swap-field-hint">
+
+								<Text className="swap-field-hint">
 									Send exactly {displaySendAmount}{' '}
 									{displaySendCoin?.toUpperCase()}.{' '}
 									{expiration
 										? `You have ${expiration} to complete the deposit.`
 										: 'Deposit window expired.'}
 								</Text>
+
 								{opaqueId && (
 									<Alert
 										type="info"
 										showIcon
 										style={{ marginTop: 12 }}
-										message="Save your Swap ID"
+										title="Save your Swap ID"
 										description={
 											<Space.Compact style={{ width: '100%', marginTop: 8 }}>
 												<Input value={opaqueId} readOnly size="large" />
