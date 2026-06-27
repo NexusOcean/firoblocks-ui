@@ -90,7 +90,7 @@ export default function AppLayout() {
 				placement="left"
 				open={drawerOpen}
 				onClose={() => setDrawerOpen(false)}
-				width={220}
+				size={220}
 				styles={{ header: { display: 'none' }, body: { padding: 0 } }}
 			>
 				<Menu

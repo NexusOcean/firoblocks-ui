@@ -1,0 +1,260 @@
+{
+	"titles": {
+		"firoblock": "FiroBlocks",
+		"explorer": "Explorador de bloques Firo",
+		"home": "Inicio",
+		"address": "Dirección",
+		"block": "Bloque",
+		"type": "Tipo",
+		"txid": "TxId",
+		"blockDetails": "Detalles del bloque",
+		"transactionDetails": "Detalles de la transacción",
+		"addressDetails": "Detalles de la dirección",
+		"inputs": "Entradas{{len}}",
+		"outputs": "Salidas{{len}}",
+		"transactions": "Transacciones",
+		"transaction": "Transacción",
+		"transactionsWithCount": "Transacciones{{len}}",
+		"firoblockWithAddressNumber": "FiroBlocks — Dirección {{address}}",
+		"firoblockWithAddress": "FiroBlocks — Dirección",
+		"latestBlocks": "Últimos bloques",
+		"latestTransactions": "Últimas transacciones",
+		"networkDistribution": "Distribución de la red",
+		"byCountry": "Por país",
+		"byProvider": "Por proveedor",
+		"firoblockWithNoBlockNumber": "FiroBlocks — Explorador de bloques Firo",
+		"firoblockWithBlockNumber": "FiroBlocks — Bloque #{{height}}",
+		"firoblockWithTransactionNumber": "FiroBlocks — Transacción #{{txid}}",
+		"firoblockNotFound": "FiroBlocks — No encontrado",
+		"firoblockMaintenance": "FiroBlocks — Mantenimiento",
+		"faq": "Preguntas frecuentes",
+		"faqSubtitles": "Todo lo que necesita saber sobre el uso de FiroBlocks"
+	},
+	"links": {
+		"previousBlock": "Bloque anterior",
+		"nextBlock": "Bloque siguiente",
+		"github": "GitHub",
+		"backToHome": "Volver al inicio",
+		"network": "Red",
+		"activity": "Actividad",
+		"masternodes": "Masternodes",
+		"swap": "Intercambio",
+		"faq": "FAQ"
+	},
+	"labels": {
+		"address": "Dirección",
+		"age": "Antigüedad",
+		"balance": "Saldo",
+		"height": "Altura",
+		"hash": "Hash",
+		"confirmations": "Confirmaciones",
+		"timestamp": "Marca de tiempo",
+		"txid": "TxId",
+		"txs": "Trans.",
+		"value": "Valor",
+		"oneThousandPlus": "1.000",
+		"recent": "Transacciones recientes",
+		"transactions": "Transacciones",
+		"size": "Tamaño",
+		"bytes": "bytes",
+		"kilobytes": "KB",
+		"difficulty": "Dificultad",
+		"chainlock": "Chainlock",
+		"blockHeight": "Altura del bloque",
+		"hashrate": "Hashrate",
+		"blockTime": "Tiempo de bloque",
+		"firoSupply": "Suministro de Firo",
+		"blockhash": "Hash del bloque",
+		"fee": "Comisión",
+		"totalOutput": "Salida total",
+		"totalReceived": "Total recibido",
+		"type": "Tipo",
+		"copy": "Copiar",
+		"copied": "¡Copiado!",
+		"coinbase": "Coinbase",
+		"anonymizedInput": "Entrada anonimizada",
+		"anonymizedOutput": "Salida anonimizada",
+		"yes": "Sí",
+		"no": "No",
+		"country": "País",
+		"code": "Código",
+		"masternodes": "Masternodes",
+		"asn": "ASN",
+		"provider": "Proveedor",
+		"loading": "Cargando...",
+		"distribution": "Distribución de la red",
+		"stats": "Ubicación de los nodos",
+		"network": "Estadísticas de la red",
+		"activity": "Actividad reciente",
+		"nodeDetails": "Masternodes",
+		"recentTransactions": "Transacciones",
+		"unknown": "Desconocido",
+		"swap": "Intercambio Firo"
+	},
+	"messages": {
+		"pageNotFound": "La página solicitada no se ha encontrado.",
+		"firoblocks": "FiroBlocks",
+		"plannedDowntime": "Estamos en mantenimiento programado. Volveremos pronto.",
+		"unPlannedDowntime": "Estamos investigándolo. Vuelva a intentarlo pronto."
+	},
+	"placeholders": {
+		"searchByBlockTransactionAddress": "Buscar por bloque, transacción o dirección..."
+	},
+	"swap": {
+		"expiresIn": "Expira en: {{time}}",
+		"expired": "Expirado",
+		"getExchangeRate": "Obtener tipo de cambio",
+		"status": "Estado: {{status}}",
+		"warningTitle": "No envíe desde un exchange.",
+		"warningDescription": "Solo se aceptan transacciones desde billeteras no custodiales.",
+		"youSend": "Usted envía",
+		"youReceive": "Usted recibe",
+		"sendPlaceholder": "Enviar",
+		"receivePlaceholder": "Recibir",
+		"amountPlaceholder": "0.00",
+		"rateLabel": "Tasa:",
+		"floatingRate": "Tasa flotante — el monto final se determina al recibir el depósito",
+		"refundAddress": "Dirección de reembolso",
+		"refundAddressPlaceholder": "Su dirección {{coin}} para reembolso",
+		"refundAddressFallback": "Dirección de reembolso",
+		"refundAddressHint": "Se usa si el intercambio falla",
+		"receiveAddress": "Dirección de recepción",
+		"receiveAddressPlaceholder": "Su dirección {{coin}}",
+		"receiveAddressHint": "Donde recibirá los fondos",
+		"newSwap": "Nuevo intercambio",
+		"getRate": "Obtener tasa",
+		"swapButton": "Intercambiar",
+		"swapCreated": "¡Intercambio creado! Envíe sus monedas a la dirección a continuación.",
+		"sendCoinsHere": "📤 Envíe las monedas aquí",
+		"addressCopied": "Dirección copiada",
+		"memoExtraId": "Memo / Extra ID",
+		"memoCopied": "Memo copiado",
+		"sendExactly": "Envíe exactamente {{amount}} {{coin}}.",
+		"depositWindow": "Tiene {{time}} para completar el depósito.",
+		"depositExpired": "Tiempo de depósito expirado.",
+		"saveSwapId": "Guarde su Swap ID",
+		"swapIdCopied": "Swap ID copiado",
+		"errorEstimate": "No se pudo obtener la estimación. Inténtelo de nuevo.",
+		"errorInvalidReceive": "Dirección de recepción {{coin}} no válida.",
+		"errorInvalidRefund": "Dirección de reembolso {{coin}} no válida.",
+		"errorCreateSwap": "No se pudo crear el intercambio. Inténtelo de nuevo.",
+		"statuses": {
+			"new": "Nuevo",
+			"waiting": "Esperando depósito",
+			"confirming": "Confirmando",
+			"confirmed": "Confirmado",
+			"exchanging": "Intercambiando",
+			"sending": "Enviando",
+			"finished": "Finalizado",
+			"failed": "Fallido",
+			"refunded": "Reembolsado",
+			"verifying": "Verificando",
+			"expired": "Expirado",
+			"hold": "En espera",
+			"overdue": "Vencido"
+		}
+	},
+	"faq": {
+		"searchPlaceholder": "Buscar preguntas...",
+		"noResults": "No se encontraron resultados para «{{search}}»",
+		"stillHaveQuestions": "¿Aún tiene preguntas?",
+		"ctaSubtitle": "Nuestro equipo está encantado de ayudar — escríbanos en cualquier momento.",
+		"emailLink": "Email 📧",
+		"simplexLink": "SimpleX 💬",
+		"categories": {
+			"swaps": "Intercambios",
+			"privacy": "Privacidad",
+			"wallets": "Billeteras",
+			"issues": "Problemas",
+			"about": "Acerca de"
+		},
+		"items": {
+			"swaps": [
+				{
+					"q": "¿Cómo funciona un intercambio?",
+					"a": "FiroBlocks actúa como un exchange no custodial. Usted indica las monedas que desea enviar, selecciona lo que desea recibir y generamos una dirección de depósito. Una vez que sus monedas se confirmen en la cadena, le enviaremos automáticamente el monto intercambiado a su dirección de recepción."
+				},
+				{
+					"q": "¿Cuánto tarda un intercambio?",
+					"a": "Los tiempos de intercambio dependen de las blockchains involucradas. Normalmente los intercambios se completan en 15-30 minutos, pero algunas redes pueden tardar más según la congestión y el número de confirmaciones requeridas. Si no se reciben confirmaciones en 30 minutos, su intercambio se recalculará a la tasa de mercado actual."
+				},
+				{
+					"q": "¿Qué ocurre si mi intercambio falla?",
+					"a": "Si un intercambio no puede completarse, sus fondos serán devueltos a la dirección de reembolso que indicó. Tenga en cuenta que si las tasas del mercado han cambiado significativamente cuando se produce el fallo, el intercambio puede recalcularse a las tasas actuales antes de emitir el reembolso. Las comisiones de red se deducen de los reembolsos."
+				},
+				{
+					"q": "¿Qué pasa si envío muy poco?",
+					"a": "Su orden se completará parcialmente por la cantidad depositada. Asegúrese de enviar el monto cotizado completo para recibir el resultado esperado."
+				},
+				{
+					"q": "¿Qué pasa si envío demasiado por accidente?",
+					"a": "El intercambio se ajustará al monto total enviado si hay liquidez disponible. Si no hay liquidez suficiente, el intercambio fallará y se emitirá un reembolso menos las comisiones de red."
+				},
+				{
+					"q": "¿Qué pasa si la confirmación de mi depósito tarda demasiado?",
+					"a": "Si no se reciben confirmaciones en 30 minutos, su intercambio se recalculará a la tasa de mercado actual. Si pasa demasiado tiempo sin confirmaciones en la red, el intercambio fallará y deberá contactar al soporte para obtener un reembolso."
+				},
+				{
+					"q": "¿Qué pasa si envío fondos después de que expire la oferta?",
+					"a": "Su intercambio se recalculará a la tasa de mercado actual. Si ha pasado demasiado tiempo, el intercambio fallará."
+				},
+				{
+					"q": "¿Hay un monto mínimo o máximo de intercambio?",
+					"a": "Sí, cada par de intercambio tiene límites mínimos y máximos que se muestran al obtener una tasa. Estos límites existen para garantizar la liquidez y cubrir las comisiones de red."
+				}
+			],
+			"privacy": [
+				{
+					"q": "¿Recopilan mis datos personales?",
+					"a": "FiroBlocks no requiere KYC ni identificación personal. Solo almacenamos los datos mínimos necesarios para procesar su intercambio. Consulte nuestra Política de Privacidad para más detalles."
+				},
+				{
+					"q": "¿Es FiroBlocks no custodial?",
+					"a": "Sí. Nunca conservamos sus fondos más allá de lo estrictamente necesario para ejecutar un intercambio. Usted siempre mantiene el control de sus direcciones de reembolso y recepción."
+				},
+				{
+					"q": "¿Utilizan infraestructura de terceros?",
+					"a": "Sí. La ejecución del intercambio se realiza a través de un proveedor de exchange externo. No compartimos información personal con ellos — solo los detalles técnicos necesarios para procesar su intercambio, como direcciones y montos."
+				},
+				{
+					"q": "¿Usan cookies?",
+					"a": "Usamos una única cookie estrictamente necesaria para rastrear su sesión de intercambio activa. Almacena su Swap ID y la hora de creación para que pueda recuperar su intercambio si actualiza la página. No se guardan datos personales y la cookie expira automáticamente. No se requiere consentimiento de cookies, ya que es una cookie funcional."
+				}
+			],
+			"wallets": [
+				{
+					"q": "¿Qué billeteras son compatibles?",
+					"a": "FiroBlocks funciona con cualquier billetera no custodial que admita las monedas que está intercambiando. No envíe desde un exchange centralizado (CEX) como Coinbase, Binance o Kraken — solo aceptamos transacciones desde billeteras no custodiales. No use direcciones de depósito de exchanges como dirección de recepción o reembolso, ya que pueden no ser permanentes."
+				},
+				{
+					"q": "¿Se admiten transacciones privadas?",
+					"a": "Actualmente solo se admiten transacciones transparentes (on-chain). Para Firo, no envíe desde direcciones Spark o Lelantus. Para Litecoin, no envíe desde direcciones MWEB. Use una dirección transparente estándar al iniciar un intercambio."
+				},
+				{
+					"q": "¿Qué es una dirección de reembolso?",
+					"a": "Una dirección de reembolso es una dirección de billetera de su propiedad para la moneda que está enviando. Si el intercambio no puede completarse, sus fondos serán devueltos a esta dirección. Verifíquela siempre antes de enviar."
+				}
+			],
+			"issues": [
+				{
+					"q": "Envié monedas pero no ha pasado nada. ¿Qué hago?",
+					"a": "Primero, verifique que su transacción tenga el número de confirmaciones requerido en el explorador de bloques. Si está confirmada y no ha pasado nada después de 60 minutos, contacte al soporte con su Swap ID y el hash de la transacción."
+				},
+				{
+					"q": "Indiqué la dirección de recepción incorrecta. ¿Se puede cambiar?",
+					"a": "Lamentablemente, una vez recibido un depósito no podemos cambiar la dirección de destino. Verifique siempre su dirección de recepción antes de enviar fondos."
+				}
+			],
+			"about": [
+				{
+					"q": "¿Qué es FiroBlocks?",
+					"a": "FiroBlocks es un servicio de intercambio de criptomonedas no custodial centrado en la privacidad. Nuestro objetivo es hacer que los intercambios privados sean accesibles para todos sin requerir cuentas ni información personal."
+				},
+				{
+					"q": "¿Cómo contacto al soporte?",
+					"a": "Puede contactarnos por Email o a través de SimpleX Chat, ambos enlazados a continuación. Intentamos responder en 24 horas."
+				}
+			]
+		}
+	}
+}

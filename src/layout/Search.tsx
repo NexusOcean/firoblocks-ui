@@ -5,7 +5,7 @@ import type { InputRef } from 'antd';
 import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
 import { ThemeToggle } from './Theme';
 import { useTranslation } from 'react-i18next';
-import LanguageToggle from './Language';
+import LanguageSelect from './Language';
 
 function detectLocal(value: string): string | null {
 	const trimmed = value.trim();
@@ -69,7 +69,7 @@ export default function Search() {
 
 				<ThemeToggle />
 
-				<LanguageToggle />
+				<LanguageSelect />
 			</span>
 		);
 	}
