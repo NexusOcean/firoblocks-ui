@@ -80,7 +80,11 @@ export default function RecentTables() {
 			title: t('labels.txid'),
 			dataIndex: 'txid',
 			key: 'txid',
-			render: (id: string) => <HashLink value={id} to={`/tx/${id}`} truncate />
+			render: (id: string) => (
+				<span style={{ color: '#ba2a45', cursor: 'default' }}>
+					{`${id.slice(0, 12)}…${id.slice(-6)}`}
+				</span>
+			)
 		},
 		{
 			title: t('labels.fee'),
