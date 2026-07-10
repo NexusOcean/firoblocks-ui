@@ -24,7 +24,9 @@ export default function AppLayout() {
 	const screens = useBreakpoint();
 	const navigate = useNavigate();
 
-	useEffect(() => window.scrollTo(0, 0), [pathname]);
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
 
 	const NAV_ITEMS = [
 		{
