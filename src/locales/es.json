@@ -89,7 +89,12 @@
 		"nodeDetails": "Masternodes",
 		"recentTransactions": "Transacciones",
 		"unknown": "Desconocido",
-		"swap": "Intercambio Firo"
+		"swap": "Intercambio Firo",
+		"feeRate": "Tasa de Comisión",
+		"timeInPool": "Tiempo en Cola",
+		"mempoolClear": "La mempool está vacía",
+		"pending": "pendientes",
+		"mempool": "Mempool"
 	},
 	"messages": {
 		"pageNotFound": "La página solicitada no se ha encontrado.",

@@ -5,8 +5,9 @@ import { useLatestBlocks, useLatestTransactions } from '@/hooks/useStats';
 import HashLink from '@/components/HashLink';
 import TimeAgo from '@/components/TimeAgo';
 import { truncateHash } from '@/components/HashDisplay';
-import type { BlockSummaryDto, TransactionCategory } from '@/types/dto';
+import type { BlockSummaryDto, MempoolEntryDto, TransactionCategory } from '@/types/dto';
 import { TX_CATEGORY_COLORS, TX_CATEGORY_LABELS } from '@/types';
+import { useMempoolDetail } from '@/hooks/useMempool';
 
 const { Title, Text } = Typography;
 
@@ -15,6 +16,7 @@ export default function RecentTables() {
 	const navigate = useNavigate();
 	const { data: blocks, isLoading: blocksLoading } = useLatestBlocks();
 	const { data: txs, isLoading: txsLoading } = useLatestTransactions();
+	const { data: mempool, isLoading: mempoolLoading } = useMempoolDetail();
 
 	const blockColumns = [
 		{
@@ -73,6 +75,39 @@ export default function RecentTables() {
 		}
 	];
 
+	const mempoolColumns = [
+		{
+			title: t('labels.txid'),
+			dataIndex: 'txid',
+			key: 'txid',
+			render: (id: string) => <HashLink value={id} to={`/tx/${id}`} truncate />
+		},
+		{
+			title: t('labels.fee'),
+			dataIndex: 'fee',
+			key: 'fee',
+			render: (fee: number) => `${fee.toFixed(8)} FIRO`
+		},
+		{
+			title: t('labels.size'),
+			dataIndex: 'size',
+			key: 'size',
+			render: (s: number) => `${(s / 1024).toFixed(1)} ${t('labels.kilobytes')}`
+		},
+		{
+			title: t('labels.feeRate'),
+			dataIndex: 'feeRate',
+			key: 'feeRate',
+			render: (r: number) => `${r.toFixed(8)} FIRO/kB`
+		},
+		{
+			title: t('labels.timeInPool'),
+			dataIndex: 'time',
+			key: 'time',
+			render: (t: number) => <TimeAgo timestamp={t} />
+		}
+	];
+
 	return (
 		<>
 			<Row gutter={[24, 24]}>
@@ -115,6 +150,28 @@ export default function RecentTables() {
 						className="pointer"
 						rowKey={(row) => row.txid}
 						onRow={(row) => ({ onClick: () => navigate(`/tx/${row.txid}`) })}
+					/>
+				</Col>
+			</Row>
+			<Row gutter={[24, 24]}>
+				<Col xs={24}>
+					<Text style={{ fontSize: 24, fontWeight: 600 }}>{t('labels.mempool')}</Text>
+					{!mempoolLoading && (
+						<Text type="secondary" style={{ marginLeft: 12 }}>
+							{mempool?.pendingCount} {t('labels.pending')} ·{' '}
+							{mempool && (mempool.bytes / 1024).toFixed(1)} {t('labels.kilobytes')}
+						</Text>
+					)}
+					<Divider style={{ margin: '8px 0' }} />
+					<Table
+						dataSource={mempool?.transactions}
+						columns={mempoolColumns}
+						loading={mempoolLoading}
+						pagination={false}
+						size="small"
+						scroll={{ x: true }}
+						rowKey={(row: MempoolEntryDto) => row.txid}
+						locale={{ emptyText: t('labels.mempoolClear') }}
 					/>
 				</Col>
 			</Row>

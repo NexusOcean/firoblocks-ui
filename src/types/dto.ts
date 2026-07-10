@@ -62,11 +62,7 @@ export type TransactionCategory =
 	| 'unknown';
 
 export type TransactionFlag =
-	| 'has_transparent_change'
-	| 'has_op_return'
-	| 'has_p2sh'
-	| 'has_multisig'
-	| 'has_exchange_addr';
+	'has_transparent_change' | 'has_op_return' | 'has_p2sh' | 'has_multisig' | 'has_exchange_addr';
 
 export type VinKind =
 	| 'coinbase'
@@ -165,6 +161,14 @@ export interface SearchResult {
 // Mempool
 // --------------------------------------------------------
 
+export type MempoolEntryDto = {
+	txid: string;
+	fee: number;
+	size: number;
+	feeRate: number;
+	time: number;
+};
+
 export interface MempoolDto {
 	pendingCount: number;
 	bytes: number;
@@ -172,7 +176,7 @@ export interface MempoolDto {
 	maxMempool: number;
 	minFee: number;
 	instantSendLocks: number;
-	txids: string[];
+	transactions: MempoolEntryDto[];
 }
 
 // --------------------------------------------------------

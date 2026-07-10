@@ -28,7 +28,9 @@
 		"firoblockNotFound": "FiroBlocks — Не найдено",
 		"firoblockMaintenance": "FiroBlocks — Техническое обслуживание",
 		"faq": "Часто задаваемые вопросы",
-		"faqSubtitles": "Всё, что нужно знать об использовании FiroBlocks"
+		"faqSubtitles": "Всё, что нужно знать об использовании FiroBlocks",
+		"feeRate": "Ставка комиссии",
+		"timeInPool": "Время в пуле"
 	},
 	"links": {
 		"previousBlock": "Предыдущий блок",
@@ -89,7 +91,12 @@
 		"nodeDetails": "Мастерноды",
 		"recentTransactions": "Транзакции",
 		"unknown": "Неизвестно",
-		"swap": "Обмен Firo"
+		"swap": "Обмен Firo",
+		"feeRate": "Ставка комиссии",
+		"timeInPool": "Время в пуле",
+		"mempoolClear": "Мемпул пуст",
+		"pending": "ожидают",
+		"mempool": "Мемпул"
 	},
 	"messages": {
 		"pageNotFound": "Запрашиваемая страница не найдена.",

@@ -89,7 +89,12 @@
 		"nodeDetails": "Masternodes",
 		"recentTransactions": "Transactions",
 		"unknown": "Unknown",
-		"swap": "Firo Swap"
+		"swap": "Firo Swap",
+		"feeRate": "Fee Rate",
+		"timeInPool": "Time in Pool",
+		"mempoolClear": "Mempool is clear",
+		"pending": "pending",
+		"mempool": "Mempool"
 	},
 	"messages": {
 		"pageNotFound": "The page you requested could not be found.",
