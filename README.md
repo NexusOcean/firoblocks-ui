@@ -27,10 +27,6 @@ pnpm dev
 | `VITE_MAINTENANCE_PLANNED` | Enable maintenance mode banner |
 | `VITE_LOCAL_API`           | Use local API for development  |
 
-## Community
-
-- Chat: [#general:nexusocean.org](https://matrix.to/#/#general:nexusocean.org)
-
 ## License
 
 [Mozilla Public License 2.0](./LICENSE)
