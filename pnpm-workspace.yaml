@@ -3,3 +3,4 @@ minimumReleaseAgeExclude:
   - '@ant-design/icons@6.3.1'
   - i18next@26.3.3
   - prettier@3.8.5
+  - globals@17.9.0
