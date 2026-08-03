@@ -5,6 +5,7 @@
 	"author": "nexusocean",
 	"private": true,
 	"license": "MPL-2.0",
+	"type": "module",
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc -b && vite build",
