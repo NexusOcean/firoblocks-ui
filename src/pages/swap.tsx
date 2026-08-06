@@ -84,8 +84,19 @@ export default function Swap() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const { data: swap } = useQuery({
+		queryKey: ['swap', opaqueId],
+		queryFn: () => getExchange(opaqueId!),
+		enabled: opaqueId !== null,
+		retry: 0,
+		refetchInterval: (query) =>
+			query.state.data && TERMINAL_STATUSES.includes(query.state.data.status) ? false : 30_000
+	});
+
+	const awaitingDeposit = !swap || swap.status === 'waiting';
+
 	useEffect(() => {
-		if (!opaqueId || timeLeft <= 0) return;
+		if (!opaqueId || timeLeft <= 0 || !awaitingDeposit) return;
 
 		const timeExpiry = Cookies.get('timeExpiry');
 		if (!timeExpiry) return;
@@ -99,21 +110,12 @@ export default function Swap() {
 
 		return () => clearInterval(interval);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [opaqueId]);
+	}, [opaqueId, awaitingDeposit]);
 
 	const expiration =
 		timeLeft > 0
 			? `${Math.floor(timeLeft / 60)}:${(timeLeft % 60).toString().padStart(2, '0')}`
 			: null;
-
-	const { data: swap } = useQuery({
-		queryKey: ['swap', opaqueId],
-		queryFn: () => getExchange(opaqueId!),
-		enabled: opaqueId !== null,
-		retry: 0,
-		refetchInterval: (query) =>
-			query.state.data && TERMINAL_STATUSES.includes(query.state.data.status) ? false : 30_000
-	});
 
 	const confirmSwap = async () => {
 		if (!sendCoin) return;
@@ -137,8 +139,11 @@ export default function Swap() {
 				amount_from: sendAmount
 			});
 			setReceiveAmount(res.estimated_amount);
+			const perUnitRate = trimZeros(
+				(Number(res.estimated_amount) / Number(sendAmount)).toFixed(8)
+			);
 			setRateInfo({
-				rate: `1 ${sendCoin.toUpperCase()} ≈ ${res.estimated_amount} ${receiveCoin.toUpperCase()}`,
+				rate: `1 ${sendCoin.toUpperCase()} ≈ ${perUnitRate} ${receiveCoin.toUpperCase()}`,
 				estimated: res.estimated_amount
 			});
 		} catch {
@@ -221,11 +226,11 @@ export default function Swap() {
 	const depositData = swap ?? exchange;
 	const swapLocked = opaqueId !== null;
 
-	const titleText = swapLocked
-		? expiration
+	const titleText = !swapLocked
+		? t('swap.getExchangeRate')
+		: expiration
 			? t('swap.expiresIn', { time: expiration })
-			: t('swap.expired')
-		: t('swap.getExchangeRate');
+			: t('swap.expired');
 
 	const { data: price } = useQuery({
 		queryKey: ['firo-price'],
@@ -250,14 +255,16 @@ export default function Swap() {
 					<div className="swap-page">
 						<div className="swap-card" style={{ margin: '8px 0' }}>
 							<div className="swap-card-labels">
-								<Title
-									level={3}
-									className="swap-card-title"
-									style={{ marginBottom: 24, marginRight: 'auto' }}
-								>
-									<SwapOutlined className="swap-card-title-icon" />
-									{titleText}
-								</Title>
+								{awaitingDeposit && (
+									<Title
+										level={3}
+										className="swap-card-title"
+										style={{ marginBottom: 24, marginRight: 'auto' }}
+									>
+										<SwapOutlined className="swap-card-title-icon" />
+										{titleText}
+									</Title>
+								)}
 
 								<Title
 									level={4}
