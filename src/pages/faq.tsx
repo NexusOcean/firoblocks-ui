@@ -129,15 +129,6 @@ export default function FAQ() {
 					<a href="mailto:hello@firoblocks.app" className="faq-cta-link">
 						{t('faq.emailLink')}
 					</a>
-					<Text type="secondary">·</Text>
-					<a
-						href="https://smp2.simplexonflux.com/a#e4BKKMD9I-8Qv3_Ky1xyiTzg9vzeYTXRCDbZZjbs0DM"
-						target="_blank"
-						rel="noreferrer"
-						className="faq-cta-link"
-					>
-						{t('faq.simplexLink')}
-					</a>
 				</Space>
 			</div>
 		</div>

@@ -14,42 +14,19 @@ type DonationOption = {
 
 const DONATION_OPTIONS: DonationOption[] = [
 	{
-		key: 'firo',
+		key: 'spark',
 		label: 'Firo',
-		coin: 'FIRO',
-		network: 'Transparent or Spark',
+		coin: 'Spark',
+		network: 'Spark',
 		address:
-			'sm1nthexc43lx3803l8kp5wym9ctzc2huutfq2v8snnv22rjarvyqn8h96zkhynd3y753yzs34glgg84q2kwamvu2vp99egf9mywwc4mdej6za309rg470fzwydeuyqqalh6dg0usqf66vq3'
+			'sm1c5nlzjpzhqnljxhdu75qfw7876ez0g4uqr0hmklz2z2gsmlx65xckn762mlj4sumkejgsuyh93532qdhvy7lsex523hea30gl0zlnc3nt2qhhhand9hyc6u4dk5f7fn8p6w8hzs2sre39'
 	},
 	{
-		key: 'btc',
-		label: 'Bitcoin',
-		coin: 'BTC',
+		key: 'mainnet',
+		label: 'Firo',
+		coin: 'Transparent',
 		network: 'Mainnet',
-		address: 'bc1pfy0ru0gwz3uwmqkrmsgztpd97xq69g0e3yqksjj5g93zsgx8afjqmkq9wf'
-	},
-	{
-		key: 'ltc',
-		label: 'Litecoin',
-		coin: 'LTC',
-		network: 'Mainnet or MWEB',
-		address:
-			'ltcmweb1qqdsz0s4ej33c45j0ktvmf7wyk7yrf2lv80jwxg8thaq8qtf8ajy2wqc0tnf6qww5zgarucavu6x56y6mcwzvv5km635paczp7xyzfe4a3qaahtre'
-	},
-	{
-		key: 'eth',
-		label: 'Ethereum',
-		coin: 'ETH',
-		network: 'Mainnet',
-		address: '0x6eFaF25038eE9b54672513afD900586f290b94eB'
-	},
-	{
-		key: 'xmr',
-		label: 'Monero',
-		coin: 'XMR',
-		network: 'Mainnet',
-		address:
-			'42JJ87GZ7ygWMfTR9bEygySbXXG25TpBSLcT1FBn9y97NKTAAbXyrtVACyKRAoy78hYux4C7ZB3qP1eu9ee1E5Wm7KvwVnS'
+		address: 'a7ispoSZNH72k1aLhtDWfUd18HRMTBidCx'
 	}
 ];
 
@@ -105,9 +82,7 @@ export default function DonateModal() {
 				</Tooltip>
 				<Text type="warning" style={{ fontSize: 12, textAlign: 'center', maxWidth: 300 }}>
 					{'Send only '}
-					{opt.coin === 'ETH'
-						? 'ETH or ERC20 tokens to this address.'
-						: opt.coin + ' to this address.'}
+					{opt.coin + ' to this address.'}
 				</Text>
 			</Space>
 		)
