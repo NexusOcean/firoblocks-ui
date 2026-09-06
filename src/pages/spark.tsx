@@ -197,10 +197,11 @@ export default function Spark() {
 					href="https://firo-spark-sync-monitor.vercel.app"
 					target="_blank"
 					rel="noreferrer"
+					style={{ fontSize: 12 }}
 				>
 					Firo Spark Sync Monitor
 				</Link>{' '}
-				{t('spark.by')} panagot
+				{t('spark.by')} panagot.
 			</Text>
 		</div>
 	);
