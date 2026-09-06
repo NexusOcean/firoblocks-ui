@@ -73,7 +73,7 @@ export default function Spark() {
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-			<Title level={3} style={{ margin: 0 }}>
+			<Title level={3} style={{ color: '#ba2a45' }}>
 				{t('spark.sparkFleetHealth')}
 			</Title>
 			<title>{t('spark.firoblockWithSpark')}</title>
