@@ -38,6 +38,7 @@
 		"network": "Red",
 		"activity": "Actividad",
 		"masternodes": "Masternodes",
+		"spark": "Spark",
 		"swap": "Intercambio",
 		"faq": "FAQ"
 	},
@@ -104,6 +105,35 @@
 	},
 	"placeholders": {
 		"searchByBlockTransactionAddress": "Buscar por bloque, transacción o dirección..."
+	},
+	"spark": {
+		"pageTitle": "Spark",
+		"firoblockWithSpark": "Firo Block Explorer | Spark",
+		"fleetSummary": "Resumen de la flota",
+		"sparkFleetHealth": "Estado de la flota Spark",
+		"backends": "Backends",
+		"backend": "Backend",
+		"height": "Altura",
+		"lag": "Retraso",
+		"latency": "Latencia",
+		"anonSet": "Conjunto anónimo",
+		"setHash": "Hash del conjunto",
+		"match": "Coincide",
+		"mismatch": "No coincide",
+		"status": "Estado",
+		"green": "Verde",
+		"yellow": "Amarillo",
+		"red": "Rojo",
+		"medianLatency": "Latencia mediana",
+		"maxLag": "Retraso máximo",
+		"sparkConsensus": "Consenso Spark",
+		"setHashConsensus": "Consenso del hash del conjunto",
+		"lastChecked": "Última comprobación",
+		"fleetDegraded": "{{count}} backend(s) inaccesibles o muy retrasados",
+		"anonsetSnapshotNotice": "Los datos del conjunto anónimo provienen de una instantánea reciente, no en tiempo real.",
+		"lastSweptAt": "Último barrido",
+		"dataFrom": "Datos de",
+		"by": "por"
 	},
 	"swap": {
 		"expiresIn": "Expira en: {{time}}",

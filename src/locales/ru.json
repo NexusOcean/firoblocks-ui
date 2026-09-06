@@ -40,6 +40,7 @@
 		"network": "Сеть",
 		"activity": "Активность",
 		"masternodes": "Мастерноды",
+		"spark": "Spark",
 		"swap": "Обмен",
 		"faq": "ЧаВо"
 	},
@@ -106,6 +107,35 @@
 	},
 	"placeholders": {
 		"searchByBlockTransactionAddress": "Поиск по блоку, транзакции или адресу..."
+	},
+	"spark": {
+		"pageTitle": "Спарк",
+		"firoblockWithSpark": "Firo Block Explorer | Спарк",
+		"fleetSummary": "Сводка по флоту",
+		"sparkFleetHealth": "Состояние флота Spark",
+		"backends": "Бэкенды",
+		"backend": "Бэкенд",
+		"height": "Высота",
+		"lag": "Отставание",
+		"latency": "Задержка",
+		"anonSet": "Анонимный набор",
+		"setHash": "Хэш набора",
+		"match": "Совпадает",
+		"mismatch": "Не совпадает",
+		"status": "Статус",
+		"green": "Зелёный",
+		"yellow": "Жёлтый",
+		"red": "Красный",
+		"medianLatency": "Медианная задержка",
+		"maxLag": "Макс. отставание",
+		"sparkConsensus": "Консенсус Spark",
+		"setHashConsensus": "Консенсус хэша набора",
+		"lastChecked": "Последняя проверка",
+		"fleetDegraded": "{{count}} бэкенд(ов) недоступны или сильно отстают",
+		"anonsetSnapshotNotice": "Данные анонимного набора взяты из недавнего снимка, а не в реальном времени.",
+		"lastSweptAt": "Последнее сканирование",
+		"dataFrom": "Данные от",
+		"by": "автор"
 	},
 	"swap": {
 		"expiresIn": "Истекает через: {{time}}",

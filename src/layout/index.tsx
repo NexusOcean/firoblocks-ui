@@ -1,11 +1,12 @@
 import { Layout, Typography, Grid, Menu, Button, Drawer } from 'antd';
 import {
 	BlockOutlined,
-	SwapOutlined,
 	ClusterOutlined,
+	FireOutlined,
 	MenuOutlined,
 	NodeIndexOutlined,
-	QuestionCircleOutlined
+	QuestionCircleOutlined,
+	SwapOutlined
 } from '@ant-design/icons';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -43,6 +44,11 @@ export default function AppLayout() {
 			key: '/masternodes',
 			icon: <ClusterOutlined style={{ fontSize: 22 }} />,
 			label: t('links.masternodes')
+		},
+		{
+			key: '/spark',
+			icon: <FireOutlined style={{ fontSize: 22 }} />,
+			label: t('links.spark')
 		},
 		{ key: '/swap', icon: <SwapOutlined style={{ fontSize: 22 }} />, label: t('links.swap') },
 		{

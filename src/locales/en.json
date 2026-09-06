@@ -38,6 +38,7 @@
 		"network": "Network",
 		"activity": "Activity",
 		"masternodes": "Masternodes",
+		"spark": "Spark",
 		"swap": "Swap",
 		"faq": "FAQ"
 	},
@@ -104,6 +105,35 @@
 	},
 	"placeholders": {
 		"searchByBlockTransactionAddress": "Search by block, transaction, or address..."
+	},
+	"spark": {
+		"pageTitle": "Spark",
+		"firoblockWithSpark": "Firo Block Explorer | Spark",
+		"fleetSummary": "Fleet Summary",
+		"sparkFleetHealth": "Spark Fleet Health",
+		"backends": "Backends",
+		"backend": "Backend",
+		"height": "Height",
+		"lag": "Lag",
+		"latency": "Latency",
+		"anonSet": "Anon Set",
+		"setHash": "Set Hash",
+		"match": "Match",
+		"mismatch": "Mismatch",
+		"status": "Status",
+		"green": "Green",
+		"yellow": "Yellow",
+		"red": "Red",
+		"medianLatency": "Median Latency",
+		"maxLag": "Max Lag",
+		"sparkConsensus": "Spark Consensus",
+		"setHashConsensus": "Set Hash Consensus",
+		"lastChecked": "Last Checked",
+		"fleetDegraded": "{{count}} backend(s) unreachable or far behind",
+		"anonsetSnapshotNotice": "Anonymity-set data is from a recent snapshot, not live.",
+		"lastSweptAt": "Last swept",
+		"dataFrom": "Data from",
+		"by": "by"
 	},
 	"swap": {
 		"expiresIn": "Expires In: {{time}}",

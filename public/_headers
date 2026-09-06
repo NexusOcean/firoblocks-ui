@@ -1,9 +1,4 @@
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
-
-/index.html
-  Cache-Control: public, max-age=0, must-revalidate
-
-/assets/*
   Cache-Control: public, max-age=0, must-revalidate
