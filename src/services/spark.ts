@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const sparkMonitorApi = axios.create({
 	baseURL: 'https://firo-spark-sync-monitor.vercel.app/api',
-	timeout: 60_000
+	timeout: 120_000
 });
 
 export type EndpointStatus = 'green' | 'yellow' | 'red';
