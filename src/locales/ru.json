@@ -110,7 +110,7 @@
 	},
 	"spark": {
 		"pageTitle": "Спарк",
-		"firoblockWithSpark": "Firo Block Explorer | Спарк",
+		"firoblockWithSpark": "FiroBlocks | Спарк",
 		"fleetSummary": "Сводка по флоту",
 		"sparkFleetHealth": "Состояние флота Spark",
 		"backends": "Бэкенды",
