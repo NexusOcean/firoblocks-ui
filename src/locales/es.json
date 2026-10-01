@@ -108,7 +108,7 @@
 	},
 	"spark": {
 		"pageTitle": "Spark",
-		"firoblockWithSpark": "FiroBlocks | Spark",
+		"firoblockWithSpark": "FiroBlocks — Spark",
 		"fleetSummary": "Resumen de la flota",
 		"sparkFleetHealth": "Estado de la flota Spark",
 		"backends": "Backends",
