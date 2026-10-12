@@ -78,7 +78,7 @@ export default function Network() {
 					>
 						<MapContainer
 							center={[30, 10]}
-							zoom={1.5}
+							zoom={3}
 							style={{ height: '100%', width: '100%', background: 'transparent' }}
 							worldCopyJump
 							scrollWheelZoom={false}
