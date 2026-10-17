@@ -5,7 +5,6 @@ import AppLayout from './layout';
 const Home = lazy(() => import('./pages/home'));
 const Activity = lazy(() => import('./pages/activity'));
 const Masternodes = lazy(() => import('./pages/masternodes'));
-const Spark = lazy(() => import('./pages/spark'));
 const Swap = lazy(() => import('./pages/swap'));
 const FAQ = lazy(() => import('./pages/faq'));
 const Block = lazy(() => import('./pages/block'));
@@ -25,7 +24,6 @@ const routes: RouteObject[] = [
 			{ path: 'maintenance', element: <Maintenance planned={planned} /> },
 			{ path: 'activity', element: <Activity /> },
 			{ path: 'masternodes', element: <Masternodes /> },
-			{ path: 'spark', element: <Spark /> },
 			{ path: 'swap', element: <Swap /> },
 			{ path: 'faq', element: <FAQ /> },
 			{ path: 'block/:height', element: <Block /> },

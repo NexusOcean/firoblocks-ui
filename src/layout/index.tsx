@@ -2,7 +2,6 @@ import { Layout, Typography, Grid, Menu, Button, Drawer } from 'antd';
 import {
 	BlockOutlined,
 	ClusterOutlined,
-	FireOutlined,
 	MenuOutlined,
 	NodeIndexOutlined,
 	QuestionCircleOutlined,
@@ -44,11 +43,6 @@ export default function AppLayout() {
 			key: '/masternodes',
 			icon: <ClusterOutlined style={{ fontSize: 22 }} />,
 			label: t('links.masternodes')
-		},
-		{
-			key: '/spark',
-			icon: <FireOutlined style={{ fontSize: 22 }} />,
-			label: t('links.spark')
 		},
 		{ key: '/swap', icon: <SwapOutlined style={{ fontSize: 22 }} />, label: t('links.swap') },
 		{
