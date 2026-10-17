@@ -26,8 +26,3 @@ See [README.md](./README.md) for environment setup. You may use the public api f
 1. Fork the repo and create a branch from `main`
 2. Make your changes with clear, descriptive commits
 3. Open a PR with a summary of what changed and why
-
-## Questions
-
-Join the community on Matrix: [#general:nexusocean.org](https://matrix.to/#/#general:nexusocean.org)
-Matrix client available at: [element.nexusocean.org](https://element.nexusocean.org)
